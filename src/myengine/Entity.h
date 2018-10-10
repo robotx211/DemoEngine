@@ -1,8 +1,9 @@
 #include <memory>
 #include <vector>
 
+#include "Component.h"
+
 class Core;
-class Component;
 
 class Entity
 {
@@ -17,8 +18,18 @@ private:
 public:
   void setCore(std::shared_ptr<Core> _core);
   std::shared_ptr<Core> getCore();
-  template <class T> std::shared_ptr<T> addComponent(T _type);
+  template <typename T> std::shared_ptr<T> addComponent()
+  {
+    std::shared_ptr<T> newComponent = std::make_shared<T>();
+
+    components.push_back(newComponent);
+
+    return newComponent;
+  }
+
+
   //add more for initialisation parameters
+
 
 };
 

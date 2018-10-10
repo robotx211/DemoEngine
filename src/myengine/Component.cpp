@@ -1,6 +1,5 @@
 #include "Core.h"
 #include "Entity.h"
-#include "Component.h"
 
 
 void Component::onAwake()
@@ -31,7 +30,7 @@ void Component::setEntity(std::shared_ptr<Entity> _entity)
 std::shared_ptr<Entity> Component::getEntity()
 {
 
-  return entity.lock;
+  return entity.lock();
 
 }
 

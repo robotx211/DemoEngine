@@ -1,15 +1,18 @@
 cmake_minimum_required(VERSION 2.6)
 project(MYENGINE)
 
-include_directiories(
+include_directories(
 	src
-	contirib
 )
 
 add_library(myengine
+  	src/myengine/Core.h
+ 	src/myengine/Entity.h
+ 	src/myengine/Component.h
+
   	src/myengine/Core.cpp
-  	src/myengine/Entity.cpp
-  	src/myengine/Component.cpp
+ 	src/myengine/Entity.cpp
+ 	src/myengine/Component.cpp
 )
 
 add_executable(game
@@ -17,3 +20,5 @@ add_executable(game
 )
 
 target_link_libraries(game myengine)
+
+ADD_DEPENDENCIES(game myengine)

@@ -1,7 +1,9 @@
+#ifndef MYENGINE_COMPONENT_H
+#define MYENGINE_COMPONENT_H
+
 #include <memory>
 #include <vector>
 #include <iostream>
-
 
 class Core;
 class Entity;
@@ -28,3 +30,5 @@ public:
   void display();
 
 };
+
+#endif
