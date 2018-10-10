@@ -11,7 +11,7 @@ private:
   std::vector<std::shared_ptr<Component>> components;
   std::weak_ptr<Core> core;
 
-  void tick();
+  void update();
   void display();
 
 public:

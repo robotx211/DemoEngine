@@ -3,17 +3,17 @@
 #include "Component.h"
 
 
-void Component::onInit()
+void Component::onAwake()
 {
 
 }
 
-void Component::onBegin()
+void Component::onStart()
 {
 
 }
 
-void Component::onTick()
+void Component::onUpdate()
 {
 
 }
@@ -23,10 +23,15 @@ void Component::onDisplay()
   
 }
 
+void Component::setEntity(std::shared_ptr<Entity> _entity)
+{
+  entity = _entity;
+}
+
 std::shared_ptr<Entity> Component::getEntity()
 {
 
-  return entity.lock();
+  return entity.lock;
 
 }
 
@@ -37,9 +42,19 @@ std::shared_ptr<Core> Component::getCore()
 
 }
 
-void Component::tick()
+void Component::awake()
 {
-  onTick();
+  onAwake();
+}
+
+void Component::start()
+{
+  onStart();
+}
+
+void Component::update()
+{
+  onUpdate();
 }
 
 void Component::display()
