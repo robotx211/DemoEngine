@@ -1,6 +1,8 @@
 #include "Core.h"
 #include "Entity.h"
 
+#include <glm/glm.hpp>
+
 void Entity::update()
 {
   for each (std::shared_ptr<Component> comp in components)

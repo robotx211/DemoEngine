@@ -11,7 +11,10 @@ class Entity;
 class Component
 {
 
+  friend class Entity;
+
 private:
+  std::weak_ptr<Component> self;
   std::weak_ptr<Entity> entity;
 
   virtual void onAwake();

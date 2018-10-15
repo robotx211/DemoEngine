@@ -8,8 +8,11 @@ class Core;
 class Entity
 {
 
+  friend class Core;
+
 private:
   std::vector<std::shared_ptr<Component>> components;
+  std::weak_ptr<Entity> self;
   std::weak_ptr<Core> core;
 
   void update();
@@ -21,6 +24,9 @@ public:
   template <typename T> std::shared_ptr<T> addComponent()
   {
     std::shared_ptr<T> newComponent = std::make_shared<T>();
+
+    newComponent->self = newComponent;
+    newComponent->entity = this->self;
 
     components.push_back(newComponent);
 

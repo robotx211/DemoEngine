@@ -4,26 +4,19 @@
 #include "myengine/Core.h"
 #include "myengine/Entity.h"
 #include "myengine/Component.h"
+#include "myengine/Transform.h"
+#include "myengine/Window.h"
 
 int main()
 {
 
   std::cout << "Start" << std::endl;
 
-  std::shared_ptr<Core> core = std::make_shared<Core>();
+  std::shared_ptr<Core> core = Core::init();
 
-  std::cout << "Core Status: " << (core != NULL) << std::endl;
+  std::shared_ptr<Entity> entity = core->addEntity();
 
-  std::shared_ptr<Entity> newEntity = core->addEntity();
-
-  std::cout << "Entity Status: " << (newEntity != NULL) << std::endl;
-  std::cout << "Core Status: " << (core != NULL) << std::endl;
-
-  std::shared_ptr<Component> newComponet = newEntity->addComponent<Component>();
-
-  std::cout << "Component Status: " << (newComponet != NULL) << std::endl;
-  std::cout << "Entity Status: " << (newEntity != NULL) << std::endl;
-  std::cout << "Core Status: " << (core != NULL) << std::endl;
+  std::shared_ptr<Window> window = entity->addComponent<Window>();
 
   std::cout << "Press Enter To Finish" << std::endl;
   std::cin.get();
