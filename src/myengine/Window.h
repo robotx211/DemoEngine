@@ -3,18 +3,33 @@
 
 #include "Component.h"
 
-class Window : public Component
-{
+namespace myEngine {
 
-private:
+	class Window : public Component
+	{
 
-public:
-	std::string name;
-	int width;
-	int height;
+	private:
 
-	SDL_Window *window;
+		void onAwake();
+		void onAwake(std::string _name, int _width, int _height);
+		void onStart();
+		void onUpdate();
+		void onDisplay();
 
-	void init(std::string _name, int _width, int _height);
 
-};
+		//std::shared_ptr<SDL_Window> window;
+		SDL_Window *window;
+
+		std::string name;
+		int width;
+		int height;
+
+	public:
+
+
+		static std::shared_ptr<Window> createWindow(std::shared_ptr<Core> _core, std::string _name, int _width, int _height);
+
+
+	};
+
+}

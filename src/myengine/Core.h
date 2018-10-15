@@ -2,19 +2,31 @@
 #include <vector>
 #include <iostream>
 
-class Entity;
+namespace myEngine {
 
-class Core
-{
+	class Entity;
 
-private:
-  std::vector<std::shared_ptr<Entity>> entities;
-  std::weak_ptr<Core> self;
+	class Core
+	{
 
-public:
-  static std::shared_ptr<Core> init();
-  void start();
-  void stop();
-  std::shared_ptr<Entity> addEntity();
+	private:
+		std::vector<std::shared_ptr<Entity>> entities;
+		std::weak_ptr<Core> self;
 
-};
+	public:
+		static std::shared_ptr<Core> init();
+
+		void start();
+
+		void update();
+		void display();
+
+		void stop();
+
+
+		std::shared_ptr<Entity> addEntity();
+
+
+	};
+
+}
