@@ -4,12 +4,8 @@
 
 namespace myEngine {
 
-	void Window::onAwake()
-	{
-		std::cout << "Window Awake" << std::endl;
-	}
 
-	void Window::onAwake(std::string _name, int _width, int _height)
+	void Window::init(std::string _name, int _width, int _height)
 	{
 		name = _name;
 		width = _width;
@@ -30,28 +26,10 @@ namespace myEngine {
 		std::cout << "Window Awake" << std::endl;
 	}
 
-	void Window::onStart()
+	void Window::update()
 	{
-		std::cout << "Window Start" << std::endl;
+
 	}
 
-	void Window::onUpdate()
-	{
-		std::cout << "Window Update" << std::endl;
-	}
-
-	void Window::onDisplay()
-	{
-		std::cout << "Window Display" << std::endl;
-	}
-
-	std::shared_ptr<Window> Window::createWindow(std::shared_ptr<Core> _core, std::string _name, int _width, int _height)
-	{
-		std::shared_ptr<myEngine::Entity> newWindowEntity = _core->addEntity();
-
-		std::shared_ptr<myEngine::Window> newWindowComponent = newWindowEntity->addComponent<myEngine::Window>();
-	
-		return newWindowComponent;
-	}
 
 }

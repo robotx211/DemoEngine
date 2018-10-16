@@ -1,20 +1,14 @@
 #include <SDL2/SDL.h>
 #include <memory>
 
-#include "Component.h"
-
 namespace myEngine {
 
-	class Window : public Component
+	class Window
 	{
 
 	private:
 
-		void onAwake();
-		void onAwake(std::string _name, int _width, int _height);
-		void onStart();
-		void onUpdate();
-		void onDisplay();
+		void update();
 
 
 		//std::shared_ptr<SDL_Window> window;
@@ -26,9 +20,7 @@ namespace myEngine {
 
 	public:
 
-
-		static std::shared_ptr<Window> createWindow(std::shared_ptr<Core> _core, std::string _name, int _width, int _height);
-
+		void init(std::string _name, int _width, int _height);
 
 	};
 

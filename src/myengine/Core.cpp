@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "Entity.h"
+#include "Window.h"
 
 namespace myEngine {
 
@@ -10,6 +11,19 @@ namespace myEngine {
 
 		return newCore;
 	}
+
+	std::shared_ptr<Window> Core::createWindow(std::string _name, int _width, int _height)
+	{
+		std::shared_ptr<Window> newWindow = std::make_shared<Window>();
+
+		newWindow->init(_name, _width, _height);
+
+		window = newWindow;
+
+		return window;
+
+	}
+
 
 	void Core::start()
 	{
