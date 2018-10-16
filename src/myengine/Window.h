@@ -1,5 +1,10 @@
+#ifndef MYENGINE_WINDOW_H
+#define MYENGINE_WINDOW_H
+
 #include <SDL2/SDL.h>
 #include <memory>
+#include <iostream>
+#include <string>
 
 namespace myEngine {
 
@@ -7,21 +12,22 @@ namespace myEngine {
 	{
 
 	private:
+	  //std::shared_ptr<SDL_Window> window;
+	  SDL_Window *m_window;
 
-		void update();
-
-
-		//std::shared_ptr<SDL_Window> window;
-		SDL_Window *window;
-
-		std::string name;
-		int width;
-		int height;
+	  std::string m_name;
+	  int m_width;
+	  int m_height;
 
 	public:
 
-		void init(std::string _name, int _width, int _height);
+      SDL_Window* getWindow() { return m_window; }
+
+      Window(std::string _name, int _width, int _height);
+      ~Window();
 
 	};
 
 }
+
+#endif

@@ -23,22 +23,17 @@ namespace myEngine {
 		std::cout << "Component Base Class Display" << std::endl;
 	}
 
-	void Component::setEntity(std::shared_ptr<Entity> _entity)
-	{
-		entity = _entity;
-	}
-
 	std::shared_ptr<Entity> Component::getEntity()
 	{
 
-		return entity.lock();
+		return m_entity.lock();
 
 	}
 
 	std::shared_ptr<Core> Component::getCore()
 	{
 
-		return entity.lock()->getCore();
+		return m_entity.lock()->getCore();
 
 	}
 

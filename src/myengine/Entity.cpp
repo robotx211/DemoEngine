@@ -7,33 +7,28 @@ namespace myEngine {
 
 	void Entity::update()
 	{
-		for (size_t i = 0; i < components.size(); i++)
+		for (size_t i = 0; i < m_components.size(); i++)
 		{
-			if (components.at(i)->started == false)
+			if (m_components.at(i)->m_started == false)
 			{
-				components.at(i)->start();
-				components.at(i)->started = true;
+				m_components.at(i)->start();
+				m_components.at(i)->m_started = true;
 			}
-			components.at(i)->update();
+			m_components.at(i)->update();
 		}
 	}
 
 	void Entity::display()
 	{
-		for (size_t i = 0; i < components.size(); i++)
+		for (size_t i = 0; i < m_components.size(); i++)
 		{
-			components.at(i)->display();
+			m_components.at(i)->display();
 		}
-	}
-
-	void Entity::setCore(std::shared_ptr<Core> _core)
-	{
-		core = _core;
 	}
 
 	std::shared_ptr<Core> Entity::getCore()
 	{
-		return core.lock();
+		return m_core.lock();
 	}
 
 }

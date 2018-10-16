@@ -13,28 +13,27 @@ namespace myEngine {
 	class Component
 	{
 
-		friend class Entity;
+	  friend class Entity;
 
 	private:
-		std::weak_ptr<Component> self;
-		std::weak_ptr<Entity> entity;
+	  std::weak_ptr<Component> m_self;
+	  std::weak_ptr<Entity> m_entity;
 
-		virtual void onAwake();
-		virtual void onStart();
-		virtual void onUpdate();
-		virtual void onDisplay();
+	  virtual void onAwake();
+	  virtual void onStart();
+	  virtual void onUpdate();
+	  virtual void onDisplay();
 
-		bool started;
+	  bool m_started;
 
 	public:
-		void setEntity(std::shared_ptr<Entity> _entity);
-		std::shared_ptr<Entity> getEntity();
-		std::shared_ptr<Core> getCore();
+	  std::shared_ptr<Entity> getEntity();
+	  std::shared_ptr<Core> getCore();
 
-		void awake();
-		void start();
-		void update();
-		void display();
+	  void awake();
+	  void start();
+	  void update();
+	  void display();
 
 	};
 

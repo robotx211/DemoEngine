@@ -6,6 +6,7 @@
 #include "myengine/Component.h"
 #include "myengine/Transform.h"
 #include "myengine/Window.h"
+#include "myengine/GL_Triangle.h"
 
 int main()
 {
@@ -13,15 +14,14 @@ int main()
   std::cout << "Start" << std::endl;
 
   std::shared_ptr<myEngine::Core> core = myEngine::Core::init();
-	core->createWindow("main window", 1280, 720);
+  core->createNewWindowObject("main window", 1280, 720);
 
   std::shared_ptr<myEngine::Entity> entity = core->addEntity();
 
-	std::shared_ptr<myEngine::Component> component = entity->addComponent<myEngine::Component>();
-	std::shared_ptr<myEngine::Transform> transform = entity->addComponent<myEngine::Transform>();
+  std::shared_ptr<myEngine::GL_Triangle> triangle = entity->addComponent<myEngine::GL_Triangle>();
 
-	core->update();
-	core->display();
+
+  triangle->draw(core->getWindowObject());
 
   std::cout << "Press Enter To Finish" << std::endl;
   std::cin.get();

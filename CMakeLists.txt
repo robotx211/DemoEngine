@@ -38,6 +38,7 @@ add_library(myengine
  	src/myengine/Component.cpp
 	src/myengine/Transform.cpp
 	src/myengine/Window.cpp
+	src/myengine/GL_Triangle.cpp
 )
 
 if(MSVC)

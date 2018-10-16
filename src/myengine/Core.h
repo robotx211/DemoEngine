@@ -2,32 +2,34 @@
 #include <vector>
 #include <iostream>
 
+#include "Window.h"
+
 namespace myEngine {
 
 	class Entity;
-	class Window;
 
 	class Core
 	{
 
 	private:
-		std::vector<std::shared_ptr<Entity>> entities;
-		std::shared_ptr<Window> window;
-		std::weak_ptr<Core> self;
+	  std::vector<std::shared_ptr<Entity>> m_entities;
+	  std::shared_ptr<Window> m_windowObject;
+	  std::weak_ptr<Core> m_self;
 
 	public:
-		static std::shared_ptr<Core> init();
-		std::shared_ptr<Window> createWindow(std::string _name, int _width, int _height);
+	  static std::shared_ptr<Core> init();
+	  std::shared_ptr<Window> createNewWindowObject(std::string _name, int _width, int _height);
+      std::shared_ptr<Window> getWindowObject() { return m_windowObject; }
 
-		void start();
+	  void begin();
 
-		void update();
-		void display();
+	  void update();
+	  void display();
 
-		void stop();
+	  void end();
 
 
-		std::shared_ptr<Entity> addEntity();
+	  std::shared_ptr<Entity> addEntity();
 
 
 	};

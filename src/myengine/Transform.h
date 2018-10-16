@@ -11,15 +11,12 @@ namespace myEngine {
 	{
 
 	private:
-		void onAwake();
-		void onStart();
-		void onUpdate();
-		void onDisplay();
 
 	public:
-		glm::vec3 localPosition; //vec3
-		glm::vec3 localRotation; //euler
-		glm::vec3 localScale; //vec3
+
+	  glm::vec3 m_localPosition; //vec3
+	  glm::vec3 m_localOrientation; //euler
+	  glm::vec3 m_localScale; //vec3
 
 	};
 
