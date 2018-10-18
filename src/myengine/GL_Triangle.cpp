@@ -7,25 +7,7 @@ namespace myEngine
   {
     SDL_Window *window = _windowObject->getWindow();
 
-    const GLfloat m_positions[] = {
-      0.0f, 0.5f, 0.0f,
-      -0.5f, -0.5f, 0.0f,
-      0.5f, -0.5f, 0.0f
-    };
 
-    const GLchar *m_vertexShaderSrc =
-      "attribute vec3 in_Position;            " \
-      "                                       " \
-      "void main()                            " \
-      "{                                      " \
-      " gl_Position = vec4(in_Position, 1.0); " \
-      "}                                      ";
-
-    const GLchar *m_fragmentShaderSrc =
-      "void main()                        " \
-      "{                                  " \
-      " gl_FragColor = vec4(0, 0, 1, 1);  " \
-      "}                                  ";
 
     //create SDL GL Context
     if (!SDL_GL_CreateContext(window))
@@ -41,14 +23,9 @@ namespace myEngine
       throw std::exception();
     }
 
-    //set clear colour of _window
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    SDL_GL_SwapWindow(window);
-
     // - - - - - - - - - - - - - - - - - - - - - Create VBO - - - - - - - - - - - - - - - - - - - - - //
 
-    //create VBO with ID 1
+    //create VBO at position 1
     GLuint VboId = 0;
     glGenBuffers(1, &VboId);
     if (!VboId)
@@ -60,14 +37,14 @@ namespace myEngine
     glBindBuffer(GL_ARRAY_BUFFER, VboId);
 
     //upload copy of VBO
-    glBufferData(GL_ARRAY_BUFFER, sizeof(m_positions), m_positions, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(m_positions), m_positions, GL_STATIC_DRAW); //type, data list size, data, usage
 
     //reset state
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     // - - - - - - - - - - - - - - - - - - - - - Create VAO - - - - - - - - - - - - - - - - - - - - - //
 
-    //create VAO with ID 1
+    //create VAO at position 1
     GLuint VaoId = 0;
     glGenVertexArrays(1, &VaoId);
     if (!VaoId)
@@ -81,7 +58,7 @@ namespace myEngine
     //bind the VBO
     glBindBuffer(GL_ARRAY_BUFFER, VboId);
     //assign it to position 0 in the bound VBO
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), (void *)0); //index, vertex count, type, normalized, stride, pointer
     //enable the VBO at position 0
     glEnableVertexAttribArray(0);
 
@@ -151,6 +128,10 @@ namespace myEngine
 
     // - - - - - - - - - - - - - - - - - - - - - Draw Triangle - - - - - - - - - - - - - - - - - - - - - //
 
+		//set clear colour of _window
+		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
     //tell OpenGL which shader program to use
     glUseProgram(programId);
     //bind the VAO
@@ -163,7 +144,8 @@ namespace myEngine
     glBindVertexArray(0);
     glUseProgram(0);
 
-    SDL_GL_SwapWindow(window);
+
+		SDL_GL_SwapWindow(window);
 
 
 

@@ -20,7 +20,6 @@ int main()
 
   std::shared_ptr<myEngine::GL_Triangle> triangle = entity->addComponent<myEngine::GL_Triangle>();
 
-
   triangle->draw(core->getWindowObject());
 
   std::cout << "Press Enter To Finish" << std::endl;

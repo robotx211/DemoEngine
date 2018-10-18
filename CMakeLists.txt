@@ -39,6 +39,9 @@ add_library(myengine
 	src/myengine/Transform.cpp
 	src/myengine/Window.cpp
 	src/myengine/GL_Triangle.cpp
+	src/myengine/ShaderProgram.cpp
+	src/myengine/VertexArray.cpp
+	src/myengine/VertexBuffer.cpp
 )
 
 if(MSVC)
