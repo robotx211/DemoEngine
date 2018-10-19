@@ -1,3 +1,6 @@
+#ifndef VERTEX_BUFFER_H
+#define VERTEX_BUFFER_H
+
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <exception>
@@ -12,22 +15,25 @@ namespace myEngine
 
 	private:
 		GLuint m_id;
-		int m_vertexCount;
 		std::vector<GLfloat> m_data;
-		int vertexVecSize;
+        int m_components;
 		bool m_dirty;
 
 	public:
 		VertexBuffer();
-		~VertexBuffer();
 
-		void add(glm::vec3 _value);
-		void add(glm::vec4 _value);
+		void addVertex(glm::vec3 _value);
+        void addVertex(glm::vec4 _value);
 
-		int getVertexCount() { return m_vertexCount; }
 		int getDataSize() { return m_data.size(); }
-		int getId() { return m_id; }
+        GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }
+        bool getDirty() { return m_dirty; }
+        int getComponents() { if (!m_components) { throw std::exception(); } return m_components; } //vec3 or vec4?
+
+        void upload();
 
 	};
 
 }
+
+#endif // !VERTEX_BUFFER_H

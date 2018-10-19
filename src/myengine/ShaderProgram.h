@@ -1,27 +1,43 @@
+#ifndef SHADER_PROGRAM_H
+#define SHADER_PROGRAM_H
+
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <exception>
 #include <iostream>
 
+#include "enums.h"
+
 namespace myEngine
 {
 
-	//stores shaders
-	class ShaderProgram
-	{
+  struct Shader
+  {
+    GLuint m_id;
+    GLchar *m_source;
+  };
 
-	private:
-		GLuint m_id;
-		GLchar *m_vertShad;
-		GLchar *m_fragShad;
+  //stores shaders
+  class ShaderProgram
+  {
 
-	public:
-		ShaderProgram(std::string _vertShad, std::string _fragShad);
-		~ShaderProgram();
+  private:
+	GLuint m_id;
 
-		GLuint getId() { return m_id; }
+    std::shared_ptr<Shader> m_vertShad;
+    std::shared_ptr<Shader> m_fragShad;
+
+  public:
+	ShaderProgram(std::string _vertShad, std::string _fragShad);
+	~ShaderProgram();
+
+	GLuint getId() { return m_id; }
 
 
-	};
+
+
+  };
 
 }
+
+#endif //!SHADER_PROGRAM_H

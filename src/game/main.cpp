@@ -1,12 +1,7 @@
 #include <iostream>
 #include <memory>
 
-#include "myengine/Core.h"
-#include "myengine/Entity.h"
-#include "myengine/Component.h"
-#include "myengine/Transform.h"
-#include "myengine/Window.h"
-#include "myengine/GL_Triangle.h"
+#include <myengine/myengine.h>
 
 int main()
 {

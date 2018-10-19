@@ -1,9 +1,13 @@
+#ifndef VERTEX_ARRAY_H
+#define VERTEX_ARRAY_H
+
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <exception>
 #include <iostream>
 #include <vector>
 
+#include "enums.h"
 #include "VertexBuffer.h"
 
 namespace myEngine
@@ -14,20 +18,21 @@ namespace myEngine
 
 	private:
 		GLuint m_id;
-		std::vector<VertexBuffer *> m_buffers;
+		std::vector<std::shared_ptr<VertexBuffer>> m_buffers;
 		bool m_dirty;
 	
 	public:
 		VertexArray();
-		~VertexArray();
 
-		void addBuffer(std::string _attribute, VertexBuffer *_buffer);
+		void addBuffer(ShaderAttribute _attribute, std::weak_ptr<VertexBuffer> _buffer);
 
-		int getVertexCount() { return m_buffers.at(0)->getVertexCount(); }
-		int getId() { return m_id; };
-		}
+        GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }
+
+        void upload();
 		
 
 	};
 
 }
+
+#endif // !VERTEX_ARRAY_H
