@@ -49,6 +49,11 @@ namespace myEngine
   public:
     void draw(std::shared_ptr<Window> _windowObject);
 
+    virtual void awake();
+    virtual void start();
+    virtual void update();
+    virtual void display();
+
   };
 
 }

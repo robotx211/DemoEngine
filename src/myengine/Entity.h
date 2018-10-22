@@ -1,3 +1,6 @@
+#ifndef ENTITY_H
+#define ENTITY_H
+
 #include <memory>
 #include <vector>
 
@@ -5,43 +8,82 @@
 
 namespace myEngine {
 
-	class Core;
+  class Component;
 
-	class Entity
-	{
+  class Entity
+  {
 
-		friend class Core;
+    friend class Core;
 
-	private:
-	  std::vector<std::shared_ptr<Component>> m_components;
-	  std::weak_ptr<Entity> m_self;
-	  std::weak_ptr<Core> m_core;
+  private:
+    std::vector<std::shared_ptr<Component>> m_components;
+    std::weak_ptr<Entity> m_self;
+    std::weak_ptr<Core> m_core;
 
-	  void update();
-	  void display();
+    void update();
+    void display();
 
-	public:
-	  std::shared_ptr<Core> getCore();
-	  template <typename T> std::shared_ptr<T> addComponent()
-	  {
-		  std::shared_ptr<T> newComponent = std::make_shared<T>();
+  public:
+    std::shared_ptr<Core> getCore();
+    template <typename T> std::shared_ptr<T> addComponent()
+    {
+      std::shared_ptr<T> newComponent = std::make_shared<T>();
 
-		  newComponent->m_self = newComponent;
-		  newComponent->m_entity = this->m_self;
+      newComponent->m_self = newComponent;
+      newComponent->m_entity = this->m_self;
 
-		  newComponent->awake();
-		  newComponent->m_started = false;
+      newComponent->awake();
+      newComponent->m_started = false;
 
-		  m_components.push_back(newComponent);
+      m_components.push_back(newComponent);
 
-		  return newComponent;
-	  }
+      return newComponent;
+    }
 
-		//add more for initialisation parameters
+    //add more for initialisation parameters
+
+    template<typename T> std::shared_ptr<T> getComponent()
+    {
+      std::shared_ptr<T> returnComponent = NULL;
+
+      for (size_t i = 0; i < m_components.size(); i++)
+      {
+        returnComponent = std::dynamic_pointer_cast<T>(m_components.at(0));
+
+        if (returnComponent != NULL)
+        {
+          return returnComponent;
+        }
+      }
+
+      //no component of type T found
+      throw std::exception();
+    }
+
+    template<typename T> void removeComponent()
+    {
+
+      for (size_t i = 0; i < m_components.size(); i++)
+      {
+        markedComponent = std::dynamic_pointer_cast<T>(m_components.at(0));
+
+        if (markedComponent != NULL)
+        {
+          m_components.erase(m_components.begin() + i); //does this delete the component?
+          delete(markedComponent);
+        }
+      }
+
+      //no component of type T found
+      throw std::exception();
+
+    }
 
 
 
-	};
+  };
 
 }
+
+#endif //ENTITY_H
 

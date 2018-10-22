@@ -1,60 +1,37 @@
 #include "Core.h"
 #include "Entity.h"
+#include "Component.h"
 
 namespace myEngine {
 
-	void Component::onAwake()
-	{
-		std::cout << "Component Base Class Awake" << std::endl;
-	}
+  std::shared_ptr<Entity> Component::getEntity()
+  {
 
-	void Component::onStart()
-	{
-		std::cout << "Component Base Class Start" << std::endl;
-	}
+    return m_entity.lock();
 
-	void Component::onUpdate()
-	{
-		std::cout << "Component Base Class Update" << std::endl;
-	}
+  }
 
-	void Component::onDisplay()
-	{
-		std::cout << "Component Base Class Display" << std::endl;
-	}
+  std::shared_ptr<Core> Component::getCore()
+  {
 
-	std::shared_ptr<Entity> Component::getEntity()
-	{
+    return m_entity.lock()->getCore();
 
-		return m_entity.lock();
+  }
 
-	}
+  void Component::awake()
+  {
+  }
 
-	std::shared_ptr<Core> Component::getCore()
-	{
+  void Component::start()
+  {
+  }
 
-		return m_entity.lock()->getCore();
+  void Component::update()
+  {
+  }
 
-	}
-
-	void Component::awake()
-	{
-		onAwake();
-	}
-
-	void Component::start()
-	{
-		onStart();
-	}
-
-	void Component::update()
-	{
-		onUpdate();
-	}
-
-	void Component::display()
-	{
-		onDisplay();
-	}
+  void Component::display()
+  {
+  }
 
 }

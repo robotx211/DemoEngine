@@ -5,37 +5,32 @@
 #include <vector>
 #include <iostream>
 
+#include "Core.h"
+#include "Entity.h"
+
 namespace myEngine {
 
-	class Core;
-	class Entity;
+  class Component
+  {
 
-	class Component
-	{
+    friend class Entity;
 
-	  friend class Entity;
+  private:
+    std::weak_ptr<Component> m_self;
+    std::weak_ptr<Entity> m_entity;
 
-	private:
-	  std::weak_ptr<Component> m_self;
-	  std::weak_ptr<Entity> m_entity;
+    bool m_started;
 
-	  virtual void onAwake();
-	  virtual void onStart();
-	  virtual void onUpdate();
-	  virtual void onDisplay();
+  public:
+    std::shared_ptr<Entity> getEntity();
+    std::shared_ptr<Core> getCore();
 
-	  bool m_started;
+    virtual void awake();
+    virtual void start();
+    virtual void update();
+    virtual void display();
 
-	public:
-	  std::shared_ptr<Entity> getEntity();
-	  std::shared_ptr<Core> getCore();
-
-	  void awake();
-	  void start();
-	  void update();
-	  void display();
-
-	};
+  };
 
 }
 

@@ -3,6 +3,23 @@
 namespace myEngine
 {
 
+  void GL_Triangle::awake()
+  {
+  }
+
+  void GL_Triangle::start()
+  {
+  }
+
+  void GL_Triangle::update()
+  {
+  }
+
+  void GL_Triangle::display()
+  {
+    draw(getCore()->getWindowObject());
+  }
+
   void GL_Triangle::draw(std::shared_ptr<Window> _windowObject)
   {
     SDL_Window *window = _windowObject->getWindow();
@@ -57,9 +74,9 @@ namespace myEngine
 
     // - - - - - - - - - - - - - - - - - - - - - Draw Triangle - - - - - - - - - - - - - - - - - - - - - //
 
-	//set clear colour of _window
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+    //set clear colour of _window
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 
     //tell OpenGL which shader program to use
     glUseProgram(m_shaderProg->getId());
@@ -74,7 +91,7 @@ namespace myEngine
     glUseProgram(0);
 
 
-		SDL_GL_SwapWindow(window);
+    SDL_GL_SwapWindow(window);
 
 
 

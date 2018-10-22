@@ -42,6 +42,9 @@ add_library(myengine
 	src/myengine/ShaderProgram.cpp
 	src/myengine/VertexArray.cpp
 	src/myengine/VertexBuffer.cpp
+	src/myengine/Mesh.cpp
+	src/myengine/MeshRenderer.cpp
+	
 )
 
 if(MSVC)
