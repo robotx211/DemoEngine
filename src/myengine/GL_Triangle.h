@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <exception>
 #include <iostream>
+#include <vector>
 
 #include "Component.h"
 #include "Window.h"
@@ -47,12 +48,14 @@ namespace myEngine
     std::shared_ptr<ShaderProgram> m_shaderProg;
 
   public:
-    void draw(std::shared_ptr<Window> _windowObject);
+    void draw();
 
-    virtual void awake();
-    virtual void start();
-    virtual void update();
-    virtual void display();
+    void awake();
+    void start();
+    void update();
+    void display();
+    
+    void debug();
 
   };
 

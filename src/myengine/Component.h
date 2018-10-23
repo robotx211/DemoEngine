@@ -22,6 +22,8 @@ namespace myEngine {
     bool m_started;
 
   public:
+    Component();
+
     std::shared_ptr<Entity> getEntity();
     std::shared_ptr<Core> getCore();
 
@@ -29,6 +31,8 @@ namespace myEngine {
     virtual void start();
     virtual void update();
     virtual void display();
+
+    virtual void debug();
 
   };
 

@@ -28,11 +28,29 @@ namespace myEngine {
   {
     running = true;
 
+    //create SDL GL Context
+    if (!SDL_GL_CreateContext(m_windowObject->getWindow()))
+    {
+      std::cout << "GLContext is null" << std::endl;
+      throw std::exception();
+    }
+
+    //init glew
+    if (glewInit() != GLEW_OK)
+    {
+      std::cout << "glewInit failed" << std::endl;
+      throw std::exception();
+    }
+
+    debug();
+
     while (running == true)
     {
 
       update();
+
       display();
+
 
     }
 
@@ -48,9 +66,25 @@ namespace myEngine {
 
   void Core::display()
   {
+    //set clear colour of _window
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
     for (size_t i = 0; i < m_entities.size(); i++)
     {
       m_entities.at(i)->display();
+    }
+
+    SDL_GL_SwapWindow(m_windowObject->getWindow());
+  }
+
+  void Core::debug()
+  {
+    std::cout << "Entities: " << m_entities.size() << std::endl;
+
+    for (size_t i = 0; i < m_entities.size(); i++)
+    {
+      m_entities.at(i)->debug();
     }
   }
 
@@ -59,9 +93,9 @@ namespace myEngine {
     running = false;
   }
 
-  std::shared_ptr<Entity> Core::addEntity()
+  std::shared_ptr<Entity> Core::addEntity(std::string _name)
   {
-    std::shared_ptr<Entity> newEntity = std::make_shared<Entity>();
+    std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(_name);
 
     newEntity->m_self = newEntity;
     newEntity->m_core = m_self;

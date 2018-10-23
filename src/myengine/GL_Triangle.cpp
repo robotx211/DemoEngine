@@ -5,42 +5,17 @@ namespace myEngine
 
   void GL_Triangle::awake()
   {
+
   }
 
   void GL_Triangle::start()
   {
-  }
-
-  void GL_Triangle::update()
-  {
-  }
-
-  void GL_Triangle::display()
-  {
-    draw(getCore()->getWindowObject());
-  }
-
-  void GL_Triangle::draw(std::shared_ptr<Window> _windowObject)
-  {
-    SDL_Window *window = _windowObject->getWindow();
-
-    //create SDL GL Context
-    if (!SDL_GL_CreateContext(window))
-    {
-      std::cout << "GLContext is null" << std::endl;
-      throw std::exception();
-    }
-
-    //init glew
-    if (glewInit() != GLEW_OK)
-    {
-      std::cout << "glewInit failed" << std::endl;
-      throw std::exception();
-    }
+    std::cout << "GL_Triangle Start" << std::endl;
 
     m_positions.push_back(glm::vec3(0.0f, 0.5f, 0.0f));
     m_positions.push_back(glm::vec3(-0.5f, -0.5f, 0.0f));
     m_positions.push_back(glm::vec3(0.5f, -0.5f, 0.0f));
+
 
     // - - - - - - - - - - - - - - - - - - - - - Create VBO - - - - - - - - - - - - - - - - - - - - - //
 
@@ -61,22 +36,35 @@ namespace myEngine
 
     m_VAO->upload();
 
-
-    // - - - - - - - - - - - - - - - - - - - - - Load Vertex Shader - - - - - - - - - - - - - - - - - - - - - //
-
-
-    // - - - - - - - - - - - - - - - - - - - - - Load Fragment Shader - - - - - - - - - - - - - - - - - - - - - //
-
-
     // - - - - - - - - - - - - - - - - - - - - - Create Shader Program - - - - - - - - - - - - - - - - - - - - - //
 
     m_shaderProg = std::make_shared<ShaderProgram>(m_vertexShaderSrc, m_fragmentShaderSrc);
 
-    // - - - - - - - - - - - - - - - - - - - - - Draw Triangle - - - - - - - - - - - - - - - - - - - - - //
+  }
 
-    //set clear colour of _window
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+  void GL_Triangle::update()
+  {
+
+    m_positionsVBO->upload();
+
+    m_VAO->upload();
+
+    m_shaderProg->link();
+
+  }
+
+  void GL_Triangle::display()
+  {
+  }
+
+  void GL_Triangle::debug()
+  {
+    std::cout << "    GL_Triangle" << std::endl;
+  }
+
+  void GL_Triangle::draw()
+  {
+    // - - - - - - - - - - - - - - - - - - - - - Draw Triangle - - - - - - - - - - - - - - - - - - - - - //
 
     //tell OpenGL which shader program to use
     glUseProgram(m_shaderProg->getId());
@@ -89,9 +77,6 @@ namespace myEngine
     //reset the state
     glBindVertexArray(0);
     glUseProgram(0);
-
-
-    SDL_GL_SwapWindow(window);
 
 
 

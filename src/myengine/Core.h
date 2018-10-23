@@ -4,6 +4,10 @@
 #include <memory>
 #include <vector>
 #include <iostream>
+#include <stdlib.h>
+#include <SDL2/SDL.h>
+#include <glm/glm.hpp>
+#include <GL/glew.h>
 
 #include "Window.h"
 
@@ -31,9 +35,11 @@ namespace myEngine {
     void update();
     void display();
 
+    void debug();
+
     void end();
 
-    std::shared_ptr<Entity> addEntity();
+    std::shared_ptr<Entity> addEntity(std::string _name);
 
 
   };

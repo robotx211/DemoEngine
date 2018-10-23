@@ -6,6 +6,16 @@
 
 namespace myEngine {
 
+  Entity::Entity()
+  {
+
+  }
+
+  Entity::Entity(std::string _name)
+  {
+    m_name = _name;
+  }
+
   void Entity::update()
   {
     for (size_t i = 0; i < m_components.size(); i++)
@@ -27,10 +37,18 @@ namespace myEngine {
     }
   }
 
-  std::shared_ptr<Core> Entity::getCore()
+  void Entity::debug()
   {
-    return m_core.lock();
+    std::cout << "  " << m_name << std::endl;
+    std::cout << "  Components: " << m_components.size() << std::endl;
+
+    for (size_t i = 0; i < m_components.size(); i++)
+    {
+      m_components.at(i)->debug();
+    }
   }
+
+
 
 }
 

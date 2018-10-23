@@ -8,14 +8,14 @@ namespace myEngine
     //create new shader program
     m_id = glCreateProgram();
 
-
+    m_dirty = true;
   }
 
   ShaderProgram::ShaderProgram(std::string _vertShad, std::string _fragShad)
   {
-    attachVertexShader(_vertShad);
+    setVertexShader(_vertShad);
 
-    attachFragmentShader(_fragShad);
+    setFragmentShader(_fragShad);
 
     //create new shader program
     m_id = glCreateProgram();
@@ -27,7 +27,7 @@ namespace myEngine
   {
   }
 
-  void ShaderProgram::attachVertexShader(std::string _vertShad)
+  void ShaderProgram::setVertexShader(std::string _vertShad)
   {
     //create new vertex shader
     m_vertShad = std::make_shared<Shader>();
@@ -47,8 +47,10 @@ namespace myEngine
       //vert shader did not compile
       throw std::exception();
     }
+
+    m_dirty = true;
   }
-  void ShaderProgram::attachFragmentShader(std::string _fragShad)
+  void ShaderProgram::setFragmentShader(std::string _fragShad)
   {
     //create new fragment shader
     m_fragShad = std::make_shared<Shader>();
@@ -66,9 +68,17 @@ namespace myEngine
     {
       throw std::exception();
     }
+
+    m_dirty = true;
   }
   void ShaderProgram::link()
   {
+    if (m_dirty == false)
+    {
+      //not dirty, return
+      return;
+    }
+
     //attach shader objects
     glAttachShader(m_id, m_vertShad->m_id);
     glAttachShader(m_id, m_fragShad->m_id);
@@ -93,6 +103,8 @@ namespace myEngine
 
     glDetachShader(m_id, m_fragShad->m_id);
     glDeleteShader(m_fragShad->m_id);
+
+    m_dirty = false;
   }
 
 }

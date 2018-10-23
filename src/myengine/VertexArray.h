@@ -29,6 +29,8 @@ namespace myEngine
         GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }
 
         void upload();
+
+        bool getDirty() { return m_dirty; }
 		
 
 	};

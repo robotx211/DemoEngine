@@ -27,16 +27,20 @@ namespace myEngine
     std::shared_ptr<Shader> m_vertShad;
     std::shared_ptr<Shader> m_fragShad;
 
+    bool m_dirty;
+
   public:
     ShaderProgram();
 	ShaderProgram(std::string _vertShad, std::string _fragShad);
 	~ShaderProgram();
 
-    void attachVertexShader(std::string _vertShad);
-    void attachFragmentShader(std::string _fragShad);
+    void setVertexShader(std::string _vertShad);
+    void setFragmentShader(std::string _fragShad);
     void link();
 
 	GLuint getId() { return m_id; }
+
+    bool getDirty() { return m_dirty; }
 
 
 

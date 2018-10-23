@@ -4,6 +4,11 @@
 
 namespace myEngine {
 
+  Component::Component()
+  {
+    m_started = false;
+  }
+
   std::shared_ptr<Entity> Component::getEntity()
   {
 
@@ -32,6 +37,11 @@ namespace myEngine {
 
   void Component::display()
   {
+  }
+
+  void Component::debug()
+  {
+    std::cout << "    Component Base Class" << std::endl;
   }
 
 }

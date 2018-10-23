@@ -16,15 +16,26 @@ namespace myEngine {
     friend class Core;
 
   private:
+    std::string m_name;
+
     std::vector<std::shared_ptr<Component>> m_components;
     std::weak_ptr<Entity> m_self;
     std::weak_ptr<Core> m_core;
 
+
+
+  public:
+    Entity();
+    Entity (std::string _name);
+
+    std::string getName() { return m_name; }
+    std::shared_ptr<Core> getCore() { return m_core.lock(); }
+
     void update();
     void display();
 
-  public:
-    std::shared_ptr<Core> getCore();
+    void debug();
+
     template <typename T> std::shared_ptr<T> addComponent()
     {
       std::shared_ptr<T> newComponent = std::make_shared<T>();
@@ -39,7 +50,6 @@ namespace myEngine {
 
       return newComponent;
     }
-
     //add more for initialisation parameters
 
     template<typename T> std::shared_ptr<T> getComponent()

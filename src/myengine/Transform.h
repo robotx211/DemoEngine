@@ -12,6 +12,8 @@ namespace myEngine {
 
 	private:
 
+      void debug();
+
 	public:
 
 	  glm::vec3 m_localPosition; //vec3
