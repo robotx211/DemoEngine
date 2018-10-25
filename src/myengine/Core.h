@@ -25,6 +25,11 @@ namespace myEngine {
 
     bool running;
 
+		GLfloat red;
+		GLfloat green;
+		GLfloat blue;
+
+
   public:
     static std::shared_ptr<Core> init();
     std::shared_ptr<Window> createNewWindowObject(std::string _name, int _width, int _height);

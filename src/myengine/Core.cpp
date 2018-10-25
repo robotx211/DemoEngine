@@ -44,10 +44,26 @@ namespace myEngine {
 
     debug();
 
+		red = 0.0f;
+		green = 0.0f;
+		blue = 0.0f;
+
     while (running == true)
     {
 
       update();
+
+			if (red > 1.0f)
+			{
+				red = 0.0f;
+			}
+			if (green > 1.0f)
+			{
+				green = 0.0f;
+			}
+
+			red += 0.005f;
+			//green += 0.005f;
 
       display();
 
@@ -67,7 +83,7 @@ namespace myEngine {
   void Core::display()
   {
     //set clear colour of _window
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(red, green, blue, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     for (size_t i = 0; i < m_entities.size(); i++)

@@ -55,6 +55,7 @@ namespace myEngine
 
   void GL_Triangle::display()
   {
+		draw();
   }
 
   void GL_Triangle::debug()
@@ -64,7 +65,7 @@ namespace myEngine
 
   void GL_Triangle::draw()
   {
-    // - - - - - - - - - - - - - - - - - - - - - Draw Triangle - - - - - - - - - - - - - - - - - - - - - //
+		// - - - - - - - - - - - - - - - - - - - - - Draw Triangle - - - - - - - - - - - - - - - - - - - - - //
 
     //tell OpenGL which shader program to use
     glUseProgram(m_shaderProg->getId());
