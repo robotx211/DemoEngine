@@ -3,17 +3,23 @@
 
 namespace myEngine
 {
-  enum ShaderType
-  {
-    Vertex,
-    Fragment
-  };
 
-  enum ShaderAttribute 
+  namespace enums
   {
-    in_Position,  //0
-    in_Colour     //1
-  };
+
+    enum ShaderType
+    {
+      Vertex,
+      Fragment
+    };
+
+    enum ShaderAttribute
+    {
+      in_Position,  //0
+      in_Colour     //1
+    };
+
+  }
 
 }
 

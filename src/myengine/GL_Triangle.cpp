@@ -32,7 +32,7 @@ namespace myEngine
 
     m_VAO = std::make_shared<VertexArray>();
 
-    m_VAO->addBuffer(ShaderAttribute::in_Position, m_positionsVBO);
+    m_VAO->addBuffer(enums::ShaderAttribute::in_Position, m_positionsVBO);
 
     m_VAO->upload();
 

@@ -38,12 +38,6 @@ namespace myEngine
 
 	public:
 
-		std::shared_ptr<VertexBuffer> m_positionsVBO;
-
-		std::shared_ptr<VertexArray> m_VAO;
-
-		std::shared_ptr<ShaderProgram> m_shaderProg;
-
 		void draw();
 
 		void awake();

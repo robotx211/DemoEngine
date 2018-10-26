@@ -17,7 +17,7 @@ namespace myEngine
         m_dirty = true;
 	}
 
-	void VertexArray::addBuffer(ShaderAttribute _attribute, std::weak_ptr<VertexBuffer> _buffer)
+	void VertexArray::addBuffer(enums::ShaderAttribute _attribute, std::weak_ptr<VertexBuffer> _buffer)
 	{
       /*
         Attribute       Position
@@ -29,10 +29,10 @@ namespace myEngine
 
       switch (_attribute)
       {
-      case in_Position:
+      case enums::ShaderAttribute::in_Position:
         m_buffers.at(0) = _buffer.lock();
         break;
-      case in_Colour:
+      case enums::ShaderAttribute::in_Colour:
         m_buffers.at(1) = _buffer.lock();
         break;
       }

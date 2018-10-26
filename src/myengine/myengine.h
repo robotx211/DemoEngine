@@ -16,5 +16,8 @@
 #include "VertexArray.h"
 #include "ShaderProgram.h"
 
+//Utilities
+#include "Utilities.h"
+
 
 #endif // !MY_ENGINE_H

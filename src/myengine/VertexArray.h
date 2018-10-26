@@ -24,7 +24,7 @@ namespace myEngine
 	public:
 		VertexArray();
 
-		void addBuffer(ShaderAttribute _attribute, std::weak_ptr<VertexBuffer> _buffer);
+		void addBuffer(enums::ShaderAttribute _attribute, std::weak_ptr<VertexBuffer> _buffer);
 
         GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }
 

@@ -1,42 +1,98 @@
 #include "Mesh.h"
+#include "Utilities.h"
 
 namespace myEngine
 {
 
-	std::shared_ptr<std::vector<glm::vec3>> Mesh::getVertexPositions()
-	{
-		std::shared_ptr<std::vector<glm::vec3>> returnVector = std::make_shared<std::vector<glm::vec3>>();
+  Mesh::Mesh()
+  {
 
-		for (int i = 0; i < m_vertices.size(); i++)
-		{
-			returnVector->push_back(m_vertices.at(i).m_positon);
-		}
+  }
+  Mesh::Mesh(std::string _modelAddress)
+  {
+    loadModel(_modelAddress);
+  }
 
-		return returnVector;
-	}
+  void Mesh::loadModel(std::string _modelAddress)
+  {
 
-	std::shared_ptr<std::vector<glm::vec3>> Mesh::getVertexNormals()
-	{
-		std::shared_ptr<std::vector<glm::vec3>> returnVector = std::make_shared<std::vector<glm::vec3>>();
+    //read each line
+    //split each line into a vector of strings by white space
+    //if line is useful, store it
+      //if "v", store as vertex position
+      //if "vt", store as texture coordinate
+      //if "vn", store as normal
+      //if "f" store as face
+        //format: "f 1/1/1 2/2/1 3/3/1" - first number is the position index, second is the tex coord index, third is the normal index
 
-		for (int i = 0; i < m_vertices.size(); i++)
-		{
-			returnVector->push_back(m_vertices.at(i).m_normal);
-		}
+    std::ifstream objfile(_modelAddress);
+    std::string currLine;
+    std::vector<std::string> seperatedCurrLine;
 
-		return returnVector;
-	}
+    while (std::getline(objfile, currLine))
+    {
 
-	std::shared_ptr<std::vector<glm::vec3>> Mesh::getVertexTexCoords()
-	{
-		std::shared_ptr<std::vector<glm::vec3>> returnVector = std::make_shared<std::vector<glm::vec3>>();
+      splitStringByWhitespace(currLine, seperatedCurrLine);
 
-		for (int i = 0; i < m_vertices.size(); i++)
-		{
-			returnVector->push_back(m_vertices.at(i).m_texCoords);
-		}
+      if (seperatedCurrLine.at(0) == "v") 
+      {
+        //vertex position
+        //should be 4 long {v, x, y, z}
 
-		return returnVector;
-	}
+        m_positions.push_back(
+          glm::vec3(
+            std::stof( seperatedCurrLine.at(1) ), 
+            std::stof( seperatedCurrLine.at(2) ),
+            std::stof( seperatedCurrLine.at(3) )
+            ) 
+          );
+      }
+      else if (seperatedCurrLine.at(0) == "vt")
+      {
+        //tex coord
+        //should be 3 long {v, s, t}
+
+        m_texCoords.push_back(
+          glm::vec2(
+            std::stof(seperatedCurrLine.at(1)),
+            std::stof(seperatedCurrLine.at(2))
+          )
+        );
+      }
+      else if (seperatedCurrLine.at(0) == "vn")
+      {
+        //normal
+        //should be 4 long {v, x, y, z}
+
+        m_normals.push_back(
+          glm::vec3(
+            std::stof(seperatedCurrLine.at(1)),
+            std::stof(seperatedCurrLine.at(2)),
+            std::stof(seperatedCurrLine.at(3))
+          )
+        );
+      }
+      else if (seperatedCurrLine.at(0) == "f")
+      {
+        //face
+        //if 3 long, is already triangulated
+        //if longer, is not (eg. 4 is a quad)
+          //therefore need to triangulate it
+
+        //TODO
+      }
+
+    }
+
+  }
+
+  void Mesh::upload()
+  {
+    m_posVBO->upload();
+    m_texCoordsVBO->upload();
+    m_normsVBO->upload();
+
+    m_VAO->upload();
+  }
 
 }

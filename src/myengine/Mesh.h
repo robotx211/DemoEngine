@@ -1,42 +1,59 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <memory>
+#include <fstream>
+#include <iostream>
+#include <string>
 
+#include "VertexBuffer.h"
+#include "VertexArray.h"
+#include "ShaderProgram.h"
 
 namespace myEngine
 {
 
+  struct Vertex
+  {
+    glm::vec3 m_pos;
+    glm::vec2 m_texCoord;
+    glm::vec3 m_norm;
+  };
 
-	class Mesh
-	{
+  struct Face
+  {
+    Vertex m_1;
+    Vertex m_2;
+    Vertex m_3;
+  };
 
-		struct Vertex
-		{
-			glm::vec3 m_positon;
-			glm::vec3 m_normal;
-			glm::vec3 m_texCoords;
-		};
+  class Mesh
+  {
 
-		struct Texture
-		{
-			int m_id;
-			std::string m_type; //diffuse, specular etc.
-		};
+  private:
 
-	private:
-		std::vector<Vertex> m_vertices;
-		std::vector<int> m_indices;
-		Texture m_textures;
+    std::vector<glm::vec3> m_positions;
+    std::vector<glm::vec2> m_texCoords;
+    std::vector<glm::vec3> m_normals;
 
-	public:
-		std::shared_ptr<std::vector<Vertex>> getVertices() { return std::make_shared<std::vector<Vertex>>(m_vertices); }
+    std::vector<Face> m_faces;
 
-		std::shared_ptr<std::vector<glm::vec3>> getVertexPositions();
-		std::shared_ptr<std::vector<glm::vec3>> getVertexNormals();
-		std::shared_ptr<std::vector<glm::vec3>> getVertexTexCoords();
+    std::shared_ptr<VertexBuffer> m_posVBO;
+    std::shared_ptr<VertexBuffer> m_texCoordsVBO;
+    std::shared_ptr<VertexBuffer> m_normsVBO;
 
-		std::shared_ptr<std::vector<int>> getIndices() { return std::make_shared<std::vector<int>>(m_indices); }
+    std::shared_ptr<VertexArray> m_VAO;
 
-	};
+    std::shared_ptr<ShaderProgram> m_shaderProg;
+
+  public:
+
+    Mesh();
+    Mesh(std::string _modelAddress);
+
+    void loadModel(std::string _modelAddress); //load model data into m_vertices
+
+    void upload();
+
+  };
 
 }
