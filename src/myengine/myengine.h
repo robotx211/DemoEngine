@@ -16,6 +16,9 @@
 #include "VertexArray.h"
 #include "ShaderProgram.h"
 
+#include "Mesh.h"
+#include "MeshRenderer.h"
+
 //Utilities
 #include "Utilities.h"
 

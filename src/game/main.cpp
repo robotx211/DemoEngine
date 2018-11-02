@@ -17,27 +17,9 @@ int main()
 
   //core->begin();
 
-  std::string input =
-    "This text is pretty long, but will be "
-    "concatenated into just a single string. "
-    "The disadvantage is that you have to quote "
-    "each part, and newlines must be literal as "
-    "usual.";
+  std::shared_ptr<myEngine::Mesh> mesh = std::make_shared<myEngine::Mesh>();
 
-  std::vector<std::string> output;
-
-  std::cout << "Input:\t" << input << std::endl;
-  std::cout << std::endl;
-
-  myEngine::splitStringByWhitespace(input, output);
-  
-  std::cout << std::endl;
-  std::cout << "Output:\t";
-
-  for (size_t i = 0; i < output.size(); i++)
-  {
-    std::cout << output.at(i);
-  }
+  mesh->loadModel();
 
   std::cout << std::endl;
 
