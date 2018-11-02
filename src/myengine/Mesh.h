@@ -1,3 +1,6 @@
+#ifndef MESH_H
+#define MESH_H
+
 #include <glm/glm.hpp>
 #include <vector>
 #include <memory>
@@ -12,7 +15,7 @@
 namespace myEngine
 {
 
-  struct Vertex
+  struct VertexData
   {
     glm::vec3 m_pos;
     glm::vec2 m_texCoord;
@@ -21,9 +24,9 @@ namespace myEngine
 
   struct Face
   {
-    Vertex m_1;
-    Vertex m_2;
-    Vertex m_3;
+    VertexData m_v1;
+    VertexData m_v2;
+    VertexData m_v3;
   };
 
   class Mesh
@@ -57,3 +60,5 @@ namespace myEngine
   };
 
 }
+
+#endif // !MESH_H

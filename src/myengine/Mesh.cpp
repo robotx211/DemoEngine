@@ -34,6 +34,11 @@ namespace myEngine
 
       splitStringByWhitespace(currLine, seperatedCurrLine);
 
+      if (seperatedCurrLine.size() == 0)
+      {
+        continue;
+      }
+
       if (seperatedCurrLine.at(0) == "v") 
       {
         //vertex position
@@ -77,12 +82,78 @@ namespace myEngine
         //face
         //if 3 long, is already triangulated
         //if longer, is not (eg. 4 is a quad)
-          //therefore need to triangulate it
+          //therefore needs triangulating (externally)
 
-        //TODO
+        //note: relys on "f v/t/n v/t/n ..." format
+        //or "f v//n v//n"
+
+        //create vector of VertexDatas to store each vertex data
+        std::vector<VertexData> verticesData;
+
+        //go through each string (vertex data) after the first "f" string and push the VertexData to verticesData
+        for (size_t i = 1; i < seperatedCurrLine.size(); i++)
+        {
+          //split vertex data into vector of strings
+          std::vector<std::string> vertexSData;
+          splitStringByChar(seperatedCurrLine.at(i), '/', vertexSData, true);
+
+          //turn vector of strings into vector of ints (vertex data indices)
+          std::vector<int> vertexIData;
+          for (size_t j = 0; j < vertexSData.size(); j++)
+          {
+            if (vertexSData.at(j) == " ")
+            {
+              vertexIData.push_back(-1);
+            }
+            else
+            {
+              vertexIData.push_back( std::stoi( vertexSData.at(j) ) );
+            }
+          }
+
+          //create new VertexData, populate and push to verticesData
+          VertexData currVertexData;
+          if (vertexIData.at(0) != -1)
+          {
+            currVertexData.m_pos = m_positions.at(vertexIData.at(0) - 1); //need to -1, as obj indexes are 1 indexed, not 0 indexed
+          }
+          if (vertexIData.at(1) != -1)
+          {
+            currVertexData.m_texCoord = m_positions.at(vertexIData.at(1) - 1);
+          }
+          if (vertexIData.at(2) != -1)
+          {
+            currVertexData.m_norm = m_positions.at(vertexIData.at(2) - 1);
+          }
+          verticesData.push_back(currVertexData);
+        }
+
+        //triangulation check
+        Face currFace;
+        if (verticesData.size() == 3)
+        {
+          //already triangulated :D
+
+          currFace.m_v1 = verticesData.at(0);
+          currFace.m_v2 = verticesData.at(1);
+          currFace.m_v3 = verticesData.at(2);
+
+          m_faces.push_back(currFace);
+        }
+        else 
+        {
+          //not triangulated, throw exception
+
+          std::cout << "Error: Model contains N-Gons!";
+          std::exception();
+
+        }
+
       }
 
     }
+
+
 
   }
 

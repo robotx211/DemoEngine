@@ -6,8 +6,6 @@
 int main()
 {
 
-  std::cout << "Start splitStringByWhitespace Test" << std::endl;
-
   //std::shared_ptr<myEngine::Core> core = myEngine::Core::init();
   //core->createNewWindowObject("main window", 1280, 720);
 
@@ -17,11 +15,29 @@ int main()
 
   //core->begin();
 
+
+
   std::shared_ptr<myEngine::Mesh> mesh = std::make_shared<myEngine::Mesh>();
 
-  mesh->loadModel();
+  mesh->loadModel("../resources/cube.obj");
 
-  std::cout << std::endl;
+
+  //std::cout << "Split String By Char Test" << std::endl;
+
+  //std::string input = "Hello//There/My//Fellow/Children//*holds skateboard*";
+
+  //std::vector<std::string> output;
+
+  //myEngine::splitStringByChar(input, '/', output);
+
+  //std::cout << "Input: " << input << std::endl << std::endl;
+
+  //std::cout << "Output: ";
+  //for (int i = 0; i < output.size(); i++)
+  //{
+  //  std::cout << output.at(i);
+  //}
+  //std::cout << std::endl << std::endl;
 
   std::cin.get();
 

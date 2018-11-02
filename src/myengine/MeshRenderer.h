@@ -1,3 +1,6 @@
+#ifndef MESH_RENDERER_H
+#define MESH_RENDERER_H
+
 #include <SDL2/SDL.h>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
@@ -52,6 +55,8 @@ namespace myEngine
 	};
 
 }
+
+#endif // !MESH_RENDERER_H
 
 
 

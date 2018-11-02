@@ -44,6 +44,7 @@ add_library(myengine
 	src/myengine/VertexBuffer.cpp
 	src/myengine/Mesh.cpp
 	src/myengine/MeshRenderer.cpp
+	src/myengine/Utilities.cpp
 	
 )
 
