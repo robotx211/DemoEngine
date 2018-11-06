@@ -15,49 +15,56 @@
 namespace myEngine
 {
 
-  struct VertexData
-  {
-    glm::vec3 m_pos;
-    glm::vec2 m_texCoord;
-    glm::vec3 m_norm;
-  };
+	struct VertexData
+	{
+		bool m_posCheck = false;
+		bool m_texCheck = false;
+		bool m_normCheck = false;
 
-  struct Face
-  {
-    VertexData m_v1;
-    VertexData m_v2;
-    VertexData m_v3;
-  };
+		glm::vec3 m_pos;
+		glm::vec2 m_texCoord;
+		glm::vec3 m_norm;
+	};
 
-  class Mesh
-  {
+	struct Face
+	{
+		VertexData m_verticesData[3];
+	};
 
-  private:
+	class Mesh
+	{
 
-    std::vector<glm::vec3> m_positions;
-    std::vector<glm::vec2> m_texCoords;
-    std::vector<glm::vec3> m_normals;
+	private:
 
-    std::vector<Face> m_faces;
+		std::vector<glm::vec3> m_positions;
+		std::vector<glm::vec2> m_texCoords;
+		std::vector<glm::vec3> m_normals;
 
-    std::shared_ptr<VertexBuffer> m_posVBO;
-    std::shared_ptr<VertexBuffer> m_texCoordsVBO;
-    std::shared_ptr<VertexBuffer> m_normsVBO;
+		std::vector<Face> m_faces;
 
-    std::shared_ptr<VertexArray> m_VAO;
+		bool m_posCheck = false;
+		bool m_texCheck = false;
+		bool m_normCheck = false;
 
-    std::shared_ptr<ShaderProgram> m_shaderProg;
+		std::shared_ptr<VertexBuffer> m_posVBO;
+		std::shared_ptr<VertexBuffer> m_texCoordsVBO;
+		std::shared_ptr<VertexBuffer> m_normsVBO;
 
-  public:
+		std::shared_ptr<VertexArray> m_VAO;
 
-    Mesh();
-    Mesh(std::string _modelAddress);
+	public:
 
-    void loadModel(std::string _modelAddress); //load model data into m_vertices
+		Mesh();
+		Mesh(std::string _modelAddress);
 
-    void upload();
+		void loadModel(std::string _modelAddress); //load model data into m_vertices
 
-  };
+		int getVertexcount() { return (m_faces.size() * 3); } //faces each have 3 vertices, so verte count is faces.size x 3
+		std::shared_ptr<VertexArray> getModelVAO() { return m_VAO; }
+
+		void upload();
+
+	};
 
 }
 

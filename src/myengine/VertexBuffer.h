@@ -16,21 +16,22 @@ namespace myEngine
 	private:
 		GLuint m_id;
 		std::vector<GLfloat> m_data;
-        int m_components;
+		int m_components;
 		bool m_dirty;
 
 	public:
 		VertexBuffer();
 
+		void addVertex(glm::vec2 _value);
 		void addVertex(glm::vec3 _value);
-        void addVertex(glm::vec4 _value);
+		void addVertex(glm::vec4 _value);
 
 		int getDataSize() { return m_data.size(); }
-        GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }
-        bool getDirty() { return m_dirty; }
-        int getComponents() { if (!m_components) { throw std::exception(); } return m_components; } //vec3 or vec4?
+		GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }
+		bool getDirty() { return m_dirty; }
+		int getComponents() { if (!m_components) { throw std::exception(); } return m_components; } //vec3 or vec4?
 
-        void upload();
+		void upload();
 
 	};
 

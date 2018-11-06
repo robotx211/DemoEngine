@@ -16,7 +16,8 @@ namespace myEngine
     enum ShaderAttribute
     {
       in_Position,  //0
-      in_Colour     //1
+			in_TexCoord,
+			in_Normal
     };
 
   }

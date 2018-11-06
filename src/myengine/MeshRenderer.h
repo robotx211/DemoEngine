@@ -23,21 +23,11 @@ namespace myEngine
 	{
 
 	private:
-		std::shared_ptr<Mesh> m_mesh;
+		std::weak_ptr<Mesh> m_mesh; //meshes should be stored in a resources array (or something like that)
 
-		std::string m_vertexShaderSrc =
-			"attribute vec3 in_Position;            " \
-			"                                       " \
-			"void main()                            " \
-			"{                                      " \
-			" gl_Position = vec4(in_Position, 1.0); " \
-			"}                                      ";
+		//texture
 
-		std::string m_fragmentShaderSrc =
-			"void main()                        " \
-			"{                                  " \
-			" gl_FragColor = vec4(0, 0, 0, 1);  " \
-			"}                                  ";
+		std::shared_ptr<ShaderProgram> m_shaderProg; //shader programs are stored in the mesh renderer
 
 	public:
 
@@ -50,6 +40,9 @@ namespace myEngine
 
 		void debug();
 
+		void setMesh(std::shared_ptr<Mesh> _mesh);
+		void setTexture();
+		void setShaders(std::string _vertShadAddress, std::string _fragShadAddress);
 
 
 	};

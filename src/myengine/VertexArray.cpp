@@ -23,7 +23,8 @@ namespace myEngine
         Attribute       Position
 
         in_Position     0
-        in_Colour       1
+				in_TexCoord			1
+				in_Normal				2
 
       */
 
@@ -32,9 +33,12 @@ namespace myEngine
       case enums::ShaderAttribute::in_Position:
         m_buffers.at(0) = _buffer.lock();
         break;
-      case enums::ShaderAttribute::in_Colour:
+      case enums::ShaderAttribute::in_TexCoord:
         m_buffers.at(1) = _buffer.lock();
         break;
+			case enums::ShaderAttribute::in_Normal:
+				m_buffers.at(2) = _buffer.lock();
+				break;
       }
 
       m_dirty = true;

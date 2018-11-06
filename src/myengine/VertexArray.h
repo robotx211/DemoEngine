@@ -20,18 +20,18 @@ namespace myEngine
 		GLuint m_id;
 		std::vector<std::shared_ptr<VertexBuffer>> m_buffers;
 		bool m_dirty;
-	
+
 	public:
 		VertexArray();
 
 		void addBuffer(enums::ShaderAttribute _attribute, std::weak_ptr<VertexBuffer> _buffer);
 
-        GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }
+		GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }
 
-        void upload();
+		void upload();
 
-        bool getDirty() { return m_dirty; }
-		
+		bool getDirty() { return m_dirty; }
+
 
 	};
 

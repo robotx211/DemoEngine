@@ -31,7 +31,11 @@ namespace myEngine {
 
 
   public:
-    static std::shared_ptr<Core> init();
+		static std::shared_ptr<Core> init();
+
+		Core();
+		~Core();
+
     std::shared_ptr<Window> createNewWindowObject(std::string _name, int _width, int _height);
     std::shared_ptr<Window> getWindowObject() { return m_windowObject; }
 

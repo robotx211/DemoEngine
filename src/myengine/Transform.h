@@ -17,8 +17,8 @@ namespace myEngine {
 	public:
 
 	  glm::vec3 m_localPosition; //vec3
-	  glm::vec3 m_localOrientation; //euler
-	  glm::vec3 m_localScale; //vec3
+	  //glm::vec3 m_localOrientation; //euler
+	  //glm::vec3 m_localScale; //vec3
 
 	};
 

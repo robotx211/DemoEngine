@@ -38,7 +38,7 @@ namespace myEngine
 
     // - - - - - - - - - - - - - - - - - - - - - Create Shader Program - - - - - - - - - - - - - - - - - - - - - //
 
-    m_shaderProg = std::make_shared<ShaderProgram>(m_vertexShaderSrc, m_fragmentShaderSrc);
+    m_shaderProg = std::make_shared<ShaderProgram>("../resources/VertexShader.txt", "../resources/FragmentShader.txt");
 
   }
 

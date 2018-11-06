@@ -47,8 +47,6 @@ namespace myEngine
         currString += _input.at(j);
       }
 
-      std::cout << std::endl;
-
     }
 
     //save last string?

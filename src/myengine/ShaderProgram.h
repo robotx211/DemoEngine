@@ -5,47 +5,49 @@
 #include <GL/glew.h>
 #include <exception>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 #include "enums.h"
 
 namespace myEngine
 {
 
-  struct Shader
-  {
-    GLuint m_id;
-    GLchar *m_source;
-  };
+	struct Shader
+	{
+		GLuint m_id;
+		GLchar *m_source;
+	};
 
-  //stores shaders
-  class ShaderProgram
-  {
+	//stores shaders
+	class ShaderProgram
+	{
 
-  private:
-	GLuint m_id;
+	private:
+		GLuint m_id;
 
-    std::shared_ptr<Shader> m_vertShad;
-    std::shared_ptr<Shader> m_fragShad;
+		std::shared_ptr<Shader> m_vertShad;
+		std::shared_ptr<Shader> m_fragShad;
 
-    bool m_dirty;
+		bool m_dirty;
 
-  public:
-    ShaderProgram();
-	ShaderProgram(std::string _vertShad, std::string _fragShad);
-	~ShaderProgram();
+	public:
+		ShaderProgram();
+		ShaderProgram(std::string _vertShadAddress, std::string _fragShadAddress);
+		~ShaderProgram();
 
-    void setVertexShader(std::string _vertShad);
-    void setFragmentShader(std::string _fragShad);
-    void link();
+		void setVertexShader(std::string _vertShadAddress);
+		void setFragmentShader(std::string _fragShadAddress);
+		void link();
 
-	GLuint getId() { return m_id; }
+		GLuint getId() { return m_id; }
 
-    bool getDirty() { return m_dirty; }
-
-
+		bool getDirty() { return m_dirty; }
 
 
-  };
+
+
+	};
 
 }
 

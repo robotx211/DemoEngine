@@ -115,15 +115,18 @@ namespace myEngine
           VertexData currVertexData;
           if (vertexIData.at(0) != -1)
           {
+						currVertexData.m_posCheck = true;
             currVertexData.m_pos = m_positions.at(vertexIData.at(0) - 1); //need to -1, as obj indexes are 1 indexed, not 0 indexed
           }
           if (vertexIData.at(1) != -1)
           {
-            currVertexData.m_texCoord = m_positions.at(vertexIData.at(1) - 1);
+						currVertexData.m_texCheck = true;
+            currVertexData.m_texCoord = m_texCoords.at(vertexIData.at(1) - 1);
           }
           if (vertexIData.at(2) != -1)
           {
-            currVertexData.m_norm = m_positions.at(vertexIData.at(2) - 1);
+						currVertexData.m_normCheck = true;
+            currVertexData.m_norm = m_normals.at(vertexIData.at(2) - 1);
           }
           verticesData.push_back(currVertexData);
         }
@@ -134,9 +137,9 @@ namespace myEngine
         {
           //already triangulated :D
 
-          currFace.m_v1 = verticesData.at(0);
-          currFace.m_v2 = verticesData.at(1);
-          currFace.m_v3 = verticesData.at(2);
+          currFace.m_verticesData[0] = verticesData.at(0);
+          currFace.m_verticesData[1] = verticesData.at(1);
+          currFace.m_verticesData[2] = verticesData.at(2);
 
           m_faces.push_back(currFace);
         }
@@ -153,15 +156,86 @@ namespace myEngine
 
     }
 
+	//put data into VBOs and VAO
 
+		m_posCheck = m_faces.at(0).m_verticesData[0].m_posCheck;
+		m_texCheck = m_faces.at(0).m_verticesData[0].m_texCheck;
+		m_normCheck = m_faces.at(0).m_verticesData[0].m_normCheck;
+
+		if (m_posCheck == true)
+		{
+			m_posVBO = std::make_shared<VertexBuffer>();
+
+		}
+		if (m_texCheck == true)
+		{
+			m_texCoordsVBO = std::make_shared<VertexBuffer>();
+
+		}
+		if (m_normCheck == true)
+		{
+			m_normsVBO = std::make_shared<VertexBuffer>();
+		}
+
+		m_VAO = std::make_shared<VertexArray>();
+
+	for (size_t i = 0; i < m_faces.size(); i++)
+	{
+
+		Face &thisFace = m_faces.at(i);
+
+		for (int j = 0; j < 3; j++)
+		{
+
+			if (m_posCheck == true)
+			{
+				m_posVBO->addVertex(thisFace.m_verticesData[j].m_pos);
+			}
+			if (m_texCheck == true)
+			{
+				m_texCoordsVBO->addVertex(thisFace.m_verticesData[j].m_texCoord);
+			}
+			if (m_normCheck == true)
+			{
+				m_normsVBO->addVertex(thisFace.m_verticesData[j].m_norm);
+			}
+
+		}
+
+		
+		if (m_posCheck == true)
+		{
+			m_VAO->addBuffer(enums::ShaderAttribute::in_Position, m_posVBO);
+		}
+		if (m_texCheck == true)
+		{
+			m_VAO->addBuffer(enums::ShaderAttribute::in_TexCoord, m_texCoordsVBO);
+		}
+		if (m_normCheck == true)
+		{
+			m_VAO->addBuffer(enums::ShaderAttribute::in_Normal, m_normsVBO);
+		}
+
+		upload();
+
+	}
 
   }
 
   void Mesh::upload()
   {
-    m_posVBO->upload();
-    m_texCoordsVBO->upload();
-    m_normsVBO->upload();
+		if (m_posCheck == true)
+		{
+			m_posVBO->upload();
+		}
+		if (m_texCheck == true)
+		{
+			m_texCoordsVBO->upload();
+		}
+		if (m_normCheck == true)
+		{
+			m_normsVBO->upload();
+		}
 
     m_VAO->upload();
   }

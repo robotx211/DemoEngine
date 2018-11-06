@@ -19,13 +19,27 @@ namespace myEngine
 
 	}
 
+	void VertexBuffer::addVertex(glm::vec2 _value)
+	{
+		if (m_components != 0 && m_components != 2) //if m_components has been set and is not 2, a non vec2 has already been added
+		{
+			throw std::exception();
+		}
+
+		m_components = 2;
+
+		m_data.push_back(_value.x);
+		m_data.push_back(_value.y);
+
+		m_dirty = true;
+	}
+
 	void VertexBuffer::addVertex(glm::vec3 _value)
 	{
-      if (m_components == 4) //only allows 4 and 4 rn, needs generalising
-      {
-        //vec4 already added
-        throw std::exception();
-      }
+		if (m_components != 0 && m_components != 3) //if m_components has been set and is not 2, a non vec2 has already been added
+		{
+			throw std::exception();
+		}
 
       m_components = 3;
 
@@ -38,11 +52,10 @@ namespace myEngine
 
     void VertexBuffer::addVertex(glm::vec4 _value)
     {
-      if (m_components == 3)
-      {
-        //vec3 already added
-        throw std::exception();
-      }
+			if (m_components != 0 && m_components != 4) //if m_components has been set and is not 2, a non vec2 has already been added
+			{
+				throw std::exception();
+			}
 
       m_components = 4;
 
