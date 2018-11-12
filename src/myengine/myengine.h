@@ -9,7 +9,7 @@
 //Components
 #include "Transform.h"
 #include "Window.h"
-#include "GL_Triangle.h"
+#include "Camera.h"
 
 //OpenGL Wrapper
 #include "VertexBuffer.h"
@@ -21,6 +21,10 @@
 
 //Utilities
 #include "Utilities.h"
+#include "enums.h"
+
+//dev
+#include "GL_Triangle.h"
 
 
 #endif // !MY_ENGINE_H

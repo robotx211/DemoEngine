@@ -10,31 +10,31 @@
 
 namespace myEngine {
 
-  class Component
-  {
+	class Component
+	{
 
-    friend class Entity;
+		friend class Entity;
 
-  private:
-    std::weak_ptr<Component> m_self;
-    std::weak_ptr<Entity> m_entity;
+	private:
+		std::weak_ptr<Component> m_self;
+		std::weak_ptr<Entity> m_entity;
 
-    bool m_started;
+		bool m_started;
 
-  public:
-    Component();
+	public:
+		Component();
 
-    std::shared_ptr<Entity> getEntity();
-    std::shared_ptr<Core> getCore();
+		std::shared_ptr<Entity> getEntity();
+		std::shared_ptr<Core> getCore();
 
-    virtual void awake();
-    virtual void start();
-    virtual void update();
-    virtual void display();
+		virtual void awake();
+		virtual void start();
+		virtual void update();
+		virtual void display();
 
-    virtual void debug();
+		virtual void debug();
 
-  };
+	};
 
 }
 

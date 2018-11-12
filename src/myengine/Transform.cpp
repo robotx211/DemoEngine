@@ -6,7 +6,7 @@ namespace myEngine {
 	{
 		m_localPosition = glm::vec3(0.0);
 		m_localRotation = glm::vec3(0.0);
-		m_localScale = glm::vec3(0.0);
+		m_localScale = glm::vec3(1.0);
 	}
 
 	Transform::Transform(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _sca)
@@ -16,11 +16,16 @@ namespace myEngine {
 		m_localScale = _sca;
 	}
 
-	glm::vec3 Transform::localPosition()
+	Transform::~Transform()
+	{
+
+	}
+
+	glm::vec3 Transform::getLocalPosition()
 	{
 		return m_localPosition;
 	}
-	void Transform::localPosition(glm::vec3 _pos)
+	void Transform::setLocalPosition(glm::vec3 _pos)
 	{
 		m_localPosition = _pos;
 	}
@@ -34,11 +39,11 @@ namespace myEngine {
 		translate(glm::vec3(_x, _y, _z));
 	}
 
-	glm::vec3 Transform::localRotation()
+	glm::vec3 Transform::getLocalRotation()
 	{
 		return m_localRotation;
 	}
-	void Transform::localRotation(glm::vec3 _rot)
+	void Transform::setLocalRotation(glm::vec3 _rot)
 	{
 		m_localRotation = _rot;
 	}
@@ -52,11 +57,11 @@ namespace myEngine {
 		rotate(glm::vec3(_x, _y, _z));
 	}
 
-	glm::vec3 Transform::localScale()
+	glm::vec3 Transform::getLocalScale()
 	{
 		return m_localScale;
 	}
-	void Transform::localScale(glm::vec3 _sca)
+	void Transform::setLocalScale(glm::vec3 _sca)
 	{
 		m_localScale = _sca;
 	}

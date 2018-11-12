@@ -33,8 +33,6 @@ namespace myEngine
 		m_vertShad = std::make_shared<Shader>();
 		m_vertShad->m_id = glCreateShader(GL_VERTEX_SHADER);
 
-		//-------------------TEST-------------------
-
 		//get source code from file
 		std::ifstream shaderFilestream(_vertShadAddress);
 		std::string sourceString(
@@ -42,8 +40,6 @@ namespace myEngine
 			(std::istreambuf_iterator<char>())
 		);
 		std::cout << sourceString << std::endl;
-
-		//-------------------TEST-------------------
 
 		//attach source code
 		m_vertShad->m_source = (GLchar *)sourceString.c_str();
@@ -68,8 +64,6 @@ namespace myEngine
 		m_fragShad = std::make_shared<Shader>();
 		m_fragShad->m_id = glCreateShader(GL_FRAGMENT_SHADER);
 
-		//-------------------TEST-------------------
-
 //get source code from file
 		std::ifstream shaderFilestream(_fragShadAddress);
 		std::string sourceString(
@@ -78,9 +72,7 @@ namespace myEngine
 		);
 		std::cout << sourceString << std::endl;
 
-		//-------------------TEST-------------------
-
-		//attach soucre code
+		//attach source code
 		m_fragShad->m_source = (GLchar *)sourceString.c_str();
 		glShaderSource(m_fragShad->m_id, 1, &m_fragShad->m_source, NULL);
 
@@ -130,6 +122,19 @@ namespace myEngine
 		glDeleteShader(m_fragShad->m_id);
 
 		m_dirty = false;
+	}
+
+	void ShaderProgram::setModelMatrix(glm::mat4 _mat)
+	{
+		m_modelMat = _mat;
+	}
+	void ShaderProgram::setViewMatrix(glm::mat4 _mat)
+	{
+		m_viewMat = _mat;
+	}
+	void ShaderProgram::setProjectionMatrix(glm::mat4 _mat)
+	{
+		m_projMat = _mat;
 	}
 
 }

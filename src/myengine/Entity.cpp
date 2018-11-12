@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "Entity.h"
+#include "Component.h"
 
 #include <glm/glm.hpp>
 #include <typeinfo>
@@ -47,6 +48,8 @@ namespace myEngine {
       m_components.at(i)->debug();
     }
   }
+
+
 
 
 

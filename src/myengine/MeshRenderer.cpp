@@ -24,8 +24,6 @@ namespace myEngine
 	}
 	void MeshRenderer::start()
 	{
-		std::cout << "MeshRenderer Start" << std::endl;
-
 	}
 	void MeshRenderer::update()
 	{
@@ -37,7 +35,7 @@ namespace myEngine
 
 	void MeshRenderer::debug()
 	{
-
+		std::cout << "    Mesh Renderer" << std::endl;
 	}
 
 	void MeshRenderer::setMesh(std::shared_ptr<Mesh> _mesh)

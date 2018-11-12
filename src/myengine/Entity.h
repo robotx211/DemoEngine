@@ -4,11 +4,11 @@
 #include <memory>
 #include <vector>
 
-#include "Component.h"
+#include "Core.h"
 
 namespace myEngine {
 
-  class Component;
+	class Component;
 
   class Entity
   {
@@ -21,8 +21,6 @@ namespace myEngine {
     std::vector<std::shared_ptr<Component>> m_components;
     std::weak_ptr<Entity> m_self;
     std::weak_ptr<Core> m_core;
-
-
 
   public:
     Entity();
@@ -58,7 +56,7 @@ namespace myEngine {
 
       for (size_t i = 0; i < m_components.size(); i++)
       {
-        returnComponent = std::dynamic_pointer_cast<T>(m_components.at(0));
+        returnComponent = std::dynamic_pointer_cast<T>(m_components.at(i));
 
         if (returnComponent != NULL)
         {
@@ -75,7 +73,7 @@ namespace myEngine {
 
       for (size_t i = 0; i < m_components.size(); i++)
       {
-        markedComponent = std::dynamic_pointer_cast<T>(m_components.at(0));
+        markedComponent = std::dynamic_pointer_cast<T>(m_components.at(i));
 
         if (markedComponent != NULL)
         {

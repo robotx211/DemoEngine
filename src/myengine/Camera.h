@@ -1,18 +1,29 @@
-#include "Component.h"
+#ifndef CAMERA_H
+#define CAMERA_H
 
-namespace myengine
+
+#include <memory>
+#include <vector>
+
+#include <glm/glm.hpp>
+
+#include "Component.h"
+#include "Transform.h"
+
+namespace myEngine
 {
 
-	class Camera::public Component
+	class Camera : public Component
 	{
+	private:
+		//rn just marks a transform as a camera
 
-		virtual void awake();
-		virtual void start();
-		virtual void update();
-		virtual void display();
+	public:
 
-		virtual void debug();
+		void debug();
 
 	};
 
 }
+
+#endif // !CAMERA_H

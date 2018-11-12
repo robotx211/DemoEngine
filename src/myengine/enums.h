@@ -17,7 +17,10 @@ namespace myEngine
     {
       in_Position,  //0
 			in_TexCoord,
-			in_Normal
+			in_Normal,
+			in_ModelMat,
+			in_ViewMat,
+			in_ProjMat
     };
 
   }
