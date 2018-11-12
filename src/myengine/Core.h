@@ -48,6 +48,7 @@ namespace myEngine {
 
     void end();
 
+		std::shared_ptr<Entity> addEntity();
     std::shared_ptr<Entity> addEntity(std::string _name);
 
 

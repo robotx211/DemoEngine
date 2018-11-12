@@ -102,6 +102,18 @@ namespace myEngine {
     running = false;
   }
 
+	std::shared_ptr<Entity> Core::addEntity(std::string _name)
+	{
+		std::shared_ptr<Entity> newEntity = std::make_shared<Entity>();
+
+		newEntity->m_self = newEntity;
+		newEntity->m_core = m_self;
+
+		m_entities.push_back(newEntity);
+
+		return newEntity;
+	}
+
   std::shared_ptr<Entity> Core::addEntity(std::string _name)
   {
     std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(_name);

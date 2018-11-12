@@ -45,6 +45,7 @@ add_library(myengine
 	src/myengine/Mesh.cpp
 	src/myengine/MeshRenderer.cpp
 	src/myengine/Utilities.cpp
+	src/myengine/Camera.cpp
 	
 )
 
