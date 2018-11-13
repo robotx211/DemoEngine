@@ -1,3 +1,5 @@
+#include <glm/ext.hpp>
+
 #include "Transform.h"
 
 namespace myEngine {
@@ -21,6 +23,8 @@ namespace myEngine {
 
 	}
 
+	//-------------TRANSLATION-------------
+
 	glm::vec3 Transform::getLocalPosition()
 	{
 		return m_localPosition;
@@ -39,23 +43,10 @@ namespace myEngine {
 		translate(glm::vec3(_x, _y, _z));
 	}
 
-	glm::vec3 Transform::getLocalRotation()
-	{
-		return m_localRotation;
-	}
-	void Transform::setLocalRotation(glm::vec3 _rot)
-	{
-		m_localRotation = _rot;
-	}
+	//-------------TRANSLATION-------------
 
-	void Transform::rotate(glm::vec3 _vec)
-	{
-		m_localRotation += _vec;
-	}
-	void Transform::rotate(float _x, float _y, float _z)
-	{
-		rotate(glm::vec3(_x, _y, _z));
-	}
+
+	//-------------SCALE-------------
 
 	glm::vec3 Transform::getLocalScale()
 	{
@@ -73,6 +64,19 @@ namespace myEngine {
 	void Transform::scale(float _x, float _y, float _z)
 	{
 		scale(glm::vec3(_x, _y, _z));
+	}
+
+	//-------------SCALE-------------
+
+	glm::mat4 Transform::getTransformMat()
+	{
+
+		glm::mat4 scaleMat = glm::scale(glm::mat4(1.0), m_localScale);
+
+		glm::mat4 translationMat = glm::translate(glm::mat4(1.0), m_localPosition);
+
+		return translationMat /* * roationMat */ * scaleMat;
+
 	}
 
   void Transform::debug()

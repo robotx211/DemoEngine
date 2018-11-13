@@ -9,6 +9,7 @@
 namespace myEngine {
 
 	class Component;
+	class Transform;
 
   class Entity
   {
@@ -49,6 +50,11 @@ namespace myEngine {
       return newComponent;
     }
     //add more for initialisation parameters
+
+		std::shared_ptr<Transform> getTransform()
+		{
+			return getComponent<Transform>();
+		}
 
     template<typename T> std::shared_ptr<T> getComponent()
     {

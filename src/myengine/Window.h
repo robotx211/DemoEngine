@@ -26,6 +26,9 @@ namespace myEngine {
       Window(std::string _name, int _width, int _height);
       ~Window();
 
+			float getWidth() { return (float)m_width; }
+			float getHeight() { return (float)m_height; }
+
 	};
 
 }

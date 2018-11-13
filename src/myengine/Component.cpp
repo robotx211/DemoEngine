@@ -23,6 +23,11 @@ namespace myEngine {
 
   }
 
+	std::shared_ptr<Transform> Component::getTransform()
+	{
+		return m_entity.lock()->getTransform();
+	}
+
   void Component::awake()
   {
   }

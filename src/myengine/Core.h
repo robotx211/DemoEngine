@@ -16,9 +16,6 @@
 
 namespace myEngine {
 
-	//class Entity;
-	class Component;
-
   class Core
   {
 

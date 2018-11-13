@@ -1,3 +1,5 @@
+#include <glm/ext.hpp>
+
 #include "MeshRenderer.h"
 
 namespace myEngine
@@ -5,6 +7,11 @@ namespace myEngine
 
 	void MeshRenderer::draw()
 	{
+		m_shaderProg->setModelMatrix(getTransform()->getTransformMat());
+		m_shaderProg->setViewMatrix(getCore()->getcurrentCamera()->getViewMatrix());
+		m_shaderProg->setProjectionMatrix(glm::perspective(getCore()->getcurrentCamera()->getRadFOV(),
+			getCore()->getWindowObject()->getWidth() / getCore()->getWindowObject()->getHeight(), 0.1f, 100.0f));
+
 		//tell OpenGL which shader program to use
 		glUseProgram(m_shaderProg->getId());
 		//bind the VAO

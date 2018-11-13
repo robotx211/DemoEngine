@@ -1,3 +1,5 @@
+#include <glm/ext.hpp>
+
 #include "ShaderProgram.h"
 
 namespace myEngine
@@ -126,15 +128,42 @@ namespace myEngine
 
 	void ShaderProgram::setModelMatrix(glm::mat4 _mat)
 	{
-		m_modelMat = _mat;
+		GLuint id = glGetUniformLocation(id, "in_ModelMat");
+
+		if (id == -1)
+		{
+			throw std::exception();
+		}
+
+		glUseProgram(m_id);
+		glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(_mat));
+		glUseProgram(0);
 	}
 	void ShaderProgram::setViewMatrix(glm::mat4 _mat)
 	{
-		m_viewMat = _mat;
+		GLuint id = glGetUniformLocation(id, "in_ViewMat");
+
+		if (id == -1)
+		{
+			throw std::exception();
+		}
+
+		glUseProgram(m_id);
+		glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(_mat));
+		glUseProgram(0);
 	}
 	void ShaderProgram::setProjectionMatrix(glm::mat4 _mat)
 	{
-		m_projMat = _mat;
+		GLuint id = glGetUniformLocation(id, "in_ProjMat");
+
+		if (id == -1)
+		{
+			throw std::exception();
+		}
+
+		glUseProgram(m_id);
+		glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(_mat));
+		glUseProgram(0);
 	}
 
 }

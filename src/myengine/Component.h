@@ -10,6 +10,8 @@
 
 namespace myEngine {
 
+	class Transform;
+
 	class Component
 	{
 
@@ -26,6 +28,8 @@ namespace myEngine {
 
 		std::shared_ptr<Entity> getEntity();
 		std::shared_ptr<Core> getCore();
+
+		std::shared_ptr<Transform> getTransform();
 
 		virtual void awake();
 		virtual void start();

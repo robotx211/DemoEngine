@@ -80,7 +80,7 @@ namespace myEngine {
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-		std::vector<std::shared_ptr<Camera>> *camList;
+		std::vector<std::shared_ptr<Camera>> *camList = new std::vector<std::shared_ptr<Camera>>();
 		getComponents<Camera>(camList);
 
 		if (camList->size() == 0)

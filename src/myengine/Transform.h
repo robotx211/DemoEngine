@@ -6,6 +6,8 @@
 #include <vector>
 
 #include <glm/glm.hpp>
+#include <glm/ext.hpp>
+
 
 #include "Component.h"
 
@@ -17,7 +19,7 @@ namespace myEngine {
 	private:
 
 			glm::vec3 m_localPosition; //vec3
-			glm::vec3 m_localRotation; //euler
+			glm::quat m_localRotation; //quaternions
 			glm::vec3 m_localScale; //vec3
 
 	public:
@@ -26,23 +28,31 @@ namespace myEngine {
 		Transform(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _sca);
 		~Transform();
 
+		//-------------TRANSLATION-------------
+
 		glm::vec3 getLocalPosition();
 		void setLocalPosition(glm::vec3 _pos);
 
 		void translate(glm::vec3 _vec);
 		void translate(float _x, float _y, float _z);
 
-		glm::vec3 getLocalRotation();
-		void setLocalRotation(glm::vec3 _rot);
+		//-------------TRANSLATION-------------
 
-		void rotate(glm::vec3 _vec);
-		void rotate(float _x, float _y, float _z);
+
+
+		//-------------SCALE-------------
 
 		glm::vec3 getLocalScale();
 		void setLocalScale(glm::vec3 _sca);
 
 		void scale(glm::vec3 _vec);
 		void scale(float _x, float _y, float _z);
+
+		//-------------SCALE-------------
+
+
+
+		glm::mat4 getTransformMat();
 
 		void debug();
 

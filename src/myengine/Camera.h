@@ -8,7 +8,6 @@
 #include <glm/glm.hpp>
 
 #include "Component.h"
-#include "Transform.h"
 
 namespace myEngine
 {
@@ -16,12 +15,21 @@ namespace myEngine
 	class Camera : public Component
 	{
 	private:
-		//rn just marks a transform as a camera
+		
+		float m_DegFOV;
+
 
 	public:
 
-		void debug();
+		Camera();
+		~Camera();
 
+		void setDegFOV(float _value); //in degrees
+
+		glm::mat4 getViewMatrix();
+		float getRadFOV();
+
+		void debug();
 	};
 
 }

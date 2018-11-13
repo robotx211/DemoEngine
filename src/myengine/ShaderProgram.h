@@ -26,10 +26,6 @@ namespace myEngine
 	private:
 		GLuint m_id;
 
-		glm::mat4 m_modelMat;
-		glm::mat4 m_viewMat;
-		glm::mat4 m_projMat;
-
 		std::shared_ptr<Shader> m_vertShad;
 		std::shared_ptr<Shader> m_fragShad;
 
@@ -51,8 +47,6 @@ namespace myEngine
 		void setModelMatrix(glm::mat4 _mat);
 		void setViewMatrix(glm::mat4 _mat);
 		void setProjectionMatrix(glm::mat4 _mat);
-
-		void 
 
 
 
