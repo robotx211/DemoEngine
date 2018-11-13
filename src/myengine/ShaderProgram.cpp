@@ -1,6 +1,7 @@
 #include <glm/ext.hpp>
 
 #include "ShaderProgram.h"
+#include "enums.h"
 
 namespace myEngine
 {
@@ -103,8 +104,8 @@ namespace myEngine
 
 		//ensure VAO "position" attrib stream gets set as the first position during link
 		glBindAttribLocation(m_id, 0, "in_Position");
-		glBindAttribLocation(m_id, 1, "in_TexCoord");
-		glBindAttribLocation(m_id, 2, "in_Normal");
+		//glBindAttribLocation(m_id, 1, "in_TexCoord");
+		//glBindAttribLocation(m_id, 2, "in_Normal");
 
 		//perform the link
 		glLinkProgram(m_id);
@@ -128,7 +129,7 @@ namespace myEngine
 
 	void ShaderProgram::setModelMatrix(glm::mat4 _mat)
 	{
-		GLuint id = glGetUniformLocation(id, "in_ModelMat");
+		GLuint id = glGetUniformLocation(m_id, "in_ModelMat");
 
 		if (id == -1)
 		{
@@ -141,7 +142,7 @@ namespace myEngine
 	}
 	void ShaderProgram::setViewMatrix(glm::mat4 _mat)
 	{
-		GLuint id = glGetUniformLocation(id, "in_ViewMat");
+		GLuint id = glGetUniformLocation(m_id, "in_ViewMat");
 
 		if (id == -1)
 		{
@@ -154,7 +155,7 @@ namespace myEngine
 	}
 	void ShaderProgram::setProjectionMatrix(glm::mat4 _mat)
 	{
-		GLuint id = glGetUniformLocation(id, "in_ProjMat");
+		GLuint id = glGetUniformLocation(m_id, "in_ProjMat");
 
 		if (id == -1)
 		{

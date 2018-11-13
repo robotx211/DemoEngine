@@ -11,43 +11,45 @@
 
 #include "Window.h"
 
-#include "Entity.h"
-#include "Camera.h"
+
 
 namespace myEngine {
 
-  class Core
-  {
+	class Camera;
+	class Entity;
 
-  private:
-    std::vector<std::shared_ptr<Entity>> m_entities;
-    std::shared_ptr<Window> m_windowObject;
-    std::weak_ptr<Core> m_self;
+	class Core
+	{
+
+	private:
+		std::vector<std::shared_ptr<Entity>> m_entities;
+		std::shared_ptr<Window> m_windowObject;
+		std::weak_ptr<Core> m_self;
 
 		std::shared_ptr<Camera> m_currentCamera;
 
-    bool running;
+		bool running;
 
-  public:
+	public:
 		static std::shared_ptr<Core> init();
 
 		Core();
 		~Core();
 
-    std::shared_ptr<Window> createNewWindowObject(std::string _name, int _width, int _height);
-    std::shared_ptr<Window> getWindowObject() { return m_windowObject; }
+		std::shared_ptr<Window> createNewWindowObject(std::string _name, int _width, int _height);
+		std::shared_ptr<Window> getWindowObject() { return m_windowObject; }
 
-    void begin();
+		void begin();
 
-    void update();
-    void display();
+		void update();
+		void display();
 
-    void debug();
+		void debug();
 
-    void end();
+		void end();
 
 		std::shared_ptr<Entity> addEntity();
-    std::shared_ptr<Entity> addEntity(std::string _name);
+		std::shared_ptr<Entity> addEntity(std::string _name);
 
 		template<typename T> void getComponents(std::vector<std::shared_ptr<T>> *_list)
 		{
@@ -58,7 +60,7 @@ namespace myEngine {
 					m_entities.at(i)->debug();
 					_list->push_back(m_entities.at(i)->getComponent<T>());
 				}
-				catch(...)
+				catch (...)
 				{
 					//no component type
 				}
@@ -69,7 +71,7 @@ namespace myEngine {
 		std::shared_ptr<Camera> getcurrentCamera();
 
 
-  };
+	};
 
 }
 

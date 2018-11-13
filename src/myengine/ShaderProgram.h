@@ -8,7 +8,6 @@
 #include <fstream>
 #include <string>
 
-#include "enums.h"
 
 namespace myEngine
 {
@@ -40,7 +39,10 @@ namespace myEngine
 		void setFragmentShader(std::string _fragShadAddress);
 		void link();
 
-		GLuint getId() { return m_id; }
+		GLuint getId() {
+			if (m_dirty == true) { link(); } 
+			return m_id;
+		}
 
 		bool getDirty() { return m_dirty; }
 

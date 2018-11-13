@@ -1,6 +1,8 @@
 #include <glm/ext.hpp>
 
 #include "MeshRenderer.h"
+#include "Transform.h"
+#include "Camera.h"
 
 namespace myEngine
 {

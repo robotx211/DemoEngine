@@ -1,6 +1,7 @@
 #include <glm/ext.hpp>
 
 #include "Camera.h"
+#include "Transform.h"
 
 namespace myEngine
 {

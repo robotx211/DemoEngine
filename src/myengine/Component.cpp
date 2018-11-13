@@ -1,6 +1,7 @@
 #include "Core.h"
 #include "Entity.h"
 #include "Component.h"
+#include "Transform.h"
 
 namespace myEngine {
 
@@ -25,7 +26,7 @@ namespace myEngine {
 
 	std::shared_ptr<Transform> Component::getTransform()
 	{
-		return m_entity.lock()->getTransform();
+		return m_entity.lock()->getComponent<Transform>();
 	}
 
   void Component::awake()
