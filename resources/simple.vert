@@ -1,17 +1,15 @@
-uniform mat4 in_ProjMat;
-uniform mat4 in_ViewMat;
-uniform mat4 in_ModelMat;
+uniform mat4 in_Projection;
+uniform mat4 in_View;
+uniform mat4 in_Model;
 
 attribute vec3 in_Position;
-//attribute vec2 in_TexCoord;
-//attribute vec3 in_Normal;
+attribute vec2 in_TexCoord;
 
-//varying vec2 ex_TexCoord;
+varying vec2 ex_TexCoord;
 
 void main()
 {
-  gl_Position = in_ProjMat * in_ViewMat * in_ModelMat * vec4(in_Position, 1.0);
-
-  //ex_TexCoord = in_TexCoord;
+  gl_Position = in_Projection * in_View * in_Model * vec4(in_Position, 1.0);
+  ex_TexCoord = in_TexCoord;
 }
 

@@ -16,8 +16,8 @@ namespace myEngine
 		{
 			if (i < 200)
 			{
-				getTransform()->translate(glm::vec3(0.02f, -0.02f, 0.0f));
-				getTransform()->rotate(glm::vec3(0.02f, 0.02f, 0.0f));
+				//getTransform()->translate(glm::vec3(0.02f, -0.02f, 0.0f));
+				getTransform()->rotate(glm::vec3(0.0f, 0.02f, 0.0f));
 				i++;
 			}
 			else
@@ -29,8 +29,8 @@ namespace myEngine
 		{
 			if (i > -200)
 			{
-				getTransform()->translate(glm::vec3(-0.02f, 0.02f, 0.0f));
-				getTransform()->rotate(glm::vec3(-0.02f, -0.02f, 0.0f));
+				//getTransform()->translate(glm::vec3(-0.02f, 0.02f, 0.0f));
+				getTransform()->rotate(glm::vec3(-0.0f, -0.02f, 0.0f));
 				i--;
 			}
 			else

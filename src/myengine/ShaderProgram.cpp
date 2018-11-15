@@ -173,4 +173,22 @@ namespace myEngine
 		glUseProgram(0);
 	}
 
+	void ShaderProgram::setTexture(std::shared_ptr<Texture> _texture)
+	{
+		GLuint id = glGetUniformLocation(m_id, "in_Texture");
+
+		if (id == -1)
+		{
+			throw std::exception();
+		}
+
+		Sampler sampler;
+		sampler.m_id = id;
+		sampler.m_source = _texture;
+
+		glUseProgram(m_id);
+		glUniform1i(id, 0);
+		glUseProgram(0);
+	}
+
 }

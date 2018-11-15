@@ -33,6 +33,9 @@ if(MSVC)
 endif()
 
 add_library(myengine
+
+  	contrib/stb_image/stb_image.cpp
+
   	src/myengine/Core.cpp
  	src/myengine/Entity.cpp
  	src/myengine/Component.cpp
@@ -47,6 +50,7 @@ add_library(myengine
 	src/myengine/Utilities.cpp
 	src/myengine/Camera.cpp
 	src/myengine/Move.cpp
+	src/myengine/Texture.cpp
 )
 
 if(MSVC)

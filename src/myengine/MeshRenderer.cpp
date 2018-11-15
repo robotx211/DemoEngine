@@ -51,9 +51,9 @@ namespace myEngine
 	{
 		m_mesh = _mesh;
 	}
-	void MeshRenderer::setTexture()
+	void MeshRenderer::setTexture(std::shared_ptr<Texture> _texture)
 	{
-
+		m_shaderProg->setTexture(_texture);
 	}
 	void MeshRenderer::setShaders(std::string _vertShadAddress, std::string _fragShadAddress)
 	{

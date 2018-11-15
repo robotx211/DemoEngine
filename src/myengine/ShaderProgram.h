@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 
+#include "Texture.h"
 
 namespace myEngine
 {
@@ -16,6 +17,12 @@ namespace myEngine
 	{
 		GLuint m_id;
 		GLchar *m_source;
+	};
+
+	struct Sampler
+	{
+		GLuint m_id;
+		std::shared_ptr<Texture> m_source;
 	};
 
 	//stores shaders
@@ -27,6 +34,8 @@ namespace myEngine
 
 		std::shared_ptr<Shader> m_vertShad;
 		std::shared_ptr<Shader> m_fragShad;
+
+		Sampler m_texture;
 
 		glm::mat4 m_modelMat;
 		glm::mat4 m_viewMat;
@@ -54,6 +63,7 @@ namespace myEngine
 		void setViewMatrix(glm::mat4 _mat);
 		void setProjectionMatrix(glm::mat4 _mat);
 
+		void setTexture(std::shared_ptr<Texture> _texture);
 
 
 

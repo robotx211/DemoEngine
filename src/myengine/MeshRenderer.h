@@ -41,7 +41,7 @@ namespace myEngine
 		void debug();
 
 		void setMesh(std::shared_ptr<Mesh> _mesh);
-		void setTexture();
+		void setTexture(std::shared_ptr<Texture> _texture);
 		void setShaders(std::string _vertShadAddress, std::string _fragShadAddress);
 
 

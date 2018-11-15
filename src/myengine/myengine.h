@@ -17,6 +17,7 @@
 #include "ShaderProgram.h"
 
 #include "Mesh.h"
+#include "Texture.h"
 #include "MeshRenderer.h"
 
 //Utilities
