@@ -25,6 +25,7 @@
 
 //dev
 #include "GL_Triangle.h"
+#include "Move.h"
 
 
 #endif // !MY_ENGINE_H

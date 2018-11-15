@@ -129,6 +129,8 @@ namespace myEngine
 
 	void ShaderProgram::setModelMatrix(glm::mat4 _mat)
 	{
+		m_modelMat = _mat;
+
 		GLuint id = glGetUniformLocation(m_id, "in_ModelMat");
 
 		if (id == -1)
@@ -142,6 +144,8 @@ namespace myEngine
 	}
 	void ShaderProgram::setViewMatrix(glm::mat4 _mat)
 	{
+		m_viewMat = _mat;
+
 		GLuint id = glGetUniformLocation(m_id, "in_ViewMat");
 
 		if (id == -1)
@@ -155,6 +159,8 @@ namespace myEngine
 	}
 	void ShaderProgram::setProjectionMatrix(glm::mat4 _mat)
 	{
+		m_projMat = _mat;
+
 		GLuint id = glGetUniformLocation(m_id, "in_ProjMat");
 
 		if (id == -1)

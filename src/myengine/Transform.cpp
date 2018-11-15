@@ -1,20 +1,27 @@
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <glm/ext.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include "Transform.h"
+
 
 namespace myEngine {
 
 	Transform::Transform()
 	{
-		m_localPosition = glm::vec3(0.0);
-		m_localRotation = glm::vec3(0.0);
-		m_localScale = glm::vec3(1.0);
+		m_localPosition = glm::vec3(0.0f);
+
+		m_localOrientation = glm::quat(glm::vec3(0.0f));
+
+		m_localScale = glm::vec3(1.0f);
 	}
 
-	Transform::Transform(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _sca)
+	Transform::Transform(glm::vec3 _pos, glm::vec3 _sca)
 	{
 		m_localPosition = _pos;
-		m_localRotation = _rot;
+
 		m_localScale = _sca;
 	}
 
@@ -45,6 +52,36 @@ namespace myEngine {
 
 	//-------------TRANSLATION-------------
 
+	//-------------ROTATION-------------
+
+	glm::quat Transform::getLocalOrientation()
+	{
+		return m_localOrientation;
+	}
+	void Transform::setLocalOrientation(glm::quat _orient)
+	{
+		m_localOrientation = _orient;
+	}
+
+	void Transform::rotate(glm::quat _quat)
+	{
+		m_localOrientation = _quat * m_localOrientation;
+	}
+	void Transform::rotate(float _angle, glm::vec3 _axis)
+	{
+		rotate(glm::angleAxis(_angle, _axis));
+	}
+	void Transform::rotate(float _angle, float _x, float _y, float _z)
+	{
+		rotate(_angle, glm::vec3(_x, _y, _z));
+	}
+
+	void Transform::rotate(glm::vec3 _euler)
+	{
+		rotate(glm::quat(_euler));
+	}
+
+	//-------------ROTATION-------------
 
 	//-------------SCALE-------------
 
@@ -73,9 +110,11 @@ namespace myEngine {
 
 		glm::mat4 scaleMat = glm::scale(glm::mat4(1.0), m_localScale);
 
+		glm::mat4 rotationMat = glm::toMat4(m_localOrientation);
+
 		glm::mat4 translationMat = glm::translate(glm::mat4(1.0), m_localPosition);
 
-		return translationMat /* * roationMat */ * scaleMat;
+		return translationMat  * rotationMat  * scaleMat;
 
 	}
 

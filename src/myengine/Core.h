@@ -57,7 +57,6 @@ namespace myEngine {
 			{
 				try
 				{
-					m_entities.at(i)->debug();
 					_list->push_back(m_entities.at(i)->getComponent<T>());
 				}
 				catch (...)

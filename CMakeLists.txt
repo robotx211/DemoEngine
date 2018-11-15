@@ -46,7 +46,7 @@ add_library(myengine
 	src/myengine/MeshRenderer.cpp
 	src/myengine/Utilities.cpp
 	src/myengine/Camera.cpp
-	
+	src/myengine/Move.cpp
 )
 
 if(MSVC)

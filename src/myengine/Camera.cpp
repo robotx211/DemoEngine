@@ -7,7 +7,7 @@ namespace myEngine
 {
 	Camera::Camera()
 	{
-
+		setDegFOV(90.0f);
 	}
 	Camera::~Camera()
 	{

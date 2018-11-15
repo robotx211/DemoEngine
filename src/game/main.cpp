@@ -13,24 +13,28 @@ int main()
 
 	std::shared_ptr<myEngine::Entity> camera = core->addEntity();
 
-	std::shared_ptr<myEngine::Transform> camera_transform = camera->addComponent<myEngine::Transform>();
+	camera->addComponent<myEngine::Transform>();
 
-	camera_transform->translate(glm::vec3(0.0f, 0.0f, -3.0f));
+	camera->getComponent<myEngine::Transform>()->translate(glm::vec3(0.0f, 0.0f, 10.0f));
 
-	std::shared_ptr<myEngine::Camera> camera_camera = camera->addComponent<myEngine::Camera>();
+	camera->addComponent<myEngine::Camera>();
+
+	camera->getComponent<myEngine::Camera>()->setDegFOV(45.0f);
 
 	//create cube
 
 	std::shared_ptr<myEngine::Entity> cube = core->addEntity();
 
-	std::shared_ptr<myEngine::Transform> cube_transform = cube->addComponent<myEngine::Transform>();
+	cube->addComponent<myEngine::Transform>();
 
 	std::shared_ptr<myEngine::Mesh> cubemesh = std::make_shared<myEngine::Mesh>();
 	cubemesh->loadModel("../resources/cube.obj");
 
-	std::shared_ptr<myEngine::MeshRenderer> cube_meshRenderer = cube->addComponent<myEngine::MeshRenderer>();
-	cube_meshRenderer->setMesh(cubemesh);
-	cube_meshRenderer->setShaders("../resources/simple.vert", "../resources/simple.frag");
+	cube->addComponent<myEngine::MeshRenderer>();
+	cube->getComponent<myEngine::MeshRenderer>()->setMesh(cubemesh);
+	cube->getComponent<myEngine::MeshRenderer>()->setShaders("../resources/simple.vert", "../resources/simple.frag");
+
+	cube->addComponent<myEngine::Move>();
 
 	core->begin();
 

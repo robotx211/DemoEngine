@@ -19,13 +19,13 @@ namespace myEngine {
 	private:
 
 			glm::vec3 m_localPosition; //vec3
-			glm::quat m_localRotation; //quaternions
+			glm::quat m_localOrientation; //quaternions
 			glm::vec3 m_localScale; //vec3
 
 	public:
 
 		Transform();
-		Transform(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _sca);
+		Transform(glm::vec3 _pos, glm::vec3 _sca);
 		~Transform();
 
 		//-------------TRANSLATION-------------
@@ -38,7 +38,18 @@ namespace myEngine {
 
 		//-------------TRANSLATION-------------
 
+		//-------------ROTATION-------------
 
+		glm::quat getLocalOrientation();
+		void setLocalOrientation(glm::quat _orient);
+
+		void rotate(glm::quat _quat);
+		void rotate(float _angle, glm::vec3 _axis);
+		void rotate(float _angle, float _x, float _y, float _z);
+
+		void rotate(glm::vec3 _euler); //rotate in euler degrees
+
+		//-------------ROTATION-------------
 
 		//-------------SCALE-------------
 

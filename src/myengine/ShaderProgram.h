@@ -28,6 +28,10 @@ namespace myEngine
 		std::shared_ptr<Shader> m_vertShad;
 		std::shared_ptr<Shader> m_fragShad;
 
+		glm::mat4 m_modelMat;
+		glm::mat4 m_viewMat;
+		glm::mat4 m_projMat;
+
 		bool m_dirty;
 
 	public:
