@@ -13,45 +13,33 @@ int main()
 
 	std::shared_ptr<myEngine::Entity> camera = core->addEntity();
 
-	camera->addComponent<myEngine::Transform>();
+	std::shared_ptr<myEngine::Transform> camera_transform = camera->addComponent<myEngine::Transform>();
 
-	camera->getComponent<myEngine::Transform>()->translate(glm::vec3(0.0f, 0.0f, 10.0f));
+	camera_transform->translate(glm::vec3(0.0f, 0.0f, 10.0f));
 
-	camera->addComponent<myEngine::Camera>();
+	std::shared_ptr<myEngine::Camera> camera_camera = camera->addComponent<myEngine::Camera>();
 
-	camera->getComponent<myEngine::Camera>()->setDegFOV(45.0f);
+	camera_camera->setDegFOV(45.0f);
 
 	//create cube
 
-	//std::shared_ptr<myEngine::Entity> cube = core->addEntity();
+	std::shared_ptr<myEngine::Entity> cube = core->addEntity();
 
-	//cube->addComponent<myEngine::Transform>();
+	cube->addComponent<myEngine::Transform>();
 
-	//std::shared_ptr<myEngine::Mesh> cubemesh = std::make_shared<myEngine::Mesh>();
-	//cubemesh->loadModel("../resources/cube.obj");
+	std::shared_ptr<myEngine::Mesh> cubeMesh = std::make_shared<myEngine::Mesh>();
+	cubeMesh->loadModel("../resources/cube.obj");
 
-	//cube->addComponent<myEngine::MeshRenderer>();
-	//cube->getComponent<myEngine::MeshRenderer>()->setMesh(cubemesh);
-	//cube->getComponent<myEngine::MeshRenderer>()->setShaders("../resources/simple.vert", "../resources/simple.frag");
+	std::shared_ptr<myEngine::Texture> cubeTex = std::make_shared<myEngine::Texture>();
+	cubeTex->loadTexture("../resources/red.png");
 
-	//cube->addComponent<myEngine::Move>();
+	std::shared_ptr<myEngine::MeshRenderer> cube_renderer = cube->addComponent<myEngine::MeshRenderer>();
+	cube_renderer->setMesh(cubeMesh);
+	cube_renderer->setShaders("../resources/simple.vert", "../resources/simple.frag");
+	//cube_renderer->setTexture(cubeTex);
 
-	std::shared_ptr<myEngine::Entity> catman = core->addEntity();
+	cube->addComponent<myEngine::Move>();
 
-	catman->addComponent<myEngine::Transform>();
-
-	std::shared_ptr<myEngine::Mesh> catmesh = std::make_shared<myEngine::Mesh>();
-	catmesh->loadModel("../resources/curuthers.obj");
-
-	std::shared_ptr<myEngine::Texture> catTex = std::make_shared<myEngine::Texture>();
-	catTex->loadTexture("../resources/curuthers_diffuse.png");
-
-	catman->addComponent<myEngine::MeshRenderer>();
-	catman->getComponent<myEngine::MeshRenderer>()->setMesh(catmesh);
-	catman->getComponent<myEngine::MeshRenderer>()->setShaders("../resources/simple.vert", "../resources/simple.frag");
-	catman->getComponent<myEngine::MeshRenderer>()->setTexture(catTex);
-
-	catman->addComponent<myEngine::Move>();
 
 	core->begin();
 

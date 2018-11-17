@@ -6,14 +6,12 @@ namespace myEngine
 {
 	Texture::Texture()
 	{
-		m_width = 0;
-		m_height = 0;
+		m_size = glm::ivec2(0);
 	}
 
 	Texture::Texture(std::string _path)
 	{
-		m_width = 0;
-		m_height = 0;
+		m_size = glm::ivec2(0);
 
 		loadTexture(_path);
 	}
@@ -33,8 +31,8 @@ namespace myEngine
 			throw std::exception();
 		}
 
-		m_width = width;
-		m_height = height;
+		m_size.x = width;
+		m_size.y = height;
 
 		glGenTextures(1, &m_id);
 

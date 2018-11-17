@@ -14,14 +14,13 @@ namespace myEngine
 	private:
 		GLuint m_id;
 
-		int m_width;
-		int m_height;
+		glm::ivec2 m_size;
 
 	public:
 		Texture();
 		Texture(std::string _path);
 		void loadTexture(std::string _path);
-		glm::ivec2 getSize() { return glm::ivec2(m_width, m_height); }
+		glm::ivec2 getSize() { return m_size; }
 		GLuint getId() { return m_id; }
 	};
 

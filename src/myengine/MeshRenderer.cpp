@@ -16,13 +16,18 @@ namespace myEngine
 
 		//tell OpenGL which shader program to use
 		glUseProgram(m_shaderProg->getId());
+
 		//bind the VAO
 		glBindVertexArray(m_mesh.lock()->getModelVAO()->getId());
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, m_shaderProg->getTexId());
 
 		//draw the vertices in the VAO
 		glDrawArrays(GL_TRIANGLES, 0, m_mesh.lock()->getVertexcount());
 
 		//reset the state
+		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}

@@ -64,7 +64,7 @@ namespace myEngine
 		void setProjectionMatrix(glm::mat4 _mat);
 
 		void setTexture(std::shared_ptr<Texture> _texture);
-
+		GLuint getTexId() { return m_texture.m_id; }
 
 
 	};

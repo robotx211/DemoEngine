@@ -203,23 +203,22 @@ namespace myEngine
 
 			}
 
-
-			if (m_posCheck == true)
-			{
-				m_VAO->addBuffer(enums::ShaderAttribute::in_Position, m_posVBO);
-			}
-			if (m_texCheck == true)
-			{
-				m_VAO->addBuffer(enums::ShaderAttribute::in_TexCoord, m_texCoordsVBO);
-			}
-			if (m_normCheck == true)
-			{
-				m_VAO->addBuffer(enums::ShaderAttribute::in_Normal, m_normsVBO);
-			}
-
-			upload();
-
 		}
+
+		if (m_posCheck == true)
+		{
+			m_VAO->addBuffer(enums::ShaderAttribute::in_Position, m_posVBO);
+		}
+		if (m_texCheck == true)
+		{
+			m_VAO->addBuffer(enums::ShaderAttribute::in_TexCoord, m_texCoordsVBO);
+		}
+		if (m_normCheck == true)
+		{
+			m_VAO->addBuffer(enums::ShaderAttribute::in_Normal, m_normsVBO);
+		}
+
+		upload();
 
 	}
 
