@@ -43,11 +43,12 @@ namespace myEngine {
 		glm::quat getLocalOrientation();
 		void setLocalOrientation(glm::quat _orient);
 
-		void rotate(glm::quat _quat);
-		void rotate(float _angle, glm::vec3 _axis);
-		void rotate(float _angle, float _x, float _y, float _z);
+		void rotateQuaternion(glm::quat _quat);
+		void rotateQuaternion(float _angle, glm::vec3 _axis);
+		void rotateQuaternion(float _angle, float _x, float _y, float _z);
 
-		void rotate(glm::vec3 _euler); //rotate in euler degrees
+		void Transform::rotateEulerRadians(glm::vec3 radians);
+		void Transform::rotateEulerDegrees(glm::vec3 degrees);
 
 		//-------------ROTATION-------------
 

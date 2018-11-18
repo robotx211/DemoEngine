@@ -63,22 +63,27 @@ namespace myEngine {
 		m_localOrientation = _orient;
 	}
 
-	void Transform::rotate(glm::quat _quat)
+	void Transform::rotateQuaternion(glm::quat _quat)
 	{
 		m_localOrientation = _quat * m_localOrientation;
 	}
-	void Transform::rotate(float _angle, glm::vec3 _axis)
+	void Transform::rotateQuaternion(float _angle, glm::vec3 _axis)
 	{
-		rotate(glm::angleAxis(_angle, _axis));
+		rotateQuaternion(glm::angleAxis(_angle, _axis));
 	}
-	void Transform::rotate(float _angle, float _x, float _y, float _z)
+	void Transform::rotateQuaternion(float _angle, float _x, float _y, float _z)
 	{
-		rotate(_angle, glm::vec3(_x, _y, _z));
+		rotateQuaternion(_angle, glm::vec3(_x, _y, _z));
 	}
 
-	void Transform::rotate(glm::vec3 _euler)
+	void Transform::rotateEulerRadians(glm::vec3 radians)
 	{
-		rotate(glm::quat(_euler));
+		rotateQuaternion(glm::quat(radians));
+	}
+	void Transform::rotateEulerDegrees(glm::vec3 degrees)
+	{
+		glm::vec3 radians = glm::radians(degrees);
+		rotateQuaternion(glm::quat(radians));
 	}
 
 	//-------------ROTATION-------------

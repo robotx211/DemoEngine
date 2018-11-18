@@ -1,5 +1,8 @@
 #include "Move.h"
 #include "Transform.h"
+#include "Constants.h"
+#include "Core.h"
+#include "Keyboard.h"
 
 namespace myEngine
 {
@@ -12,32 +15,14 @@ namespace myEngine
 
 	void Move::update()
 	{
-		if (add == true)
+
+		bool space = getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE);
+
+		if (space)
 		{
-			if (i < 200)
-			{
-				//getTransform()->translate(glm::vec3(0.02f, -0.02f, 0.0f));
-				getTransform()->rotate(glm::vec3(0.0f, 0.02f, 0.0f));
-				i++;
-			}
-			else
-			{
-				add = false;
-			}
+			getTransform()->rotateEulerDegrees(glm::vec3(0.0f, 1.0f, 0.0f));
 		}
-		else if (add == false)
-		{
-			if (i > -200)
-			{
-				//getTransform()->translate(glm::vec3(-0.02f, 0.02f, 0.0f));
-				getTransform()->rotate(glm::vec3(-0.0f, -0.02f, 0.0f));
-				i--;
-			}
-			else
-			{
-				add = true;
-			}
-		}
+
 	}
 
 

@@ -5,15 +5,22 @@
 
 namespace myEngine {
 
-  std::shared_ptr<Core> Core::init()
-  {
-    std::shared_ptr<Core> newCore = std::make_shared<Core>();
-    newCore->m_self = newCore;
+	std::shared_ptr<Core> Core::init()
+	{
+		std::shared_ptr<Core> newCore = std::make_shared<Core>();
+		newCore->m_self = newCore;
 
-    newCore->running = false;
+		if (SDL_Init(SDL_INIT_VIDEO) == -1)
+		{
+			throw std::exception();
+		}
+
+		newCore->m_keyboardInput = std::make_shared<Keyboard>();
+
+		newCore->running = false;
 
 		return newCore;
-  }
+	}
 
 	Core::Core()
 	{
@@ -21,14 +28,14 @@ namespace myEngine {
 	}
 	Core::~Core()
 	{
-
+		SDL_Quit();
 	}
 
-  std::shared_ptr<Window> Core::createNewWindowObject(std::string _name, int _width, int _height)
-  {
-    std::shared_ptr<Window> newWindowObject = std::make_shared<Window>(_name, _width, _height);
+	std::shared_ptr<Window> Core::createNewWindowObject(std::string _name, int _width, int _height)
+	{
+		std::shared_ptr<Window> newWindowObject = std::make_shared<Window>(_name, _width, _height);
 
-    m_windowObject = newWindowObject;
+		m_windowObject = newWindowObject;
 
 		//create SDL GL Context
 		if (!SDL_GL_CreateContext(m_windowObject->getWindow()))
@@ -44,41 +51,43 @@ namespace myEngine {
 			throw std::exception();
 		}
 
-    return m_windowObject;
+		return m_windowObject;
 
-  }
-
-
-  void Core::begin()
-  {
-    running = true;
+	}
 
 
-    while (running == true)
-    {
-
-      update();
-
-      display();
+	void Core::begin()
+	{
+		running = true;
 
 
-    }
+		while (running == true)
+		{
 
-  }
+			update();
 
-  void Core::update()
-  {
-    for (size_t i = 0; i < m_entities.size(); i++)
-    {
-      m_entities.at(i)->update();
-    }
-  }
+			display();
 
-  void Core::display()
-  {
-    //set clear colour of _window
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+
+		}
+
+	}
+
+	void Core::update()
+	{
+		m_keyboardInput->update();
+
+		for (size_t i = 0; i < m_entities.size(); i++)
+		{
+			m_entities.at(i)->update();
+		}
+	}
+
+	void Core::display()
+	{
+		//set clear colour of _window
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		std::vector<std::shared_ptr<Camera>> *camList = new std::vector<std::shared_ptr<Camera>>();
 		getComponents<Camera>(camList);
@@ -99,23 +108,23 @@ namespace myEngine {
 			}
 		}
 
-    SDL_GL_SwapWindow(m_windowObject->getWindow());
-  }
+		SDL_GL_SwapWindow(m_windowObject->getWindow());
+	}
 
-  void Core::debug()
-  {
-    std::cout << "Entities: " << m_entities.size() << std::endl;
+	void Core::debug()
+	{
+		std::cout << "Entities: " << m_entities.size() << std::endl;
 
-    for (size_t i = 0; i < m_entities.size(); i++)
-    {
-      m_entities.at(i)->debug();
-    }
-  }
+		for (size_t i = 0; i < m_entities.size(); i++)
+		{
+			m_entities.at(i)->debug();
+		}
+	}
 
-  void Core::end()
-  {
-    running = false;
-  }
+	void Core::end()
+	{
+		running = false;
+	}
 
 	std::shared_ptr<Entity> Core::addEntity()
 	{
@@ -129,17 +138,17 @@ namespace myEngine {
 		return newEntity;
 	}
 
-  std::shared_ptr<Entity> Core::addEntity(std::string _name)
-  {
-    std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(_name);
+	std::shared_ptr<Entity> Core::addEntity(std::string _name)
+	{
+		std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(_name);
 
-    newEntity->m_self = newEntity;
-    newEntity->m_core = m_self;
+		newEntity->m_self = newEntity;
+		newEntity->m_core = m_self;
 
-    m_entities.push_back(newEntity);
+		m_entities.push_back(newEntity);
 
-    return newEntity;
-  }
+		return newEntity;
+	}
 
 	void Core::setCurrentCamera(std::shared_ptr<Camera> _cam)
 	{

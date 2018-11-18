@@ -10,8 +10,7 @@
 #include <GL/glew.h>
 
 #include "Window.h"
-
-
+#include "Keyboard.h"
 
 namespace myEngine {
 
@@ -27,6 +26,8 @@ namespace myEngine {
 		std::weak_ptr<Core> m_self;
 
 		std::shared_ptr<Camera> m_currentCamera;
+
+		std::shared_ptr<Keyboard> m_keyboardInput;
 
 		bool running;
 
@@ -68,6 +69,8 @@ namespace myEngine {
 
 		void setCurrentCamera(std::shared_ptr<Camera> _cam);
 		std::shared_ptr<Camera> getcurrentCamera();
+
+		std::shared_ptr<Keyboard> getKeyboard() { return m_keyboardInput; }
 
 
 	};
