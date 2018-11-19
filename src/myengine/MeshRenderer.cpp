@@ -12,7 +12,7 @@ namespace myEngine
 		m_shaderProg->setModelMatrix(getTransform()->getTransformMat());
 		m_shaderProg->setViewMatrix(getCore()->getcurrentCamera()->getViewMatrix());
 		m_shaderProg->setProjectionMatrix(glm::perspective(getCore()->getcurrentCamera()->getRadFOV(),
-			getCore()->getWindowObject()->getWidth() / getCore()->getWindowObject()->getHeight(), 0.1f, 100.0f));
+			(float)getCore()->getWindowObject()->getWidth() / (float)getCore()->getWindowObject()->getHeight(), 0.1f, 100.0f));
 
 		//tell OpenGL which shader program to use
 		glUseProgram(m_shaderProg->getId());
@@ -20,14 +20,14 @@ namespace myEngine
 		//bind the VAO
 		glBindVertexArray(m_mesh.lock()->getModelVAO()->getId());
 
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, m_shaderProg->getTexId());
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, m_shaderProg->getTexId());
 
 		//draw the vertices in the VAO
 		glDrawArrays(GL_TRIANGLES, 0, m_mesh.lock()->getVertexcount());
 
 		//reset the state
-		//glBindTexture(GL_TEXTURE_2D, 0);
+		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}

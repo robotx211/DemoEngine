@@ -80,10 +80,19 @@ namespace myEngine {
 	{
 		rotateQuaternion(glm::quat(radians));
 	}
+	void Transform::rotateEulerRadians(float _x, float _y, float _z)
+	{
+		rotateEulerRadians(glm::vec3(_x, _y, _z));
+	}
+
 	void Transform::rotateEulerDegrees(glm::vec3 degrees)
 	{
 		glm::vec3 radians = glm::radians(degrees);
 		rotateQuaternion(glm::quat(radians));
+	}
+	void Transform::rotateEulerDegrees(float _x, float _y, float _z)
+	{
+		rotateEulerDegrees(glm::vec3(_x, _y, _z));
 	}
 
 	//-------------ROTATION-------------

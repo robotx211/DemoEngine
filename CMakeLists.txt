@@ -52,6 +52,8 @@ add_library(myengine
 	src/myengine/Move.cpp
 	src/myengine/Texture.cpp
 	src/myengine/Keyboard.cpp
+	src/myengine/Mouse.cpp
+	src/myengine/Enviroment.cpp
 )
 
 if(MSVC)

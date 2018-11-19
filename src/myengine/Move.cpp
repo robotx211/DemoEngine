@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include "Core.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 namespace myEngine
 {
@@ -15,12 +16,18 @@ namespace myEngine
 
 	void Move::update()
 	{
+		getCore()->getMouse()->setCentreLocked(false);
 
-		bool space = getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE);
+		bool leftMb = getCore()->getMouse()->getKey(SDL_BUTTON_LEFT);
+		bool rightMb = getCore()->getMouse()->getKey(SDL_BUTTON_RIGHT);
 
-		if (space)
+		if (leftMb)
 		{
-			getTransform()->rotateEulerDegrees(glm::vec3(0.0f, 1.0f, 0.0f));
+			getTransform()->rotateEulerDegrees(0.0f, -1.0f, 0.0f);
+		}
+		else if (rightMb)
+		{
+			getTransform()->rotateEulerDegrees(0.0f, 1.0f, 0.0f);
 		}
 
 	}

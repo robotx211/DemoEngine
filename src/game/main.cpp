@@ -30,20 +30,17 @@ int main()
 	std::shared_ptr<myEngine::Mesh> cubeMesh = std::make_shared<myEngine::Mesh>();
 	cubeMesh->loadModel("../resources/cube.obj");
 
-	//std::shared_ptr<myEngine::Texture> cubeTex = std::make_shared<myEngine::Texture>();
-	//cubeTex->loadTexture("../resources/red.png");
+	std::shared_ptr<myEngine::Texture> cubeTex = std::make_shared<myEngine::Texture>();
+	cubeTex->loadTexture("../resources/bricks.png");
 
 	std::shared_ptr<myEngine::MeshRenderer> cube_renderer = cube->addComponent<myEngine::MeshRenderer>();
 	cube_renderer->setMesh(cubeMesh);
-	cube_renderer->setShaders("../resources/simple.vert", "../resources/red.frag");
-	//cube_renderer->setTexture(cubeTex);
+	cube_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
+	cube_renderer->setTexture(cubeTex);
 
 	cube->addComponent<myEngine::Move>();
 
-
 	core->begin();
-
-	std::cin.get();
 
 	return 0;
 }

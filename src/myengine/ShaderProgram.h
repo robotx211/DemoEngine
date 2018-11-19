@@ -35,7 +35,7 @@ namespace myEngine
 		std::shared_ptr<Shader> m_vertShad;
 		std::shared_ptr<Shader> m_fragShad;
 
-		Sampler m_texture;
+		Sampler m_textureSampler;
 
 		glm::mat4 m_modelMat;
 		glm::mat4 m_viewMat;
@@ -64,7 +64,7 @@ namespace myEngine
 		void setProjectionMatrix(glm::mat4 _mat);
 
 		void setTexture(std::shared_ptr<Texture> _texture);
-		GLuint getTexId() { return m_texture.m_id; }
+		GLuint getTexId() { return m_textureSampler.m_source->getId(); }
 
 
 	};

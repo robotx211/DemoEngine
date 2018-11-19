@@ -16,6 +16,7 @@ namespace myEngine {
 		}
 
 		newCore->m_keyboardInput = std::make_shared<Keyboard>();
+		newCore->m_mouseInput = std::make_shared<Mouse>(newCore);
 
 		newCore->running = false;
 
@@ -33,9 +34,7 @@ namespace myEngine {
 
 	std::shared_ptr<Window> Core::createNewWindowObject(std::string _name, int _width, int _height)
 	{
-		std::shared_ptr<Window> newWindowObject = std::make_shared<Window>(_name, _width, _height);
-
-		m_windowObject = newWindowObject;
+		m_windowObject = std::make_shared<Window>(_name, _width, _height);
 
 		//create SDL GL Context
 		if (!SDL_GL_CreateContext(m_windowObject->getWindow()))
@@ -60,11 +59,19 @@ namespace myEngine {
 	{
 		running = true;
 
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
 
 		while (running == true)
 		{
 
 			update();
+
+			if (getKeyboard()->getKey(SDL_SCANCODE_ESCAPE))
+			{
+				running = false;
+				break;
+			}
 
 			display();
 
@@ -75,6 +82,7 @@ namespace myEngine {
 
 	void Core::update()
 	{
+		m_mouseInput->update();
 		m_keyboardInput->update();
 
 		for (size_t i = 0; i < m_entities.size(); i++)
@@ -87,7 +95,7 @@ namespace myEngine {
 	{
 		//set clear colour of _window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		std::vector<std::shared_ptr<Camera>> *camList = new std::vector<std::shared_ptr<Camera>>();
 		getComponents<Camera>(camList);

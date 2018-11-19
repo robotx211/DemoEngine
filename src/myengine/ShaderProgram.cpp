@@ -104,7 +104,7 @@ namespace myEngine
 
 		//ensure VAO "position" attrib stream gets set as the first position during link
 		glBindAttribLocation(m_id, 0, "in_Position");
-		//glBindAttribLocation(m_id, 1, "in_TexCoord");
+		glBindAttribLocation(m_id, 1, "in_TexCoord");
 		//glBindAttribLocation(m_id, 2, "in_Normal");
 
 		//perform the link
@@ -182,11 +182,9 @@ namespace myEngine
 			throw std::exception();
 		}
 
-		Sampler sampler;
-		sampler.m_id = id;
-		sampler.m_source = _texture;
+		m_textureSampler.m_id = id;
+		m_textureSampler.m_source = _texture;
 
-		m_texture = sampler;
 
 		glUseProgram(m_id);
 		glUniform1i(id, 0);

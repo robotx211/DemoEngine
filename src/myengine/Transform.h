@@ -48,7 +48,10 @@ namespace myEngine {
 		void rotateQuaternion(float _angle, float _x, float _y, float _z);
 
 		void Transform::rotateEulerRadians(glm::vec3 radians);
+		void Transform::rotateEulerRadians(float _x, float _y, float _z);
+
 		void Transform::rotateEulerDegrees(glm::vec3 degrees);
+		void Transform::rotateEulerDegrees(float _x, float _y, float _z);
 
 		//-------------ROTATION-------------
 

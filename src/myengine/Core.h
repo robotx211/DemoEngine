@@ -11,6 +11,7 @@
 
 #include "Window.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 namespace myEngine {
 
@@ -28,6 +29,7 @@ namespace myEngine {
 		std::shared_ptr<Camera> m_currentCamera;
 
 		std::shared_ptr<Keyboard> m_keyboardInput;
+		std::shared_ptr<Mouse> m_mouseInput;
 
 		bool running;
 
@@ -71,6 +73,7 @@ namespace myEngine {
 		std::shared_ptr<Camera> getcurrentCamera();
 
 		std::shared_ptr<Keyboard> getKeyboard() { return m_keyboardInput; }
+		std::shared_ptr<Mouse> getMouse() { return m_mouseInput; }
 
 
 	};
