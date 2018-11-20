@@ -20,8 +20,7 @@ namespace myEngine
 		//bind the VAO
 		glBindVertexArray(m_mesh.lock()->getModelVAO()->getId());
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, m_shaderProg->getTexId());
+		m_texture.lock()->bindTexture();
 
 		//draw the vertices in the VAO
 		glDrawArrays(GL_TRIANGLES, 0, m_mesh.lock()->getVertexcount());
@@ -58,7 +57,7 @@ namespace myEngine
 	}
 	void MeshRenderer::setTexture(std::shared_ptr<Texture> _texture)
 	{
-		m_shaderProg->setTexture(_texture);
+		m_texture = _texture;
 	}
 	void MeshRenderer::setShaders(std::string _vertShadAddress, std::string _fragShadAddress)
 	{

@@ -28,6 +28,18 @@ namespace myEngine
 		return glm::radians(m_DegFOV);
 	}
 
+	void Camera::setRenderTexture(std::shared_ptr<RenderTexture> _renderTex)
+	{
+		m_renderTex = _renderTex;
+	}
+	void Camera::bindRenderTexFramebuffer()
+	{
+		if (isRenderTexCamera())
+		{
+			m_renderTex->bindFrameBuffer();
+		} 
+	}
+
 	void Camera::debug()
 	{
 		std::cout << "    Camera" << std::endl;

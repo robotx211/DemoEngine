@@ -10,6 +10,7 @@
 #include <GL/glew.h>
 
 #include "Window.h"
+#include "Enviroment.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 
@@ -27,6 +28,8 @@ namespace myEngine {
 		std::weak_ptr<Core> m_self;
 
 		std::shared_ptr<Camera> m_currentCamera;
+
+		std::shared_ptr<Enviroment> m_enviroment;
 
 		std::shared_ptr<Keyboard> m_keyboardInput;
 		std::shared_ptr<Mouse> m_mouseInput;
@@ -71,6 +74,8 @@ namespace myEngine {
 
 		void setCurrentCamera(std::shared_ptr<Camera> _cam);
 		std::shared_ptr<Camera> getcurrentCamera();
+
+		std::shared_ptr<Enviroment> getEnviroment() { return m_enviroment; }
 
 		std::shared_ptr<Keyboard> getKeyboard() { return m_keyboardInput; }
 		std::shared_ptr<Mouse> getMouse() { return m_mouseInput; }

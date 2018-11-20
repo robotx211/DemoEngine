@@ -41,7 +41,6 @@ add_library(myengine
  	src/myengine/Component.cpp
 	src/myengine/Transform.cpp
 	src/myengine/Window.cpp
-	src/myengine/GL_Triangle.cpp
 	src/myengine/ShaderProgram.cpp
 	src/myengine/VertexArray.cpp
 	src/myengine/VertexBuffer.cpp
@@ -54,6 +53,7 @@ add_library(myengine
 	src/myengine/Keyboard.cpp
 	src/myengine/Mouse.cpp
 	src/myengine/Enviroment.cpp
+	src/myengine/RenderTexture.cpp
 )
 
 if(MSVC)

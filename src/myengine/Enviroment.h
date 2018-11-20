@@ -2,6 +2,7 @@
 #define ENVIROMENT_H
 
 #include <SDL2/SDL.h>
+#include <deque>
 
 namespace myEngine
 {
@@ -11,10 +12,17 @@ namespace myEngine
 
 	private:
 
+		bool m_started;
+
 		Uint64 m_thisTime;
 		Uint64 m_lastTime;
 
-		double m_deltaTime;
+		double m_deltaTime; //milliseconds
+
+		int m_dTStoredCap = 30;
+
+		std::deque<double> m_dTStored;
+		double m_FPS;
 
 	public:
 
@@ -22,9 +30,12 @@ namespace myEngine
 		~Enviroment();
 
 		void start();
-		void update();
 
-		double deltaTime() { return m_deltaTime; }
+		void update();
+		void calcdT();
+		void calcFPS();
+
+		double getDeltaTime() { return m_deltaTime; }
 
 	};
 

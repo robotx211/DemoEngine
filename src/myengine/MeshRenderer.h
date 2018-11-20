@@ -12,6 +12,8 @@
 #include "Component.h"
 
 #include "VertexArray.h"
+#include "Texture.h"
+#include "RenderTexture.h"
 #include "ShaderProgram.h"
 
 namespace myEngine
@@ -27,7 +29,7 @@ namespace myEngine
 	private:
 		std::weak_ptr<Mesh> m_mesh; //meshes should be stored in a resources array (or something like that)
 
-		//texture
+		std::weak_ptr<Texture> m_texture;
 
 		std::shared_ptr<ShaderProgram> m_shaderProg; //shader programs are stored in the mesh renderer
 
@@ -43,8 +45,11 @@ namespace myEngine
 		void debug();
 
 		void setMesh(std::shared_ptr<Mesh> _mesh);
+
 		void setTexture(std::shared_ptr<Texture> _texture);
+
 		void setShaders(std::string _vertShadAddress, std::string _fragShadAddress);
+
 
 
 	};

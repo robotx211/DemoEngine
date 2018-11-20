@@ -15,6 +15,8 @@ namespace myEngine {
 			throw std::exception();
 		}
 
+		newCore->m_enviroment = std::make_shared<Enviroment>();
+
 		newCore->m_keyboardInput = std::make_shared<Keyboard>();
 		newCore->m_mouseInput = std::make_shared<Mouse>(newCore);
 
@@ -82,6 +84,8 @@ namespace myEngine {
 
 	void Core::update()
 	{
+		m_enviroment->update();
+
 		m_mouseInput->update();
 		m_keyboardInput->update();
 
@@ -109,10 +113,15 @@ namespace myEngine {
 			for (size_t i = 0; i < camList->size(); i++)
 			{
 				setCurrentCamera(camList->at(i));
+
+				m_currentCamera->bindRenderTexFramebuffer();
+
 				for (size_t j = 0; j < m_entities.size(); j++)
 				{
 					m_entities.at(j)->display();
 				}
+
+				glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			}
 		}
 

@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 
 #include "Component.h"
+#include "RenderTexture.h"
 
 namespace myEngine
 {
@@ -17,7 +18,7 @@ namespace myEngine
 	private:
 		
 		float m_DegFOV;
-
+		std::shared_ptr<RenderTexture> m_renderTex;
 
 	public:
 
@@ -28,6 +29,10 @@ namespace myEngine
 
 		glm::mat4 getViewMatrix();
 		float getRadFOV();
+
+		void setRenderTexture(std::shared_ptr<RenderTexture> _renderTex);
+		bool isRenderTexCamera() { return m_renderTex != nullptr; };
+		void bindRenderTexFramebuffer();
 
 		void debug();
 	};

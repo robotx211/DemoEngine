@@ -12,16 +12,19 @@ namespace myEngine
 	{
 
 	private:
-		GLuint m_id;
 
+	protected:
 		glm::ivec2 m_size;
+		GLuint m_textureId;
 
 	public:
 		Texture();
 		Texture(std::string _path);
 		void loadTexture(std::string _path);
 		glm::ivec2 getSize() { return m_size; }
-		GLuint getId() { return m_id; }
+		virtual GLuint getId() { return m_textureId; }
+
+		void bindTexture();
 	};
 
 }

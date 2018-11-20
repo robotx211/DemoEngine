@@ -48,7 +48,6 @@ namespace myEngine
 		SDL_PumpEvents();
 		m_state = SDL_GetMouseState(&m_xPos, &m_yPos);
 
-
 		if (m_started == false)
 		{
 			m_xDelta = 0;

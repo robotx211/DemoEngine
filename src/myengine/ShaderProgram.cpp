@@ -129,65 +129,41 @@ namespace myEngine
 
 	void ShaderProgram::setModelMatrix(glm::mat4 _mat)
 	{
-		m_modelMat = _mat;
+		GLuint modelMatId = glGetUniformLocation(m_id, "in_ModelMat");
 
-		GLuint id = glGetUniformLocation(m_id, "in_ModelMat");
-
-		if (id == -1)
+		if (modelMatId == -1)
 		{
 			throw std::exception();
 		}
 
 		glUseProgram(m_id);
-		glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(_mat));
+		glUniformMatrix4fv(modelMatId, 1, GL_FALSE, glm::value_ptr(_mat));
 		glUseProgram(0);
 	}
 	void ShaderProgram::setViewMatrix(glm::mat4 _mat)
 	{
-		m_viewMat = _mat;
+		GLuint viewMatId = glGetUniformLocation(m_id, "in_ViewMat");
 
-		GLuint id = glGetUniformLocation(m_id, "in_ViewMat");
-
-		if (id == -1)
+		if (viewMatId == -1)
 		{
 			throw std::exception();
 		}
 
 		glUseProgram(m_id);
-		glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(_mat));
+		glUniformMatrix4fv(viewMatId, 1, GL_FALSE, glm::value_ptr(_mat));
 		glUseProgram(0);
 	}
 	void ShaderProgram::setProjectionMatrix(glm::mat4 _mat)
 	{
-		m_projMat = _mat;
+		GLuint projMatId = glGetUniformLocation(m_id, "in_ProjMat");
 
-		GLuint id = glGetUniformLocation(m_id, "in_ProjMat");
-
-		if (id == -1)
+		if (projMatId == -1)
 		{
 			throw std::exception();
 		}
 
 		glUseProgram(m_id);
-		glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(_mat));
-		glUseProgram(0);
-	}
-
-	void ShaderProgram::setTexture(std::shared_ptr<Texture> _texture)
-	{
-		GLuint id = glGetUniformLocation(m_id, "in_Texture");
-
-		if (id == -1)
-		{
-			throw std::exception();
-		}
-
-		m_textureSampler.m_id = id;
-		m_textureSampler.m_source = _texture;
-
-
-		glUseProgram(m_id);
-		glUniform1i(id, 0);
+		glUniformMatrix4fv(projMatId, 1, GL_FALSE, glm::value_ptr(_mat));
 		glUseProgram(0);
 	}
 

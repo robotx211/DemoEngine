@@ -11,23 +11,27 @@ namespace myEngine
 	void Move::start()
 	{
 		add = true;
-		i = 0;
 	}
 
 	void Move::update()
 	{
-		getCore()->getMouse()->setCentreLocked(false);
 
-		bool leftMb = getCore()->getMouse()->getKey(SDL_BUTTON_LEFT);
-		bool rightMb = getCore()->getMouse()->getKey(SDL_BUTTON_RIGHT);
-
-		if (leftMb)
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_UP))
 		{
-			getTransform()->rotateEulerDegrees(0.0f, -1.0f, 0.0f);
+			getTransform()->rotateEulerDegrees(-90 * getCore()->getEnviroment()->getDeltaTime() / 1000, 0.0f, 0.0f);
 		}
-		else if (rightMb)
+		else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_DOWN))
 		{
-			getTransform()->rotateEulerDegrees(0.0f, 1.0f, 0.0f);
+			getTransform()->rotateEulerDegrees(90 * getCore()->getEnviroment()->getDeltaTime() / 1000, 0.0f, 0.0f);
+		}
+
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_LEFT))
+		{
+			getTransform()->rotateEulerDegrees(0.0f, -90 * getCore()->getEnviroment()->getDeltaTime() / 1000, 0.0f);
+		}
+		else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_RIGHT))
+		{
+			getTransform()->rotateEulerDegrees(0.0f, 90 * getCore()->getEnviroment()->getDeltaTime() / 1000, 0.0f);
 		}
 
 	}
