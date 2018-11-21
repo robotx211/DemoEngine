@@ -85,6 +85,7 @@ namespace myEngine {
 				{
 					m_components.erase(m_components.begin() + i); //does this delete the component?
 					delete(markedComponent);
+					return;
 				}
 			}
 

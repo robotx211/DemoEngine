@@ -36,12 +36,13 @@ int main()
 
 	std::shared_ptr<myEngine::RenderTexture> screenrenderTex = std::make_shared<myEngine::RenderTexture>();
 	screenrenderTex->setSize(256, 256);
+	screenrenderTex->init();
 
 	std::shared_ptr<myEngine::Entity> screen = core->addEntity();
 
 	std::shared_ptr<myEngine::Transform> screen_transform = screen->addComponent<myEngine::Transform>();
 	screen_transform->translate(0.0f, 0.0f, -10.0f);
-	screen_transform->translate(-3.0f, 0.0f, 0.0f);
+	screen_transform->translate(-20.0f, 0.0f, 0.0f);
 	screen_transform->rotateEulerDegrees(180.0f, 0.0f, 0.0f);
 	screen_transform->scale(10.0f, 10.0f, 1.0f);
 
@@ -49,12 +50,7 @@ int main()
 	screen_renderer->setMesh(screenMesh);
 	screen_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 
-	if (std::dynamic_pointer_cast<myEngine::Texture>(screenrenderTex) == nullptr)
-	{
-		int i = 0;
-	}
-
-	screen_renderer->setTexture(std::dynamic_pointer_cast<myEngine::Texture>(screenrenderTex));
+	screen_renderer->setTexture(screenrenderTex);
 
 	//create render camera
 
@@ -62,7 +58,7 @@ int main()
 
 	std::shared_ptr<myEngine::Transform> rendercamera_transform = rendercamera->addComponent<myEngine::Transform>();
 
-	rendercamera_transform->translate(0.0f, 0.0f, 10.0f);
+	rendercamera_transform->translate(4.0f, 0.0f, 3.0f);
 
 	std::shared_ptr<myEngine::Camera> rendercamera_camera = rendercamera->addComponent<myEngine::Camera>();
 
@@ -75,7 +71,7 @@ int main()
 
 	std::shared_ptr<myEngine::Transform> maincamera_transform = maincamera->addComponent<myEngine::Transform>();
 
-	maincamera_transform->translate(0.0f, 0.0f, 10.0f);
+	maincamera_transform->translate(-20.0f, 0.0f, 10.0f);
 
 	std::shared_ptr<myEngine::Camera> maincamera_camera = maincamera->addComponent<myEngine::Camera>();
 

@@ -6,7 +6,7 @@
 namespace myEngine
 {
 
-	class RenderTexture : private Texture
+	class RenderTexture : public Texture
 	{
 
 	private:
@@ -20,6 +20,8 @@ namespace myEngine
 		RenderTexture(int _width, int _height);
 		RenderTexture(glm::ivec2 _size);
 		~RenderTexture();
+
+		void init();
 
 		void setSize(int _width, int _height);
 		void setSize(glm::ivec2 _size);

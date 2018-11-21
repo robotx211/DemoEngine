@@ -18,12 +18,12 @@ namespace myEngine
 		glUseProgram(m_shaderProg->getId());
 
 		//bind the VAO
-		glBindVertexArray(m_mesh.lock()->getModelVAO()->getId());
+		glBindVertexArray(m_mesh->getModelVAO()->getId());
 
-		m_texture.lock()->bindTexture();
+		m_texture->bindTexture();
 
 		//draw the vertices in the VAO
-		glDrawArrays(GL_TRIANGLES, 0, m_mesh.lock()->getVertexcount());
+		glDrawArrays(GL_TRIANGLES, 0, m_mesh->getVertexcount());
 
 		//reset the state
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -59,6 +59,17 @@ namespace myEngine
 	{
 		m_texture = _texture;
 	}
+	void MeshRenderer::setTexture(std::shared_ptr<RenderTexture> _renderTex)
+	{
+		m_texture = std::static_pointer_cast<Texture, RenderTexture>(_renderTex);
+	}
+
+	bool MeshRenderer::usingRenderTex()
+	{
+		//return std::dynamic_pointer_cast<RenderTexture>(m_texture) != NULL;
+		return false;
+	}
+
 	void MeshRenderer::setShaders(std::string _vertShadAddress, std::string _fragShadAddress)
 	{
 		m_shaderProg = std::make_shared<ShaderProgram>(_vertShadAddress, _fragShadAddress);
