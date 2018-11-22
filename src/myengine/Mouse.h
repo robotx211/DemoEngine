@@ -41,7 +41,7 @@ namespace myEngine
 		glm::ivec2 getMousePos() { return glm::ivec2(m_xPos, m_yPos); }
 		glm::ivec2 getMouseDelta() { return glm::ivec2(m_xDelta, m_yDelta); }
 
-		void setCentreLocked(bool _locked) { m_centreLocked = _locked; }
+		void setCentreLocked(bool _locked);
 		void setVisible(bool _visible);
 
 		void setCore(std::weak_ptr<Core> _core) { m_core = _core; }

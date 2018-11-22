@@ -19,13 +19,18 @@ namespace myEngine {
 	private:
 
 			glm::vec3 m_localPosition; //vec3
+
+			glm::vec3 m_forward;
+			//glm::vec3 m_up;
+			//glm::vec3 m_left;
+
 			glm::quat m_localOrientation; //quaternions
 			glm::vec3 m_localScale; //vec3
+
 
 	public:
 
 		Transform();
-		Transform(glm::vec3 _pos, glm::vec3 _sca);
 		~Transform();
 
 		//-------------TRANSLATION-------------
@@ -43,15 +48,26 @@ namespace myEngine {
 		glm::quat getLocalOrientation();
 		void setLocalOrientation(glm::quat _orient);
 
-		void rotateQuaternion(glm::quat _quat);
-		void rotateQuaternion(float _angle, glm::vec3 _axis);
-		void rotateQuaternion(float _angle, float _x, float _y, float _z);
+		void localAxisRotateQuaternion(glm::quat _quat);
+		void localAxisRotateQuaternion(float _angle, glm::vec3 _axis);
+		void localAxisRotateQuaternion(float _angle, float _x, float _y, float _z);
 
-		void Transform::rotateEulerRadians(glm::vec3 radians);
-		void Transform::rotateEulerRadians(float _x, float _y, float _z);
+		void localAxisRotateEulerRadians(glm::vec3 radians);
+		void localAxisRotateEulerRadians(float _x, float _y, float _z);
 
-		void Transform::rotateEulerDegrees(glm::vec3 degrees);
-		void Transform::rotateEulerDegrees(float _x, float _y, float _z);
+		void localAxisRotateEulerDegrees(glm::vec3 degrees);
+		void localAxisRotateEulerDegrees(float _x, float _y, float _z);
+
+
+		void worldAxisRotateQuaternion(glm::quat _quat);
+		void worldAxisRotateQuaternion(float _angle, glm::vec3 _axis);
+		void worldAxisRotateQuaternion(float _angle, float _x, float _y, float _z);
+
+		void worldAxisRotateEulerRadians(glm::vec3 radians);
+		void worldAxisRotateEulerRadians(float _x, float _y, float _z);
+
+		void worldAxisRotateEulerDegrees(glm::vec3 degrees);
+		void worldAxisRotateEulerDegrees(float _x, float _y, float _z);
 
 		//-------------ROTATION-------------
 
@@ -70,6 +86,8 @@ namespace myEngine {
 		glm::mat4 getTransformMat();
 
 		void debug();
+
+		void checkDirections();
 
 	};
 

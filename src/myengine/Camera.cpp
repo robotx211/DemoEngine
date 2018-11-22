@@ -27,9 +27,9 @@ namespace myEngine
 	{
 		m_aspectRatio = _width / _height;
 	}
-	void Camera::setAspectRatio(int _width, int _height)
+	void Camera::setAspectRatioToWindowSize()
 	{
-		m_aspectRatio = (float)(_width / _height);
+		m_aspectRatio = getCore()->getWindowObject()->getWidth() / getCore()->getWindowObject()->getHeight();
 	}
 
 	glm::mat4 Camera::getViewMatrix()
@@ -42,6 +42,11 @@ namespace myEngine
 	}
 	float Camera::getAspectRatio()
 	{
+		if (m_aspectRatio <= 0)
+		{
+			return (float)getCore()->getWindowObject()->getWidth() / (float)getCore()->getWindowObject()->getHeight();
+		}
+
 		return m_aspectRatio;
 	}
 

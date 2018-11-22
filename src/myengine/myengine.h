@@ -25,8 +25,5 @@
 #include "Utilities.h"
 #include "enums.h"
 
-//dev
-#include "Move.h"
-
 
 #endif // !MY_ENGINE_H

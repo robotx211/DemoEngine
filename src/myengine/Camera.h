@@ -30,7 +30,7 @@ namespace myEngine
 
 		void setAspectRatio(float _aspect);
 		void setAspectRatio(float _width, float _height);
-		void setAspectRatio(int _width, int _height);
+		void setAspectRatioToWindowSize();
 
 		glm::mat4 getViewMatrix();
 		float getRadFOV();

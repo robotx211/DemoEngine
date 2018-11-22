@@ -1,12 +1,9 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
-#include "Component.h"
+#include <myengine/myengine.h>
 
-namespace myEngine
-{
-
-	class Move : public Component
+	class Move : public myEngine::Component
 	{
 	private:
 
@@ -19,5 +16,3 @@ namespace myEngine
 		void update();
 
 	};
-
-}

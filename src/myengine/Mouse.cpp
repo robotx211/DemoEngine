@@ -75,6 +75,18 @@ namespace myEngine
 		return m_state & SDL_BUTTON(_keyCode);
 	}
 
+	void Mouse::setCentreLocked(bool _locked)
+	{
+		m_centreLocked = _locked;
+
+		if (m_centreLocked)
+		{
+			m_xPos = m_core.lock()->getWindowObject()->getWidth() / 2;
+			m_yPos = m_core.lock()->getWindowObject()->getHeight() / 2;
+
+			SDL_WarpMouseInWindow(NULL, m_xPos, m_yPos);
+		}
+	}
 	void Mouse::setVisible(bool _visible)
 	{
 		if (_visible)

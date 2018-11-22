@@ -42,7 +42,6 @@ namespace myEngine
 			(std::istreambuf_iterator<char>(shaderFilestream)),
 			(std::istreambuf_iterator<char>())
 		);
-		std::cout << sourceString << std::endl;
 
 		//attach source code
 		m_vertShad->m_source = (GLchar *)sourceString.c_str();
@@ -73,7 +72,6 @@ namespace myEngine
 			(std::istreambuf_iterator<char>(shaderFilestream)),
 			(std::istreambuf_iterator<char>())
 		);
-		std::cout << sourceString << std::endl;
 
 		//attach source code
 		m_fragShad->m_source = (GLchar *)sourceString.c_str();

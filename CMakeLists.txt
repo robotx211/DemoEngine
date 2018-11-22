@@ -48,12 +48,14 @@ add_library(myengine
 	src/myengine/MeshRenderer.cpp
 	src/myengine/Utilities.cpp
 	src/myengine/Camera.cpp
-	src/myengine/Move.cpp
 	src/myengine/Texture.cpp
 	src/myengine/Keyboard.cpp
 	src/myengine/Mouse.cpp
 	src/myengine/Enviroment.cpp
 	src/myengine/RenderTexture.cpp
+
+	src/game/Move.cpp
+	src/game/CameraController.cpp
 )
 
 if(MSVC)

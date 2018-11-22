@@ -29,6 +29,8 @@ namespace myEngine {
 			int getWidth() { return m_width; }
 			int getHeight() { return m_height; }
 
+			float getAspectRatio() { return (float)m_width / (float)m_height; }
+
 	};
 
 }
