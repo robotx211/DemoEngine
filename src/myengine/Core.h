@@ -73,7 +73,7 @@ namespace myEngine {
 		}
 
 		void setCurrentCamera(std::shared_ptr<Camera> _cam);
-		std::shared_ptr<Camera> getcurrentCamera();
+		std::shared_ptr<Camera> getCurrentCamera();
 
 		std::shared_ptr<Enviroment> getEnviroment() { return m_enviroment; }
 

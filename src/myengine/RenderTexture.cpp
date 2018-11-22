@@ -89,6 +89,12 @@ namespace myEngine
 
 	void RenderTexture::bindFrameBuffer()
 	{
+		//bind fbo
 		glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferId);
+		glViewport(0, 0, m_size.x, m_size.y);
+
+		//set clear colour of frame buffer
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 }

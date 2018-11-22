@@ -9,7 +9,7 @@ int main()
 	std::shared_ptr<myEngine::Core> core = myEngine::Core::init();
 	core->createNewWindowObject("main window", 1280, 720);
 
-	//create cube
+	//---------------------------------------create cube---------------------------------------
 
 	std::shared_ptr<myEngine::Mesh> cubeMesh = std::make_shared<myEngine::Mesh>();
 	cubeMesh->loadModel("../resources/cube.obj");
@@ -29,7 +29,7 @@ int main()
 
 	cube->addComponent<myEngine::Move>();
 
-	//create a render screen
+	//---------------------------------------create a render screen---------------------------------------
 	
 	std::shared_ptr<myEngine::Mesh> screenMesh = std::make_shared<myEngine::Mesh>();
 	screenMesh->loadModel("../resources/square.obj");
@@ -52,7 +52,7 @@ int main()
 
 	screen_renderer->setTexture(screenrenderTex);
 
-	//create render camera
+	//---------------------------------------create render camera---------------------------------------
 
 	std::shared_ptr<myEngine::Entity> rendercamera = core->addEntity();
 
@@ -63,9 +63,10 @@ int main()
 	std::shared_ptr<myEngine::Camera> rendercamera_camera = rendercamera->addComponent<myEngine::Camera>();
 
 	rendercamera_camera->setDegFOV(45.0f);
+	rendercamera_camera->setAspectRatio(screenrenderTex->getSize().x, screenrenderTex->getSize().y);
 	rendercamera_camera->setRenderTexture(screenrenderTex);
 
-	//create main camera
+	//---------------------------------------create main camera---------------------------------------
 
 	std::shared_ptr<myEngine::Entity> maincamera = core->addEntity();
 
@@ -76,6 +77,7 @@ int main()
 	std::shared_ptr<myEngine::Camera> maincamera_camera = maincamera->addComponent<myEngine::Camera>();
 
 	maincamera_camera->setDegFOV(45.0f);
+	maincamera_camera->setAspectRatio(1);
 
 	core->begin();
 

@@ -9,13 +9,6 @@ namespace myEngine {
 		m_width = _width;
 		m_height = _height;
 
-		//window = std::make_shared<SDL_Window>(
-		//	SDL_CreateWindow(name.c_str(),
-		//		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		//		width, height,
-		//		SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)
-		//	);
-
 		m_window = SDL_CreateWindow(m_name.c_str(),
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			m_width, m_height,

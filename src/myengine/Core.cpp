@@ -97,10 +97,11 @@ namespace myEngine {
 
 	void Core::display()
 	{
-		//set clear colour of _window
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		//set clear colour of _window
+		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
 		std::vector<std::shared_ptr<Camera>> *camList = new std::vector<std::shared_ptr<Camera>>();
 		getComponents<Camera>(camList);
 
@@ -112,6 +113,7 @@ namespace myEngine {
 		{
 			for (size_t i = 0; i < camList->size(); i++)
 			{
+
 				setCurrentCamera(camList->at(i));
 
 				m_currentCamera->bindRenderTexFramebuffer();
@@ -121,7 +123,10 @@ namespace myEngine {
 					m_entities.at(j)->display();
 				}
 
+				//unbind fbo
 				glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+				glViewport(0, 0, m_windowObject->getWidth(), m_windowObject->getHeight());
 			}
 		}
 
@@ -171,7 +176,7 @@ namespace myEngine {
 	{
 		m_currentCamera = _cam;
 	}
-	std::shared_ptr<Camera> Core::getcurrentCamera()
+	std::shared_ptr<Camera> Core::getCurrentCamera()
 	{
 		return m_currentCamera;
 	}

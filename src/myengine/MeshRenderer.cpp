@@ -10,9 +10,9 @@ namespace myEngine
 	void MeshRenderer::draw()
 	{
 		m_shaderProg->setModelMatrix(getTransform()->getTransformMat());
-		m_shaderProg->setViewMatrix(getCore()->getcurrentCamera()->getViewMatrix());
-		m_shaderProg->setProjectionMatrix(glm::perspective(getCore()->getcurrentCamera()->getRadFOV(),
-			(float)getCore()->getWindowObject()->getWidth() / (float)getCore()->getWindowObject()->getHeight(), 0.1f, 100.0f));
+		m_shaderProg->setViewMatrix(getCore()->getCurrentCamera()->getViewMatrix());
+		m_shaderProg->setProjectionMatrix(glm::perspective(getCore()->getCurrentCamera()->getRadFOV(),
+			getCore()->getCurrentCamera()->getAspectRatio(), 0.1f, 100.0f));
 
 		//tell OpenGL which shader program to use
 		glUseProgram(m_shaderProg->getId());

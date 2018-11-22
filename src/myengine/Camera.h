@@ -18,6 +18,7 @@ namespace myEngine
 	private:
 		
 		float m_DegFOV;
+		float m_aspectRatio;
 		std::shared_ptr<RenderTexture> m_renderTex;
 
 	public:
@@ -27,8 +28,13 @@ namespace myEngine
 
 		void setDegFOV(float _value); //in degrees
 
+		void setAspectRatio(float _aspect);
+		void setAspectRatio(float _width, float _height);
+		void setAspectRatio(int _width, int _height);
+
 		glm::mat4 getViewMatrix();
 		float getRadFOV();
+		float getAspectRatio();
 
 		void setRenderTexture(std::shared_ptr<RenderTexture> _renderTex);
 		bool isRenderTexCamera() { return m_renderTex != nullptr; };

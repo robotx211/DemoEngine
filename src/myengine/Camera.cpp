@@ -19,6 +19,19 @@ namespace myEngine
 		m_DegFOV = _value;
 	}
 
+	void Camera::setAspectRatio(float _aspect)
+	{
+		m_aspectRatio = _aspect;
+	}
+	void Camera::setAspectRatio(float _width, float _height)
+	{
+		m_aspectRatio = _width / _height;
+	}
+	void Camera::setAspectRatio(int _width, int _height)
+	{
+		m_aspectRatio = (float)(_width / _height);
+	}
+
 	glm::mat4 Camera::getViewMatrix()
 	{
 		return glm::inverse(getTransform()->getTransformMat());
@@ -26,6 +39,10 @@ namespace myEngine
 	float Camera::getRadFOV()
 	{
 		return glm::radians(m_DegFOV);
+	}
+	float Camera::getAspectRatio()
+	{
+		return m_aspectRatio;
 	}
 
 	void Camera::setRenderTexture(std::shared_ptr<RenderTexture> _renderTex)
@@ -37,7 +54,7 @@ namespace myEngine
 		if (isRenderTexCamera())
 		{
 			m_renderTex->bindFrameBuffer();
-		} 
+		}
 	}
 
 	void Camera::debug()
