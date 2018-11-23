@@ -21,6 +21,9 @@
 #include "RenderTexture.h"
 #include "MeshRenderer.h"
 
+//Sound
+#include "Sound.h"
+
 //Utilities
 #include "Utilities.h"
 #include "enums.h"

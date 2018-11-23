@@ -33,13 +33,14 @@ int main()
 			cube_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 			cube_renderer->setTexture(cubeTex);
 
-			cube->addComponent<Move>();
+			if (x == 0 && y == 0)
+			{
+				//std::shared_ptr<CameraController> cube_controller = cube->addComponent<CameraController>();
+				//cube_controller->setCameraSpeed(0.01f);
+				//cube_controller->setMovementSpeed(0.1f);
+			}
 		}
 	}
-
-
-
-
 
 	//---------------------------------------create main camera---------------------------------------
 
@@ -54,7 +55,16 @@ int main()
 	maincamera_camera->setDegFOV(45.0f);
 	maincamera_camera->setAspectRatio(core->getWindowObject()->getAspectRatio());
 
-	maincamera->addComponent<CameraController>()->setSpeed(1.0f);
+	std::shared_ptr<CameraController> maincamera_controller = maincamera->addComponent<CameraController>();
+	maincamera_controller->setCameraSpeed(0.01f);
+	maincamera_controller->setMovementSpeed(0.1f);
+
+	//---------------------------------------test sound---------------------------------------
+
+	std::shared_ptr<myEngine::Sound> soundClip = std::make_shared<myEngine::Sound>();
+	soundClip->loadSoundClip("../resources/dixie_horn.ogg");
+
+	maincamera_controller->setSound(soundClip);
 
 
 	core->begin();

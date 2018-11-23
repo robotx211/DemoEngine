@@ -62,14 +62,16 @@ namespace myEngine {
 	{
 		m_localOrientation = glm::normalize(_orient);
 
-		m_forward = glm::normalize(glm::axis(m_localOrientation));
+		glm::mat4 rotationMat = glm::mat4_cast(glm::normalize(m_localOrientation));
+		m_forward = glm::normalize(rotationMat * glm::vec4(0, 0, -1, 0));
 	}
 
 	void Transform::localAxisRotateQuaternion(glm::quat _quat)
 	{
 		m_localOrientation = glm::normalize(m_localOrientation * _quat);
 
-		m_forward = glm::normalize(glm::axis(m_localOrientation));
+		glm::mat4 rotationMat = glm::mat4_cast(glm::normalize(m_localOrientation));
+		m_forward = glm::normalize(rotationMat * glm::vec4(0, 0, -1, 0));
 
 	}
 	void Transform::localAxisRotateQuaternion(float _angle, glm::vec3 _axis)
@@ -106,7 +108,8 @@ namespace myEngine {
 	{
 		m_localOrientation = glm::normalize(_quat * m_localOrientation);
 
-		m_forward = glm::normalize(glm::axis(m_localOrientation));
+		glm::mat4 rotationMat = glm::mat4_cast(glm::normalize(m_localOrientation));
+		m_forward = glm::normalize(rotationMat * glm::vec4(0, 0, -1, 0));
 
 	}
 	void Transform::worldAxisRotateQuaternion(float _angle, glm::vec3 _axis)
@@ -168,6 +171,7 @@ namespace myEngine {
 		glm::mat4 scaleMat = glm::scale(glm::mat4(1.0), m_localScale);
 
 		glm::mat4 rotationMat = glm::mat4_cast(glm::normalize(m_localOrientation));
+		m_forward = glm::normalize(rotationMat * glm::vec4(0, 0, -1, 0));
 
 		glm::mat4 translationMat = glm::translate(glm::mat4(1.0), m_localPosition);
 

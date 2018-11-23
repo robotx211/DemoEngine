@@ -5,13 +5,16 @@ class CameraController : public myEngine::Component
 
 private:
 
-	float m_speed;
+	float m_cameraSpeed;
+	float m_movementSpeed;
 
 	float m_yaw;
 	float m_pitch;
 
 	float m_pitchMin;
 	float m_pitchMax;
+
+	std::shared_ptr<myEngine::Sound> m_sound;
 
 public:
 
@@ -21,10 +24,14 @@ public:
 	void start();
 	void update();
 
-	void setSpeed(float _speed) { m_speed = _speed; }
-	float getSpeed() { return m_speed; }
+	void setCameraSpeed(float _speed) { m_cameraSpeed = _speed; }
+	float getCameraSpeed() { return m_cameraSpeed; }
+
+	void setMovementSpeed(float _speed) { m_movementSpeed = _speed; }
+	float getMovementSpeed() { return m_movementSpeed; }
 
 	void setPitchLimits(float _min, float _max);
-	void setYawLimits(float _min, float _max);
+
+	void setSound(std::shared_ptr<myEngine::Sound> _sound) { m_sound = _sound; }
 
 };

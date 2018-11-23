@@ -13,6 +13,7 @@
 #include "Enviroment.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "Sound.h"
 
 namespace myEngine {
 
@@ -25,6 +26,7 @@ namespace myEngine {
 	private:
 		std::vector<std::shared_ptr<Entity>> m_entities;
 		std::shared_ptr<Window> m_windowObject;
+		std::shared_ptr<SoundObject> m_soundObject;
 		std::weak_ptr<Core> m_self;
 
 		std::shared_ptr<Camera> m_currentCamera;
@@ -44,6 +46,7 @@ namespace myEngine {
 
 		std::shared_ptr<Window> createNewWindowObject(std::string _name, int _width, int _height);
 		std::shared_ptr<Window> getWindowObject() { return m_windowObject; }
+
 
 		void begin();
 

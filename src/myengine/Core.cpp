@@ -15,6 +15,8 @@ namespace myEngine {
 			throw std::exception();
 		}
 
+		newCore->m_soundObject = std::make_shared<SoundObject>();
+
 		newCore->m_enviroment = std::make_shared<Enviroment>();
 
 		newCore->m_keyboardInput = std::make_shared<Keyboard>();
