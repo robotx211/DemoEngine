@@ -17,15 +17,24 @@ namespace myEngine {
     m_name = _name;
   }
 
+  void Entity::physicsUpdate()
+  {
+	  for (size_t i = 0; i < m_components.size(); i++)
+	  {
+		  if (m_components.at(i)->m_started == false)
+		  {
+			  m_components.at(i)->start();
+			  m_components.at(i)->m_started = true;
+		  }
+		  m_components.at(i)->physicsUpdate();
+	  }
+  }
+
   void Entity::update()
   {
     for (size_t i = 0; i < m_components.size(); i++)
     {
-      if (m_components.at(i)->m_started == false)
-      {
-        m_components.at(i)->start();
-        m_components.at(i)->m_started = true;
-      }
+
       m_components.at(i)->update();
     }
   }

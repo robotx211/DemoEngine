@@ -11,6 +11,10 @@
 #include "Window.h"
 #include "Camera.h"
 
+//"Physics"
+#include "Collider.h"
+#include "RigidBody.h"
+
 //OpenGL Wrapper
 #include "VertexBuffer.h"
 #include "VertexArray.h"

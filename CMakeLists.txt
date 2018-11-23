@@ -60,6 +60,8 @@ add_library(myengine
 	src/myengine/Enviroment.cpp
 	src/myengine/RenderTexture.cpp
 	src/myengine/Sound.cpp
+	src/myengine/Collider.cpp
+	src/myengine/RigidBody.cpp
 
 	src/game/Move.cpp
 	src/game/CameraController.cpp

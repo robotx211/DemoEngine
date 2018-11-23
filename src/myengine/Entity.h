@@ -30,6 +30,8 @@ namespace myEngine {
 		std::string getName() { return m_name; }
 		std::shared_ptr<Core> getCore() { return m_core.lock(); }
 
+
+		void physicsUpdate();
 		void update();
 		void display();
 

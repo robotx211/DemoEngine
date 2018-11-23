@@ -93,6 +93,10 @@ namespace myEngine {
 
 		for (size_t i = 0; i < m_entities.size(); i++)
 		{
+			m_entities.at(i)->physicsUpdate();
+		}
+		for (size_t i = 0; i < m_entities.size(); i++)
+		{
 			m_entities.at(i)->update();
 		}
 	}

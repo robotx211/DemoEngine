@@ -71,25 +71,30 @@ void CameraController::update()
 
 
 
-	float movement = 0.0f;
+	float forwardMovement = 0.0f;
+	float strafeMovement = 0.0f;
 
 	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_W))
 	{
-		movement += 1.0f;
+		forwardMovement += 1.0f;
 	}
 	else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_S))
 	{
-		movement -= 1.0f;
+		forwardMovement -= 1.0f;
 	}
 
-	glm::vec3 moveVec = getTransform()->getForward() * movement * m_movementSpeed;
+	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_A))
+	{
+		strafeMovement += 1.0f;
+	}
+	else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_D))
+	{
+		strafeMovement -= 1.0f;
+	}
+
+	glm::vec3 moveVec = (getTransform()->getForward() * forwardMovement * m_movementSpeed) + (getTransform()->getLeft() * strafeMovement * m_movementSpeed);
 
 	getTransform()->translate(moveVec * glm::vec3(1, 0, 1));
-
-	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE))
-	{
-		//m_sound->play();
-	}
 
 }
 
@@ -97,4 +102,8 @@ void CameraController::update()
 
 void CameraController::setPitchLimits(float _min, float _max)
 {
+
+
+	m_pitchMin = _min;
+	m_pitchMax = _max;
 }

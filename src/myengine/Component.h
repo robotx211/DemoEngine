@@ -33,7 +33,10 @@ namespace myEngine {
 
 		virtual void awake();
 		virtual void start();
+
+		virtual void physicsUpdate();
 		virtual void update();
+
 		virtual void display();
 
 		virtual void debug();

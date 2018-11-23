@@ -21,8 +21,8 @@ namespace myEngine {
 			glm::vec3 m_localPosition; //vec3
 
 			glm::vec3 m_forward;
-			//glm::vec3 m_up;
-			//glm::vec3 m_left;
+			glm::vec3 m_up;
+			glm::vec3 m_left;
 
 			glm::quat m_localOrientation; //quaternions
 
@@ -91,6 +91,8 @@ namespace myEngine {
 		void checkDirections();
 
 		glm::vec3 getForward() { return glm::normalize(m_forward); }
+		glm::vec3 getUp() { return m_up; }
+		glm::vec3 getLeft() { return m_left; }
 
 	};
 

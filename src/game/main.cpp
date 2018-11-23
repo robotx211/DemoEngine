@@ -19,6 +19,9 @@ int main()
 	std::shared_ptr<myEngine::Texture> cubeTex = std::make_shared<myEngine::Texture>();
 	cubeTex->loadTexture("../resources/bricks.png");
 
+	std::shared_ptr<myEngine::Sound> soundClip = std::make_shared<myEngine::Sound>();
+	soundClip->loadSoundClip("../resources/dixie_horn.ogg");
+
 	for (int x = -1; x <= 1; x++)
 	{
 		for (int y = -1; y <= 1; y++)
@@ -33,11 +36,15 @@ int main()
 			cube_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 			cube_renderer->setTexture(cubeTex);
 
+			std::shared_ptr<myEngine::BoxCollider> cube_collider = cube->addComponent<myEngine::BoxCollider>();
+
 			if (x == 0 && y == 0)
 			{
-				//std::shared_ptr<CameraController> cube_controller = cube->addComponent<CameraController>();
-				//cube_controller->setCameraSpeed(0.01f);
-				//cube_controller->setMovementSpeed(0.1f);
+				std::shared_ptr<myEngine::RigidBody> cube_rb = cube->addComponent<myEngine::RigidBody>();
+
+				std::shared_ptr<CameraController> cube_controller = cube->addComponent<CameraController>();
+				cube_controller->setCameraSpeed(0.01f);
+				cube_controller->setMovementSpeed(0.1f);
 			}
 		}
 	}
@@ -55,16 +62,10 @@ int main()
 	maincamera_camera->setDegFOV(45.0f);
 	maincamera_camera->setAspectRatio(core->getWindowObject()->getAspectRatio());
 
-	std::shared_ptr<CameraController> maincamera_controller = maincamera->addComponent<CameraController>();
-	maincamera_controller->setCameraSpeed(0.01f);
-	maincamera_controller->setMovementSpeed(0.1f);
-
-	//---------------------------------------test sound---------------------------------------
-
-	std::shared_ptr<myEngine::Sound> soundClip = std::make_shared<myEngine::Sound>();
-	soundClip->loadSoundClip("../resources/dixie_horn.ogg");
-
-	maincamera_controller->setSound(soundClip);
+	//std::shared_ptr<CameraController> maincamera_controller = maincamera->addComponent<CameraController>();
+	//maincamera_controller->setCameraSpeed(0.01f);
+	//maincamera_controller->setMovementSpeed(0.1f);
+	//maincamera_controller->setSound(soundClip);
 
 
 	core->begin();
