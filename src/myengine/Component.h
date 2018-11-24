@@ -34,8 +34,9 @@ namespace myEngine {
 		virtual void awake();
 		virtual void start();
 
-		virtual void physicsUpdate();
 		virtual void update();
+		virtual void physicsUpdate();
+		virtual void lateUpdate();
 
 		virtual void display();
 

@@ -37,10 +37,13 @@ namespace myEngine {
 	{
 	}
 
+	void Component::update()
+	{
+	}
 	void Component::physicsUpdate()
 	{
 	}
-	void Component::update()
+	void Component::lateUpdate()
 	{
 	}
 

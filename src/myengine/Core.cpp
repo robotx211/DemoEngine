@@ -93,12 +93,26 @@ namespace myEngine {
 
 		for (size_t i = 0; i < m_entities.size(); i++)
 		{
+			m_entities.at(i)->update();
+		}
+		for (size_t i = 0; i < m_entities.size(); i++)
+		{
 			m_entities.at(i)->physicsUpdate();
 		}
 		for (size_t i = 0; i < m_entities.size(); i++)
 		{
-			m_entities.at(i)->update();
+			m_entities.at(i)->lateUpdate();
 		}
+
+
+		for (int i = m_entities.size() - 1; i >= 0; i--)
+		{
+			if (m_entities.at(i)->m_delete == true)
+			{
+				m_entities.erase(m_entities.begin() + i);
+			}
+		}
+
 	}
 
 	void Core::display()

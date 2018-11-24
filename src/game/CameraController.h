@@ -23,6 +23,7 @@ public:
 
 	void start();
 	void update();
+	void lateUpdate();
 
 	void setCameraSpeed(float _speed) { m_cameraSpeed = _speed; }
 	float getCameraSpeed() { return m_cameraSpeed; }

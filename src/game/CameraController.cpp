@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <myengine/myengine.h>
 
 #include "CameraController.h"
@@ -62,14 +64,8 @@ void CameraController::update()
 
 	m_yaw = glm::mod(m_yaw, 360.0f);
 
-	std::cout << "Total Pitch: " << m_pitch << "\tMaxPitch: " << m_pitchMax << "\tPitch Change: " << pitch << std::endl;
-
 	getTransform()->worldAxisRotateEulerDegrees(0.0f, yaw, 0.0f);
 	getTransform()->localAxisRotateEulerDegrees(pitch, 0.0f, 0.0f);
-
-	//std::cout << "tYaw: " << m_yaw << ", tPitch: " << m_pitch << std::endl;
-
-
 
 	float forwardMovement = 0.0f;
 	float strafeMovement = 0.0f;
@@ -97,6 +93,20 @@ void CameraController::update()
 	getTransform()->translate(moveVec * glm::vec3(1, 0, 1));
 
 }
+void CameraController::lateUpdate()
+{
+	std::shared_ptr<myEngine::RigidBody> rb = getEntity()->getComponent<myEngine::RigidBody>();
+
+	if (rb->isColliding())
+	{
+		std::vector<std::shared_ptr<myEngine::Collider>> collisions = rb->getCollisions();
+		for (size_t i = 0; i < collisions.size(); i++)
+		{
+			collisions.at(i)->getEntity()->markForDeletion();
+		}
+	}
+}
+
 
 
 

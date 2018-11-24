@@ -90,14 +90,14 @@ namespace myEngine
 
 		if (aPos.x < bPos.x)
 		{
-			if (aPos.x + aSize.x < bPos.x)
+			if (aPos.x + aSize.x > bPos.x - bSize.x) //is axMax > bxMin
 			{
 				xCheck = true;
 			}
 		}
 		else //aPos.x >= bPos.x
 		{
-			if (bPos.x + bSize.x < aPos.x)
+			if (bPos.x + bSize.x > aPos.x - aSize.x) //is bxMax > axMin
 			{
 				xCheck = true;
 			}
@@ -105,14 +105,14 @@ namespace myEngine
 
 		if (aPos.y < bPos.y)
 		{
-			if (aPos.y + aSize.y < bPos.y)
+			if (aPos.y + aSize.y > bPos.y - bSize.y)
 			{
 				yCheck = true;
 			}
 		}
 		else //aPos.y >= bPos.y
 		{
-			if (bPos.y + bSize.y < aPos.y)
+			if (bPos.y + bSize.y > aPos.y - aSize.y)
 			{
 				yCheck = true;
 			}
@@ -120,14 +120,14 @@ namespace myEngine
 
 		if (aPos.z < bPos.z)
 		{
-			if (aPos.z + aSize.z < bPos.z)
+			if (aPos.z + aSize.z > bPos.z - bSize.z)
 			{
 				zCheck = true;
 			}
 		}
 		else //aPos.z >= bPos.z
 		{
-			if (bPos.z + bSize.z < aPos.z)
+			if (bPos.z + bSize.z > aPos.z - aSize.z)
 			{
 				zCheck = true;
 			}

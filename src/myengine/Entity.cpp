@@ -9,7 +9,7 @@ namespace myEngine {
 
   Entity::Entity()
   {
-
+	  m_delete = false;
   }
 
   Entity::Entity(std::string _name)
@@ -17,7 +17,13 @@ namespace myEngine {
     m_name = _name;
   }
 
-  void Entity::physicsUpdate()
+  Entity::~Entity()
+  {
+	  std::cout << "Entity Destructor Called" << std::endl;
+  }
+
+
+  void Entity::update()
   {
 	  for (size_t i = 0; i < m_components.size(); i++)
 	  {
@@ -26,17 +32,23 @@ namespace myEngine {
 			  m_components.at(i)->start();
 			  m_components.at(i)->m_started = true;
 		  }
-		  m_components.at(i)->physicsUpdate();
+		  m_components.at(i)->update();
 	  }
   }
-
-  void Entity::update()
+  void Entity::physicsUpdate()
   {
-    for (size_t i = 0; i < m_components.size(); i++)
-    {
+	  for (size_t i = 0; i < m_components.size(); i++)
+	  {
 
-      m_components.at(i)->update();
-    }
+		  m_components.at(i)->physicsUpdate();
+	  }
+  } 
+  void Entity::lateUpdate()
+  {
+	  for (size_t i = 0; i < m_components.size(); i++)
+	  {
+		  m_components.at(i)->lateUpdate();
+	  }
   }
 
   void Entity::display()

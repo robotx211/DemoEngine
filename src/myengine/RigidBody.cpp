@@ -1,6 +1,3 @@
-#include <memory>
-#include <vector>
-
 #include "RigidBody.h"
 
 namespace myEngine
@@ -19,9 +16,15 @@ namespace myEngine
 	{
 
 		m_colliding = false;
+		m_collisions.clear();
 
 		//get this collider
 		std::shared_ptr<Collider> thisCollider = getEntity()->getComponent<Collider>();
+
+		if (thisCollider == NULL)
+		{
+			return;
+		}
 
 		//get all colliders
 		std::vector<std::shared_ptr<Collider>> allColliders;
@@ -34,14 +37,20 @@ namespace myEngine
 				continue;
 			}
 
-			m_colliding = thisCollider->collide(allColliders.at(i));
-
-			if (m_colliding == true)
+			if (thisCollider->collide(allColliders.at(i)) == true)
 			{
-				continue;
+				m_colliding = true;
+				m_collisions.push_back(allColliders.at(i));
 			}
 
 		}
+
+		if (m_colliding == true)
+		{
+			std::cout << "Colliding: " << m_colliding << std::endl;
+		}
+
+		
 	}
 
 }

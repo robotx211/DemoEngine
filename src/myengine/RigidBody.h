@@ -1,6 +1,9 @@
 #ifndef RIGID_BODY_H
 #define RIGID_BODY_H
 
+#include <memory>
+#include <vector>
+
 #include "Component.h"
 #include "Collider.h"
 
@@ -13,6 +16,7 @@ namespace myEngine
 	private:
 
 		bool m_colliding;
+		std::vector<std::shared_ptr<Collider>> m_collisions;
 
 
 	public:
@@ -22,7 +26,8 @@ namespace myEngine
 
 		void physicsUpdate();
 
-
+		bool isColliding() { return m_colliding; }
+		std::vector<std::shared_ptr<Collider>> getCollisions() { return m_collisions; }
 
 	};
 

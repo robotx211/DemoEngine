@@ -23,16 +23,19 @@ namespace myEngine {
 		std::weak_ptr<Entity> m_self;
 		std::weak_ptr<Core> m_core;
 
+		bool m_delete;
+
 	public:
 		Entity();
 		Entity(std::string _name);
+		~Entity();
 
 		std::string getName() { return m_name; }
 		std::shared_ptr<Core> getCore() { return m_core.lock(); }
 
-
-		void physicsUpdate();
 		void update();
+		void physicsUpdate();
+		void lateUpdate();
 		void display();
 
 		void debug();
@@ -95,6 +98,8 @@ namespace myEngine {
 			throw std::exception();
 
 		}
+
+		void markForDeletion() { m_delete = true; }
 
 
 
