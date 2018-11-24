@@ -64,12 +64,6 @@ namespace myEngine
 		m_texture = std::static_pointer_cast<Texture, RenderTexture>(_renderTex);
 	}
 
-	bool MeshRenderer::usingRenderTex()
-	{
-		//return std::dynamic_pointer_cast<RenderTexture>(m_texture) != NULL;
-		return false;
-	}
-
 	void MeshRenderer::setShaders(std::string _vertShadAddress, std::string _fragShadAddress)
 	{
 		m_shaderProg = std::make_shared<ShaderProgram>(_vertShadAddress, _fragShadAddress);

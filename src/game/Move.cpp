@@ -4,33 +4,34 @@
 
 void Move::start()
 	{
-		add = true;
 	}
 
 	void Move::update()
 	{
 
-		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_UP))
+		float forwardMovement = 0.0f;
+		float strafeMovement = 0.0f;
+
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_W))
 		{
-			getTransform()->worldAxisRotateEulerDegrees(-90 * getCore()->getEnviroment()->getDeltaTime() / 1000, 0.0f, 0.0f);
+			forwardMovement += 1.0f;
 		}
-		else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_DOWN))
+		else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_S))
 		{
-			getTransform()->worldAxisRotateEulerDegrees(90 * getCore()->getEnviroment()->getDeltaTime() / 1000, 0.0f, 0.0f);
+			forwardMovement -= 1.0f;
 		}
 
-		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_LEFT))
+		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_A))
 		{
-			getTransform()->worldAxisRotateEulerDegrees(0.0f, -90 * getCore()->getEnviroment()->getDeltaTime() / 1000, 0.0f);
+			strafeMovement += 1.0f;
 		}
-		else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_RIGHT))
+		else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_D))
 		{
-			getTransform()->worldAxisRotateEulerDegrees(0.0f, 90 * getCore()->getEnviroment()->getDeltaTime() / 1000, 0.0f);
+			strafeMovement -= 1.0f;
 		}
 
-		if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE))
-		{
-			getTransform()->setLocalOrientation(glm::quat(glm::vec3(0.0f, 0.0f, 0.0f)));
-		}
+		glm::vec3 moveVec = (getTransform()->getForward() * forwardMovement * 0.1f) + (getTransform()->getLeft() * strafeMovement * 0.1f);
+
+		getTransform()->translate(moveVec * glm::vec3(1, 0, 1));
 
 	}

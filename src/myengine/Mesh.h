@@ -57,9 +57,10 @@ namespace myEngine
 		Mesh();
 		Mesh(std::string _modelAddress);
 
+		void loadRect(glm::vec2 _size);
 		void loadModel(std::string _modelAddress); //load model data into m_vertices
 
-		int getVertexcount() { return (m_faces.size() * 3); } //faces each have 3 vertices, so verte count is faces.size x 3
+		int getVertexcount();
 		std::shared_ptr<VertexArray> getModelVAO() { return m_VAO; }
 
 		void upload();

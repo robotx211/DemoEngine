@@ -14,6 +14,40 @@ namespace myEngine
 		loadModel(_modelAddress);
 	}
 
+	void Mesh::loadRect(glm::vec2 _size)
+	{
+		m_posVBO = std::make_shared<VertexBuffer>();
+
+		//positions: 1, 2, 3, 1, 3, 4
+
+		m_posVBO->addVertex(glm::vec3(0.0f, 0.0f, 0.0f));
+		m_posVBO->addVertex(glm::vec3(0.0f, 1.0f, 0.0f));
+		m_posVBO->addVertex(glm::vec3(1.0f, 1.0f, 0.0f));
+
+		m_posVBO->addVertex(glm::vec3(0.0f, 0.0f, 0.0f));
+		m_posVBO->addVertex(glm::vec3(1.0f, 1.0f, 0.0f));
+		m_posVBO->addVertex(glm::vec3(1.0f, 0.0f, 0.0f));
+
+		m_texCoordsVBO = std::make_shared<VertexBuffer>();
+
+		//texCoords: 1, 2, 3, 1, 3, 4
+
+		m_texCoordsVBO->addVertex(glm::vec2(0.0f, 0.0f));
+		m_texCoordsVBO->addVertex(glm::vec2(0.0f, 1.0f));
+		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 1.0f));
+
+		m_texCoordsVBO->addVertex(glm::vec2(0.0f, 0.0f));
+		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 1.0f));
+		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 0.0f));
+
+		m_VAO = std::make_shared<VertexArray>();
+
+		m_VAO->addBuffer(enums::ShaderAttribute::in_Position, m_posVBO);
+		m_VAO->addBuffer(enums::ShaderAttribute::in_TexCoord, m_texCoordsVBO);
+
+		upload();
+
+	}
 	void Mesh::loadModel(std::string _modelAddress)
 	{
 
@@ -239,5 +273,13 @@ namespace myEngine
 
 		m_VAO->upload();
 	}
+
+	int Mesh::getVertexcount()
+	{
+		int vertexCount = m_posVBO->getDataSize() / m_posVBO->getComponents();
+
+		return vertexCount;
+	}
+
 
 }

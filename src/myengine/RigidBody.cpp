@@ -9,7 +9,7 @@ namespace myEngine
 	}
 	RigidBody::~RigidBody()
 	{
-
+		m_collisions.clear();
 	}
 
 	void RigidBody::physicsUpdate()
@@ -49,8 +49,6 @@ namespace myEngine
 		{
 			std::cout << "Colliding: " << m_colliding << std::endl;
 		}
-
-		
 	}
 
 }

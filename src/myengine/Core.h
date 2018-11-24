@@ -53,6 +53,8 @@ namespace myEngine {
 		void update();
 		void display();
 
+		void GUI();
+
 		void debug();
 
 		void end();

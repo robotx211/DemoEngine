@@ -15,6 +15,7 @@ private:
 	float m_pitchMax;
 
 	std::shared_ptr<myEngine::Sound> m_sound;
+	myEngine::Ray m_ray;
 
 public:
 

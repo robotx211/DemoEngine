@@ -1,4 +1,8 @@
 #include <memory>
+#include <glm/glm.hpp>
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
 
 #include <myengine/myengine.h>
 
@@ -25,6 +29,8 @@ CameraController::~CameraController()
 void CameraController::start()
 {
 	//getCore()->getMouse()->setCentreLocked(true);
+
+	m_ray = myEngine::Ray(getCore(), getTransform()->getLocalPosition(), getTransform()->getForward());
 }
 
 void CameraController::update()
@@ -92,19 +98,32 @@ void CameraController::update()
 
 	getTransform()->translate(moveVec * glm::vec3(1, 0, 1));
 
+	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE))
+	{
+		//system("cls");
+
+		//std::cout << "Origin: " << glm::to_string(getTransform()->getLocalPosition()) << "\n Forward: " << glm::to_string(getTransform()->getForward()) << std::endl;
+
+		m_ray.setOrigin(getTransform()->getLocalPosition());
+		m_ray.setDirection(getTransform()->getForward());
+	
+		if (m_ray.rayCast() == true)
+		{
+			//std::cout << "RayCast Hit" << std::endl;
+
+			std::vector < std::shared_ptr<myEngine::Collider>> collisions = m_ray.getCollisions();
+
+			for (size_t i = 0; i < collisions.size(); i++)
+			{
+				collisions.at(i)->getEntity()->markForDeletion();
+			}
+		}
+	}
+
 }
 void CameraController::lateUpdate()
 {
-	std::shared_ptr<myEngine::RigidBody> rb = getEntity()->getComponent<myEngine::RigidBody>();
 
-	if (rb->isColliding())
-	{
-		std::vector<std::shared_ptr<myEngine::Collider>> collisions = rb->getCollisions();
-		for (size_t i = 0; i < collisions.size(); i++)
-		{
-			collisions.at(i)->getEntity()->markForDeletion();
-		}
-	}
 }
 
 

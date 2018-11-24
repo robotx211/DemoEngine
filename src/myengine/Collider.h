@@ -20,6 +20,8 @@ namespace myEngine
 
 		virtual bool collide(std::shared_ptr<Collider> _c);
 
+		virtual bool rayCollide(glm::vec3 _o, glm::vec3 _d);
+
 		virtual void display();
 	};
 
@@ -36,6 +38,8 @@ namespace myEngine
 
 		bool collide(std::shared_ptr<Collider> _collider);
 		bool collide(std::shared_ptr<BoxCollider> _collider);
+
+		bool rayCollide(glm::vec3 _o, glm::vec3 _d);
 
 		//might do later is time allows
 		void display();

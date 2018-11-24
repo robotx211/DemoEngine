@@ -7,9 +7,6 @@
 	{
 	private:
 
-		bool add;
-		int i;
-
 	public:
 
 		void start();

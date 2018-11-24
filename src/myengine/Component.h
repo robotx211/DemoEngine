@@ -40,6 +40,8 @@ namespace myEngine {
 
 		virtual void display();
 
+		virtual void GUI();
+
 		virtual void debug();
 
 	};

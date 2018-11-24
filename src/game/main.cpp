@@ -4,6 +4,7 @@
 #include <myengine/myengine.h>
 #include <game/Move.h>
 #include <game/CameraController.h>
+#include <myengine/GL_Triangle.h>
 
 int main()
 {
@@ -38,14 +39,12 @@ int main()
 
 			std::shared_ptr<myEngine::BoxCollider> cube_collider = cube->addComponent<myEngine::BoxCollider>();
 
-			if (x == 0 && y == 0)
-			{
-				std::shared_ptr<myEngine::RigidBody> cube_rb = cube->addComponent<myEngine::RigidBody>();
+			//if (x == 0 && y == 0)
+			//{
+			//	std::shared_ptr<myEngine::RigidBody> cube_rb = cube->addComponent<myEngine::RigidBody>();
 
-				std::shared_ptr<CameraController> cube_controller = cube->addComponent<CameraController>();
-				cube_controller->setCameraSpeed(0.01f);
-				cube_controller->setMovementSpeed(0.1f);
-			}
+			//	std::shared_ptr<Move> cube_controller = cube->addComponent<Move>();
+			//}
 		}
 	}
 
@@ -62,11 +61,25 @@ int main()
 	maincamera_camera->setDegFOV(45.0f);
 	maincamera_camera->setAspectRatio(core->getWindowObject()->getAspectRatio());
 
-	//std::shared_ptr<CameraController> maincamera_controller = maincamera->addComponent<CameraController>();
-	//maincamera_controller->setCameraSpeed(0.01f);
-	//maincamera_controller->setMovementSpeed(0.1f);
-	//maincamera_controller->setSound(soundClip);
+	std::shared_ptr<CameraController> maincamera_controller = maincamera->addComponent<CameraController>();
+	maincamera_controller->setCameraSpeed(0.01f);
+	maincamera_controller->setMovementSpeed(0.1f);
 
+	//---------------------------------------create GUI---------------------------------------
+
+	//std::shared_ptr<myEngine::Texture> GUITex = std::make_shared<myEngine::Texture>();
+	//GUITex->loadTexture("../resources/bricks.png");
+
+	//std::shared_ptr<myEngine::Entity> GUIcrosshair = core->addEntity();
+
+	//std::shared_ptr<myEngine::GUIRect> GUIcrosshair_GUIRect = GUIcrosshair->addComponent<myEngine::GUIRect>();
+	//GUIcrosshair_GUIRect->setRect((float)core->getWindowObject()->getWidth() / 2, (float)core->getWindowObject()->getHeight() / 2, 100.0f, 100.0f);
+	//GUIcrosshair_GUIRect->setTexture(GUITex);
+	//GUIcrosshair_GUIRect->setShaders("../resources/GUI.vert", "../resources/red.frag");
+
+	std::shared_ptr<myEngine::Entity> triangle = core->addEntity();
+
+	std::shared_ptr<myEngine::GL_Triangle> triangle_randerer = triangle->addComponent<myEngine::GL_Triangle>();
 
 	core->begin();
 

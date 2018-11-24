@@ -149,7 +149,17 @@ namespace myEngine {
 			}
 		}
 
+		GUI();
+
 		SDL_GL_SwapWindow(m_windowObject->getWindow());
+	}
+
+	void Core::GUI()
+	{
+		for (size_t i = 0; i < m_entities.size(); i++)
+		{
+			m_entities.at(i)->GUI();
+		}
 	}
 
 	void Core::debug()

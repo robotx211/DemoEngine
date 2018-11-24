@@ -37,6 +37,7 @@ namespace myEngine {
 		void physicsUpdate();
 		void lateUpdate();
 		void display();
+		void GUI();
 
 		void debug();
 

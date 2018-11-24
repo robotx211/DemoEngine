@@ -49,8 +49,6 @@ namespace myEngine
 		void setTexture(std::shared_ptr<Texture> _texture);
 		void setTexture(std::shared_ptr<RenderTexture> _renderTex);
 
-		bool usingRenderTex();
-
 		void setShaders(std::string _vertShadAddress, std::string _fragShadAddress);
 
 

@@ -11,7 +11,7 @@ namespace myEngine
 
 	Collider::Collider()
 	{
-		
+
 	}
 	Collider::~Collider()
 	{
@@ -19,6 +19,12 @@ namespace myEngine
 	}
 
 	bool Collider::collide(std::shared_ptr<Collider> _c)
+	{
+		//should never check against this
+		throw std::exception();
+	}
+
+	bool Collider::rayCollide(glm::vec3 _origin, glm::vec3 _direction)
 	{
 		//should never check against this
 		throw std::exception();
@@ -32,9 +38,8 @@ namespace myEngine
 
 #pragma endregion
 
-
 #pragma region BoxCollider
-		//BoxCollider
+	//BoxCollider
 
 	BoxCollider::BoxCollider()
 	{
@@ -137,6 +142,80 @@ namespace myEngine
 
 		return returnBool;
 
+	}
+
+	bool BoxCollider::rayCollide(glm::vec3 _o, glm::vec3 _d)
+	{
+		//https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
+
+		std::shared_ptr<Transform> trans = getTransform();
+		glm::vec3 pos = trans->getLocalPosition();
+		glm::vec3 size = (trans->getLocalScale() * m_scale) / 2.0f;
+
+		glm::vec3 min = pos - size;
+		glm::vec3 max = pos + size;
+
+		float tMin = (min.x - _o.x) / _d.x;
+		float tMax = (max.x - _o.x) / _d.x;
+
+		if (tMin > tMax)
+		{
+			float tmp = tMax;
+			tMax = tMin;
+			tMin = tmp;
+		}
+
+		float tMinY = (min.y - _o.y) / _d.y;
+		float tMaxY = (max.y - _o.y) / _d.y;
+
+		if (tMinY > tMaxY)
+		{
+			float tmp = tMaxY;
+			tMaxY = tMinY;
+			tMinY = tmp;
+		}
+
+		if ((tMin > tMaxY) || (tMinY > tMax))
+		{
+			return false;
+		}
+
+		if (tMinY > tMin)
+		{
+			tMin = tMinY;
+		}
+
+		if (tMaxY < tMax)
+		{
+			tMax = tMaxY;
+		}
+
+		float tMinZ = (min.z - _o.z) / _d.z;
+		float tMaxZ = (max.z - _o.z) / _d.z;
+
+		if (tMinZ > tMaxZ)
+		{
+			float tmp = tMaxZ;
+			tMaxZ = tMinZ;
+			tMinZ = tmp;
+		}
+
+		if ((tMin > tMaxZ) || (tMinZ > tMax))
+		{
+			return false;
+		}
+
+		if (tMinZ > tMin)
+		{
+			tMin = tMinZ;
+		}
+
+		if (tMaxZ < tMax)
+		{
+			tMax = tMaxZ;
+		}
+
+		return true;
 	}
 
 	void BoxCollider::display()

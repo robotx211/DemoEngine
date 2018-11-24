@@ -47,6 +47,11 @@ namespace myEngine {
 	{
 	}
 
+	void Component::GUI()
+	{
+
+	}
+
 	void Component::display()
 	{
 	}

@@ -62,9 +62,10 @@ add_library(myengine
 	src/myengine/Sound.cpp
 	src/myengine/Collider.cpp
 	src/myengine/RigidBody.cpp
+	src/myengine/Ray.cpp
+	src/myengine/GUI.cpp
 
-	src/game/Move.cpp
-	src/game/CameraController.cpp
+	src/myengine/GL_Triangle.cpp
 )
 
 if(MSVC)
@@ -79,6 +80,9 @@ endif()
 
 add_executable(game
   	src/game/main.cpp
+
+	src/game/Move.cpp
+	src/game/CameraController.cpp
 )
 
 target_link_libraries(game 

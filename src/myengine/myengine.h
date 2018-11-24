@@ -14,6 +14,7 @@
 //"Physics"
 #include "Collider.h"
 #include "RigidBody.h"
+#include "Ray.h"
 
 //OpenGL Wrapper
 #include "VertexBuffer.h"
@@ -27,6 +28,9 @@
 
 //Sound
 #include "Sound.h"
+
+//GUI
+#include "GUI.h"
 
 //Utilities
 #include "Utilities.h"
