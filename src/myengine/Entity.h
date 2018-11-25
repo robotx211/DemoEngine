@@ -44,6 +44,7 @@ namespace myEngine {
 
 		template <typename T> std::shared_ptr<T> addComponent()
 		{
+			//needs error checking: if a non component is passed in, throw an exception
 			std::shared_ptr<T> newComponent = std::make_shared<T>();
 
 			newComponent->m_self = newComponent;

@@ -12,7 +12,7 @@ namespace myEngine {
 		m_window = SDL_CreateWindow(m_name.c_str(),
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			m_width, m_height,
-			SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+			SDL_WINDOW_OPENGL);
 
 		std::cout << "Window Awake" << std::endl;
 	}

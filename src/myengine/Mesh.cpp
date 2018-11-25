@@ -16,6 +16,9 @@ namespace myEngine
 
 	void Mesh::loadRect(glm::vec2 _size)
 	{
+		//doesn't actually need _size, that needs removing
+		//a rect is a set 1 by 1 square, which gets scaled by the transform/GUIRect component
+
 		m_posVBO = std::make_shared<VertexBuffer>();
 
 		//(0,0) at centre
