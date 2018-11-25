@@ -44,7 +44,9 @@ namespace myEngine
 		glBindTexture(GL_TEXTURE_2D, m_textureId);
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
 		free(data);
+
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glBindTexture(GL_TEXTURE_2D, 0);

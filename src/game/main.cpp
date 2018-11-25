@@ -67,19 +67,15 @@ int main()
 
 	//---------------------------------------create GUI---------------------------------------
 
-	//std::shared_ptr<myEngine::Texture> GUITex = std::make_shared<myEngine::Texture>();
-	//GUITex->loadTexture("../resources/bricks.png");
+	std::shared_ptr<myEngine::Texture> GUITex = std::make_shared<myEngine::Texture>();
+	GUITex->loadTexture("../resources/crosshair.png");
 
-	//std::shared_ptr<myEngine::Entity> GUIcrosshair = core->addEntity();
+	std::shared_ptr<myEngine::Entity> GUIcrosshair = core->addEntity();
 
-	//std::shared_ptr<myEngine::GUIRect> GUIcrosshair_GUIRect = GUIcrosshair->addComponent<myEngine::GUIRect>();
-	//GUIcrosshair_GUIRect->setRect((float)core->getWindowObject()->getWidth() / 2, (float)core->getWindowObject()->getHeight() / 2, 100.0f, 100.0f);
-	//GUIcrosshair_GUIRect->setTexture(GUITex);
-	//GUIcrosshair_GUIRect->setShaders("../resources/GUI.vert", "../resources/red.frag");
-
-	std::shared_ptr<myEngine::Entity> triangle = core->addEntity();
-
-	std::shared_ptr<myEngine::GL_Triangle> triangle_randerer = triangle->addComponent<myEngine::GL_Triangle>();
+	std::shared_ptr<myEngine::GUIRect> GUIcrosshair_GUIRect = GUIcrosshair->addComponent<myEngine::GUIRect>();
+	GUIcrosshair_GUIRect->setRect((float)core->getWindowObject()->getWidth() / 2, (float)core->getWindowObject()->getHeight() / 2, 1.0, 1.0);
+	GUIcrosshair_GUIRect->setTexture(GUITex);
+	GUIcrosshair_GUIRect->setShaders("../resources/GUI.vert", "../resources/textured.frag");
 
 	core->begin();
 

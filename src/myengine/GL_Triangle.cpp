@@ -14,21 +14,23 @@ namespace myEngine
 
 	glm::vec3 resize = glm::vec3(getCore()->getWindowObject()->getWidth() / 100.0f, getCore()->getWindowObject()->getHeight() / 100.0f, 1.0f);
 
-    m_positions.push_back(glm::vec3(0.0f, 0.0f, 0.0f) / resize);
-    m_positions.push_back(glm::vec3(1.0f, 1.0f, 0.0f) / resize);
-    m_positions.push_back(glm::vec3(0.0f, 1.0f, 0.0f) / resize);
+    m_positions.push_back(glm::vec3(-0.5f, -0.5f, 0.0f) / resize);
+    m_positions.push_back(glm::vec3(0.5f, 0.5f, 0.0f) / resize);
+    m_positions.push_back(glm::vec3(-0.5f, 0.5f, 0.0f) / resize);
 
-	m_positions.push_back(glm::vec3(0.0f, 0.0f, 0.0f) / resize);
-	m_positions.push_back(glm::vec3(1.0f, 0.0f, 0.0f) / resize);
-	m_positions.push_back(glm::vec3(1.0f, 1.0f, 0.0f) / resize);
-
-	m_texcoords.push_back(glm::vec2(1.0f, 0.0f));
-	m_texcoords.push_back(glm::vec2(0.0f, 1.0f));
 	m_texcoords.push_back(glm::vec2(0.0f, 0.0f));
-
-	m_texcoords.push_back(glm::vec2(1.0f, 0.0f));
 	m_texcoords.push_back(glm::vec2(1.0f, 1.0f));
 	m_texcoords.push_back(glm::vec2(0.0f, 1.0f));
+
+
+	m_positions.push_back(glm::vec3(-0.5f, -0.5f, 0.0f) / resize);
+	m_positions.push_back(glm::vec3(0.5f, -0.5f, 0.0f) / resize);
+	m_positions.push_back(glm::vec3(0.5f, 0.5f, 0.0f) / resize);
+
+	m_texcoords.push_back(glm::vec2(0.0f, 0.0f));
+	m_texcoords.push_back(glm::vec2(1.0f, 0.0f));
+	m_texcoords.push_back(glm::vec2(1.0f, 1.0f));
+
 
 
     // - - - - - - - - - - - - - - - - - - - - - Create VBO - - - - - - - - - - - - - - - - - - - - - //
@@ -98,6 +100,7 @@ namespace myEngine
 		// - - - - - - - - - - - - - - - - - - - - - Draw Triangle - - - - - - - - - - - - - - - - - - - - - //
 
 	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     //tell OpenGL which shader program to use
     glUseProgram(m_shaderProg->getId());

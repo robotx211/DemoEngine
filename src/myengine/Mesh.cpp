@@ -18,27 +18,26 @@ namespace myEngine
 	{
 		m_posVBO = std::make_shared<VertexBuffer>();
 
-		//positions: 1, 2, 3, 1, 3, 4
+		//(0,0) at centre
 
-		m_posVBO->addVertex(glm::vec3(0.0f, 0.0f, 0.0f));
-		m_posVBO->addVertex(glm::vec3(0.0f, 1.0f, 0.0f));
-		m_posVBO->addVertex(glm::vec3(1.0f, 1.0f, 0.0f));
+		m_posVBO->addVertex(glm::vec3(-0.5f, -0.5f, 0.0f)); //bot left
+		m_posVBO->addVertex(glm::vec3(0.5f, 0.5f, 0.0f)); //top right
+		m_posVBO->addVertex(glm::vec3(-0.5f, 0.5f, 0.0f)); //top left
 
-		m_posVBO->addVertex(glm::vec3(0.0f, 0.0f, 0.0f));
-		m_posVBO->addVertex(glm::vec3(1.0f, 1.0f, 0.0f));
-		m_posVBO->addVertex(glm::vec3(1.0f, 0.0f, 0.0f));
+		m_posVBO->addVertex(glm::vec3(-0.5f, -0.5f, 0.0f)); //bot left
+		m_posVBO->addVertex(glm::vec3(0.5f, -0.5f, 0.0f)); //bot right
+		m_posVBO->addVertex(glm::vec3(0.5f, 0.5f, 0.0f)); // top right
 
+		//flips image, idk why
 		m_texCoordsVBO = std::make_shared<VertexBuffer>();
 
-		//texCoords: 1, 2, 3, 1, 3, 4
-
 		m_texCoordsVBO->addVertex(glm::vec2(0.0f, 0.0f));
+		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 1.0f));
 		m_texCoordsVBO->addVertex(glm::vec2(0.0f, 1.0f));
-		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 1.0f));
 
 		m_texCoordsVBO->addVertex(glm::vec2(0.0f, 0.0f));
-		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 1.0f));
 		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 0.0f));
+		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 1.0f));
 
 		m_VAO = std::make_shared<VertexArray>();
 
