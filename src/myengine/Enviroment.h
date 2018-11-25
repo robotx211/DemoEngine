@@ -35,6 +35,7 @@ namespace myEngine
 		void calcdT();
 		void calcFPS();
 
+		//returns delta time in milliseconds
 		double getDeltaTime() { return m_deltaTime; }
 
 	};

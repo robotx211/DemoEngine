@@ -30,6 +30,7 @@ namespace myEngine {
 		Entity(std::string _name);
 		~Entity();
 
+		void setName(std::string _name) { m_name = _name; }
 		std::string getName() { return m_name; }
 		std::shared_ptr<Core> getCore() { return m_core.lock(); }
 

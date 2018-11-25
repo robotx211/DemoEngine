@@ -83,6 +83,8 @@ add_executable(game
 
 	src/game/Move.cpp
 	src/game/CameraController.cpp
+	src/game/EnemyController.cpp
+	src/game/GameController.cpp
 )
 
 target_link_libraries(game 

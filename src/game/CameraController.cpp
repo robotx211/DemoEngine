@@ -7,6 +7,7 @@
 #include <myengine/myengine.h>
 
 #include "CameraController.h"
+#include "GameController.h"
 
 CameraController::CameraController()
 {
@@ -71,7 +72,7 @@ void CameraController::update()
 	m_yaw = glm::mod(m_yaw, 360.0f);
 
 	getTransform()->worldAxisRotateEulerDegrees(0.0f, yaw, 0.0f);
-	getTransform()->localAxisRotateEulerDegrees(pitch, 0.0f, 0.0f);
+	//getTransform()->localAxisRotateEulerDegrees(pitch, 0.0f, 0.0f); //removing this makes it look left and right only
 
 	float forwardMovement = 0.0f;
 	float strafeMovement = 0.0f;
@@ -94,7 +95,7 @@ void CameraController::update()
 		strafeMovement -= 1.0f;
 	}
 
-	glm::vec3 moveVec = (getTransform()->getForward() * forwardMovement * m_movementSpeed) + (getTransform()->getLeft() * strafeMovement * m_movementSpeed);
+	glm::vec3 moveVec = (  glm::normalize(getTransform()->getForward()) * forwardMovement * m_movementSpeed) + ( glm::normalize(getTransform()->getLeft()) * strafeMovement * m_movementSpeed);
 
 	getTransform()->translate(moveVec * glm::vec3(1, 0, 1));
 
@@ -115,7 +116,11 @@ void CameraController::update()
 
 			for (size_t i = 0; i < collisions.size(); i++)
 			{
-				collisions.at(i)->getEntity()->markForDeletion();
+				if (collisions.at(i)->getEntity()->getName() == "enemy")
+				{
+					collisions.at(i)->getEntity()->markForDeletion();
+					m_enemiesKilled++;
+				}
 			}
 		}
 	}
@@ -123,7 +128,23 @@ void CameraController::update()
 }
 void CameraController::lateUpdate()
 {
+	std::shared_ptr<myEngine::RigidBody> rb = getEntity()->getComponent <myEngine::RigidBody>();
 
+	if (rb == NULL)
+	{
+		return;
+	}
+
+	if (rb->isColliding() == true)
+	{
+		for (size_t i = 0; i < rb->getCollisions().size(); i++)
+		{
+			if (rb->getCollisions().at(i)->getEntity()->getName() == "enemy")
+			{
+				m_gameController.lock()->reset();
+			}
+		}
+	}
 }
 
 

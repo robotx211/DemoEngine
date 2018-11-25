@@ -1,4 +1,9 @@
+#ifndef CAMERA_CONTROLLER_H
+#define CAMERA_CONTROLLER_H
+
 #include <myengine/myengine.h>
+
+class GameController;
 
 class CameraController : public myEngine::Component
 {
@@ -17,6 +22,10 @@ private:
 	std::shared_ptr<myEngine::Sound> m_sound;
 	myEngine::Ray m_ray;
 
+	int m_enemiesKilled;
+
+	std::weak_ptr<GameController> m_gameController;
+
 public:
 
 	CameraController();
@@ -25,6 +34,9 @@ public:
 	void start();
 	void update();
 	void lateUpdate();
+
+	int getKillCount() { return m_enemiesKilled; }
+	void resetKillCount() { m_enemiesKilled = 0; }
 
 	void setCameraSpeed(float _speed) { m_cameraSpeed = _speed; }
 	float getCameraSpeed() { return m_cameraSpeed; }
@@ -36,4 +48,7 @@ public:
 
 	void setSound(std::shared_ptr<myEngine::Sound> _sound) { m_sound = _sound; }
 
+	void setGameController(std::shared_ptr<GameController> _game) { m_gameController = _game; }
 };
+
+#endif // !CAMERA_CONTROLLER_H

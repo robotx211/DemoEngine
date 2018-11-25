@@ -162,7 +162,7 @@ namespace myEngine {
 
 	void Transform::scale(glm::vec3 _vec)
 	{
-		m_localScale += _vec;
+		m_localScale *= _vec;
 	}
 	void Transform::scale(float _x, float _y, float _z)
 	{
