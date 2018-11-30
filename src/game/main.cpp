@@ -12,8 +12,17 @@
 int main()
 {
 
+
 	std::shared_ptr<myEngine::Core> core = myEngine::Core::init();
 	core->createNewWindowObject("main window", 1280, 720);
+
+	//---------------------------------------TinyOBJ Loader testing---------------------------------------
+
+	//std::vector<std::shared_ptr<myEngine::Mesh>> meshes;
+
+	//myEngine::Mesh::loadModel("../resources/cube.obj", &meshes);
+
+	//return 0;
 
 	//---------------------------------------create main camera / player---------------------------------------
 
@@ -48,8 +57,11 @@ int main()
 
 	//---------------------------------------create enemy resources---------------------------------------
 
-	std::shared_ptr<myEngine::Mesh> cubeMesh = std::make_shared<myEngine::Mesh>();
-	cubeMesh->loadModel("../resources/cube.obj");
+	
+	//std::shared_ptr<myEngine::Mesh> cubeMesh = std::make_shared<myEngine::Mesh>();
+	//cubeMesh->loadModel("../resources/cube.obj");
+	std::vector <std::shared_ptr<myEngine::Mesh>> cubeMesh;
+	myEngine::Mesh::loadModel("../resources/cube.obj", &cubeMesh);
 
 	std::shared_ptr<myEngine::Texture> cubeTex = std::make_shared<myEngine::Texture>();
 	cubeTex->loadTexture("../resources/bricks.png");
@@ -59,7 +71,7 @@ int main()
 
 	//---------------------------------------assign enemy resources to game controller---------------------------------------
 
-	gamecontroller_controller->setEnemyMesh(cubeMesh);
+	gamecontroller_controller->setEnemyMesh(cubeMesh.at(0));
 	gamecontroller_controller->setEnemyTex(cubeTex);
 	gamecontroller_controller->setEnemySound(soundClip);
 
@@ -78,8 +90,10 @@ int main()
 
 	//---------------------------------------create world---------------------------------------
 
-	std::shared_ptr<myEngine::Mesh> squareMesh = std::make_shared<myEngine::Mesh>();
-	squareMesh->loadModel("../resources/square.obj");
+	//std::shared_ptr<myEngine::Mesh> squareMesh = std::make_shared<myEngine::Mesh>();
+	//squareMesh->loadModel("../resources/square.obj");
+	std::vector <std::shared_ptr<myEngine::Mesh>> squareMesh;
+	myEngine::Mesh::loadModel("../resources/square.obj", &squareMesh);
 
 	std::shared_ptr<myEngine::Texture> floorTex = std::make_shared<myEngine::Texture>();
 	floorTex->loadTexture("../resources/floor.png");
@@ -96,7 +110,7 @@ int main()
 			floor_transform->localAxisRotateEulerDegrees(90, 0.0f, 0.0f);
 
 			std::shared_ptr<myEngine::MeshRenderer> floor_renderer = floor->addComponent<myEngine::MeshRenderer>();
-			floor_renderer->setMesh(squareMesh);
+			floor_renderer->setMesh(squareMesh.at(0));
 			floor_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 			floor_renderer->setTexture(floorTex);
 		}
@@ -115,7 +129,7 @@ int main()
 		wall_transform->localAxisRotateEulerDegrees(0.0f, -90.0f, 0.0f);
 
 		std::shared_ptr<myEngine::MeshRenderer> wall_renderer = wall->addComponent<myEngine::MeshRenderer>();
-		wall_renderer->setMesh(squareMesh);
+		wall_renderer->setMesh(squareMesh.at(0));
 		wall_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 		wall_renderer->setTexture(wallTex);
 
@@ -127,7 +141,7 @@ int main()
 		wall2_transform->localAxisRotateEulerDegrees(0.0f, 90.0f, 0.0f);
 
 		std::shared_ptr<myEngine::MeshRenderer> wall2_renderer = wall2->addComponent<myEngine::MeshRenderer>();
-		wall2_renderer->setMesh(squareMesh);
+		wall2_renderer->setMesh(squareMesh.at(0));
 		wall2_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 		wall2_renderer->setTexture(wallTex);
 	}
@@ -142,7 +156,7 @@ int main()
 		wall_transform->localAxisRotateEulerDegrees(0.0f, 0.0f, 0.0f);
 
 		std::shared_ptr<myEngine::MeshRenderer> wall_renderer = wall->addComponent<myEngine::MeshRenderer>();
-		wall_renderer->setMesh(squareMesh);
+		wall_renderer->setMesh(squareMesh.at(0));
 		wall_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 		wall_renderer->setTexture(wallTex);
 
@@ -154,7 +168,7 @@ int main()
 		wall2_transform->localAxisRotateEulerDegrees(0.0f, -180.0f, 0.0f);
 
 		std::shared_ptr<myEngine::MeshRenderer> wall2_renderer = wall2->addComponent<myEngine::MeshRenderer>();
-		wall2_renderer->setMesh(squareMesh);
+		wall2_renderer->setMesh(squareMesh.at(0));
 		wall2_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 		wall2_renderer->setTexture(wallTex);
 	}

@@ -17,18 +17,22 @@ namespace myEngine
 		//tell OpenGL which shader program to use
 		glUseProgram(m_shaderProg->getId());
 
-		//bind the VAO
-		glBindVertexArray(m_mesh->getModelVAO()->getId());
-
 		//bind the texure
 		m_texture->bindTexture();
 
-		//draw the vertices in the VAO
-		glDrawArrays(GL_TRIANGLES, 0, m_mesh->getVertexcount());
+		for (size_t i = 0; i < m_meshes.size(); i++)
+		{
+			//bind the VAO
+			glBindVertexArray(m_meshes.at(i)->getModelVAO()->getId());
+
+			//draw the vertices in the VAO
+			glDrawArrays(GL_TRIANGLES, 0, m_meshes.at(i)->getVertexcount());
+
+			glBindVertexArray(0);
+		}
 
 		//reset the state
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
 		glUseProgram(0);
 	}
 
@@ -54,8 +58,22 @@ namespace myEngine
 
 	void MeshRenderer::setMesh(std::shared_ptr<Mesh> _mesh)
 	{
-		m_mesh = _mesh;
+		//m_mesh = _mesh;
+
+		m_meshes.clear();
+
+		m_meshes.push_back(_mesh);
 	}
+	void MeshRenderer::setMesh(std::vector<std::shared_ptr<Mesh>> *_meshes)
+	{
+		m_meshes.clear();
+
+		for (size_t i = 0; i < _meshes->size(); i++)
+		{
+			m_meshes.push_back(_meshes->at(i));
+		}
+	}
+
 	void MeshRenderer::setTexture(std::shared_ptr<Texture> _texture)
 	{
 		m_texture = _texture;

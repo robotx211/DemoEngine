@@ -30,11 +30,11 @@ namespace myEngine
 	};
 
 	/**
-	*	Stores the data of the 3 vertices which make up the face of a mesh
+	*	Stores the data of the vertices which make up the face of a mesh
 	*/
 	struct Face
 	{
-		VertexData m_verticesData[3];
+		std::vector<VertexData> m_verticesData;
 	};
 
 	/**
@@ -68,8 +68,14 @@ namespace myEngine
 		Mesh();
 		Mesh(std::string _modelAddress);
 
-		void loadRect(glm::vec2 _size);
-		void loadModel(std::string _modelAddress); //load model data into m_vertices
+		void loadRect();
+		//load model data into m_vertices *NO LONGER WORKS*
+		void loadModel(std::string _modelAddress); 
+
+		/**
+		* Fills a vector of shared pointers to Meshes, with meshes loaded from an OBJ
+		*/
+		static void loadModel(std::string _modelAddress, std::vector<std::shared_ptr<Mesh>> *_meshList);
 
 		int getVertexcount();
 		std::shared_ptr<VertexArray> getModelVAO() { return m_VAO; }

@@ -1,3 +1,7 @@
+#define TINYOBJLOADER_IMPLEMENTATION
+#include <tinyobjloader/tiny_obj_loader.h>
+#include <vector>
+
 #include "Mesh.h"
 #include "Utilities.h"
 #include "enums.h"
@@ -14,7 +18,7 @@ namespace myEngine
 		loadModel(_modelAddress);
 	}
 
-	void Mesh::loadRect(glm::vec2 _size)
+	void Mesh::loadRect()
 	{
 		//doesn't actually need _size, that needs removing
 		//a rect is a set 1 by 1 square, which gets scaled by the transform/GUIRect component
@@ -258,6 +262,78 @@ namespace myEngine
 
 		upload();
 
+	}
+
+	void Mesh::loadModel(std::string _modelAddress, std::vector<std::shared_ptr<Mesh>> *_meshList)
+	{
+		_meshList->clear();
+
+		tinyobj::attrib_t attrib;
+		std::vector<tinyobj::shape_t> shapes;
+		std::vector<tinyobj::material_t> materials;
+
+		std::string err;
+		bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, _modelAddress.c_str());
+
+		if (!err.empty()) 
+		{
+			std::cout << "tinyOBJ Error: " << err << std::endl;
+		}
+
+		if (!ret) 
+		{
+			throw std::exception();
+		}
+
+		// Loop over shapes
+		for (size_t s = 0; s < shapes.size(); s++) {
+			//create new mesh
+			std::shared_ptr<Mesh> thisMesh = std::make_shared<Mesh>();
+
+			thisMesh->m_VAO = std::make_shared<VertexArray>();
+
+			thisMesh->m_posVBO = std::make_shared<VertexBuffer>();
+			thisMesh->m_texCoordsVBO = std::make_shared<VertexBuffer>();
+			thisMesh->m_normsVBO = std::make_shared<VertexBuffer>();
+
+			// Loop over faces(polygon)
+			size_t index_offset = 0;
+			for (size_t f = 0; f < shapes[s].mesh.num_face_vertices.size(); f++) {
+				int fv = shapes[s].mesh.num_face_vertices[f];
+
+				// Loop over vertices in the face.
+				for (size_t v = 0; v < fv; v++) {
+					// access to vertex
+					tinyobj::index_t idx = shapes[s].mesh.indices[index_offset + v];
+					tinyobj::real_t vx = attrib.vertices[3 * idx.vertex_index + 0];
+					tinyobj::real_t vy = attrib.vertices[3 * idx.vertex_index + 1];
+					tinyobj::real_t vz = attrib.vertices[3 * idx.vertex_index + 2];
+
+					tinyobj::real_t tx = attrib.texcoords[2 * idx.texcoord_index + 0];
+					tinyobj::real_t ty = attrib.texcoords[2 * idx.texcoord_index + 1];
+
+					tinyobj::real_t nx = attrib.normals[3 * idx.normal_index + 0];
+					tinyobj::real_t ny = attrib.normals[3 * idx.normal_index + 1];
+					tinyobj::real_t nz = attrib.normals[3 * idx.normal_index + 2];
+
+					thisMesh->m_posVBO->addVertex(glm::vec3(vx, vy, vz));
+					thisMesh->m_texCoordsVBO->addVertex(glm::vec2(tx, ty));
+					thisMesh->m_normsVBO->addVertex(glm::vec3(nx, ny, nz));
+				}
+				index_offset += fv;
+
+				// per-face material
+				shapes[s].mesh.material_ids[f];
+			}
+
+			thisMesh->m_VAO->addBuffer(enums::ShaderAttribute::in_Position, thisMesh->m_posVBO);
+			thisMesh->m_VAO->addBuffer(enums::ShaderAttribute::in_TexCoord, thisMesh->m_texCoordsVBO);
+			thisMesh->m_VAO->addBuffer(enums::ShaderAttribute::in_Normal, thisMesh->m_normsVBO);
+
+			thisMesh->upload();
+
+			_meshList->push_back(thisMesh);
+		}
 	}
 
 	void Mesh::upload()

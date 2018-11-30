@@ -30,6 +30,7 @@ namespace myEngine
 
 	private:
 		std::shared_ptr<Mesh> m_mesh;
+		std::vector<std::shared_ptr<Mesh>> m_meshes;
 
 		std::shared_ptr<Texture> m_texture;
 
@@ -47,6 +48,7 @@ namespace myEngine
 		void debug();
 
 		void setMesh(std::shared_ptr<Mesh> _mesh);
+		void setMesh(std::vector<std::shared_ptr<Mesh>> *_meshes);
 
 		void setTexture(std::shared_ptr<Texture> _texture);
 		void setTexture(std::shared_ptr<RenderTexture> _renderTex);

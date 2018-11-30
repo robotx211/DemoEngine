@@ -41,6 +41,7 @@ endif()
 add_library(myengine
 
   	contrib/stb_image/stb_image.cpp
+	contrib/tinyobjloader/tiny_obj_loader.h
 
   	src/myengine/Core.cpp
  	src/myengine/Entity.cpp

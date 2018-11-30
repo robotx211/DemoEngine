@@ -53,7 +53,7 @@ namespace myEngine
 		m_size = _size;
 
 		m_mesh = std::make_shared<Mesh>();
-		m_mesh->loadRect(_size);
+		m_mesh->loadRect();
 
 	}
 	void GUIRect::setRect(float _x, float _y, float _w, float _h)
