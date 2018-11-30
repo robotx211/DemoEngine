@@ -71,6 +71,7 @@ namespace myEngine {
 
 			update();
 
+			//if ESC pressed, quit
 			if (getKeyboard()->getKey(SDL_SCANCODE_ESCAPE))
 			{
 				running = false;
@@ -118,7 +119,6 @@ namespace myEngine {
 	void Core::display()
 	{
 
-		//set clear colour of _window
 		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
@@ -131,6 +131,7 @@ namespace myEngine {
 		}
 		else
 		{
+			//draw scene for each camera, if it has a render texture attached, bind it
 			for (size_t i = 0; i < camList->size(); i++)
 			{
 
@@ -164,7 +165,7 @@ namespace myEngine {
 
 	void Core::debug()
 	{
-		std::cout << "Entities: " << m_entities.size() << std::endl;
+		//std::cout << "Entities: " << m_entities.size() << std::endl;
 
 		for (size_t i = 0; i < m_entities.size(); i++)
 		{

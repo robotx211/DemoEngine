@@ -12,9 +12,14 @@
 
 namespace myEngine
 {
-
+	/**
+	* Loads a sound clip, stores the id to it
+	*/
 	struct SoundClip;
 
+	/**
+	* Creates and stores a SoundClip, Allows for the playing of the SoundClip
+	*/
 	class Sound
 	{
 	private:
@@ -32,6 +37,9 @@ namespace myEngine
 
 	};
 
+	/**
+	* Initialises and Stores the Sound device and context
+	*/
 	class SoundObject
 	{
 

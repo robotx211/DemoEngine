@@ -8,11 +8,13 @@
 
 namespace myEngine {
 
+	/**
+	*	Creates and stores an SDL Window
+	*/
 	class Window
 	{
 
 	private:
-	  //std::shared_ptr<SDL_Window> window;
 	  SDL_Window *m_window;
 
 	  std::string m_name;
@@ -29,7 +31,7 @@ namespace myEngine {
 			int getWidth() { return m_width; }
 			int getHeight() { return m_height; }
 
-			float getAspectRatio() { return (float)m_width / (float)m_height; }
+			float getAspectRatio() { return (float)m_width / (float)m_height; } ///< returns the aspect ratio of the window
 
 	};
 

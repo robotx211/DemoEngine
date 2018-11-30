@@ -20,6 +20,7 @@ namespace myEngine
 		//bind the VAO
 		glBindVertexArray(m_mesh->getModelVAO()->getId());
 
+		//bind the texure
 		m_texture->bindTexture();
 
 		//draw the vertices in the VAO

@@ -14,12 +14,13 @@ namespace myEngine {
 
   Entity::Entity(std::string _name)
   {
+		m_delete = false;
     m_name = _name;
   }
 
   Entity::~Entity()
   {
-	  std::cout << "Entity Destructor Called" << std::endl;
+	  //std::cout << "Entity Destructor Called" << std::endl;
   }
 
 
@@ -69,8 +70,8 @@ namespace myEngine {
 
   void Entity::debug()
   {
-    std::cout << "  " << m_name << std::endl;
-    std::cout << "  Components: " << m_components.size() << std::endl;
+    //std::cout << "  " << m_name << std::endl;
+    //std::cout << "  Components: " << m_components.size() << std::endl;
 
     for (size_t i = 0; i < m_components.size(); i++)
     {

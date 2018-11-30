@@ -58,7 +58,7 @@ namespace myEngine {
 
 	void Component::debug()
 	{
-		std::cout << "    Component Base Class" << std::endl;
+		//std::cout << "    Component Base Class" << std::endl;
 	}
 
 }

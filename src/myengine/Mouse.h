@@ -10,6 +10,10 @@ namespace myEngine
 
 	class Core;
 
+	/**
+	*	Grabs and Stores the State of the Mouse using SDL_GetMouseState
+	*	Calculates the delta position of the mouse
+	*/
 	class Mouse
 	{
 
@@ -20,7 +24,7 @@ namespace myEngine
 		Uint32 m_state;
 
 		bool m_started;
-		bool m_centreLocked;
+		bool m_centreLocked; ///< flag for whether the mouse should be locked to the center of the window
 
 		int m_xPos;
 		int m_xDelta;

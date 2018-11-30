@@ -13,6 +13,10 @@
 
 namespace myEngine
 {
+
+	/**
+	*	Component which draws a textured rectangle to the screen
+	*/
 	class GUIRect : public Component
 	{
 

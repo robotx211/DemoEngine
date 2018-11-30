@@ -56,7 +56,7 @@ void GameController::spawn()
 
 	spawnNewEnemy(m_spawnPositions.at(index));
 
-	std::cout << "Spawned Enemy! Count: " << m_enemies.size() << std::endl;
+	//std::cout << "Spawned Enemy! Count: " << m_enemies.size() << std::endl;
 
 }
 

@@ -15,6 +15,9 @@
 namespace myEngine
 {
 
+	/**
+	*	Stores the position, texture coordinate and normal of a vertex
+	*/
 	struct VertexData
 	{
 		bool m_posCheck = false;
@@ -26,11 +29,19 @@ namespace myEngine
 		glm::vec3 m_norm;
 	};
 
+	/**
+	*	Stores the data of the 3 vertices which make up the face of a mesh
+	*/
 	struct Face
 	{
 		VertexData m_verticesData[3];
 	};
 
+	/**
+	*	Loads model data from an OBJ file
+	*	Stores Vertex positions, Tex coordinates, and Normals and Mesh faces
+	* Creates and fills the VBOs and VAO with the Model data
+	*/
 	class Mesh
 	{
 

@@ -19,23 +19,25 @@
 namespace myEngine
 {
 
-	//https://learnopengl.com/Model-Loading/Mesh
 
-
-
+	/**
+	*	MeshRenderer Component
+	*	Contains pointers to a Mesh, a Texture and a ShaderProgram
+	*	Used to draw a Textured Mesh
+	*/
 	class MeshRenderer : public Component
 	{
 
 	private:
-		std::shared_ptr<Mesh> m_mesh; //meshes should be stored in a resources array (or something like that)
+		std::shared_ptr<Mesh> m_mesh;
 
 		std::shared_ptr<Texture> m_texture;
 
-		std::shared_ptr<ShaderProgram> m_shaderProg; //shader programs are stored in the mesh renderer
+		std::shared_ptr<ShaderProgram> m_shaderProg;
 
 	public:
 
-		void draw();
+		void draw(); ///< Draws the Mesh to the bound framebuffer
 
 		void awake();
 		void start();

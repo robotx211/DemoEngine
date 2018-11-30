@@ -10,6 +10,9 @@
 namespace myEngine
 {
 
+	/**
+	*	Component which performs collision checking for the Entity's collider against all other colliders in the scene, and stores pointers to the colliders
+	*/
 	class RigidBody : public Component
 	{
 

@@ -6,7 +6,9 @@
 
 namespace myEngine
 {
-
+	/**
+	*	Grabs and Stores the State of the Keyboard using SDL_GetKeyboardState
+	*/
 	class Keyboard
 	{
 

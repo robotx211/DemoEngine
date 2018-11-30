@@ -6,6 +6,9 @@
 namespace myEngine
 {
 
+	/**
+	*	Creates a Texture and Framebuffer, to be used as a renderTexture
+	*/
 	class RenderTexture : public Texture
 	{
 

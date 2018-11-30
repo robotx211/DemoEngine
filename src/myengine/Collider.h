@@ -10,6 +10,10 @@
 namespace myEngine
 {
 
+	/**
+	*	Base class for Colliders
+	*	Allows for collision between Colliders and a Ray
+	*/
 	class Collider : public Component
 	{
 	private:
@@ -25,6 +29,9 @@ namespace myEngine
 		virtual void display();
 	};
 
+	/**
+	*	Axis Aligned Bounding Box collider
+	*/
 	class BoxCollider : public Collider
 	{
 	private:
@@ -37,11 +44,11 @@ namespace myEngine
 		void setScale(float _x, float _y, float _z) { setScale(glm::vec3(_x, _y, _z)); }
 
 		bool collide(std::shared_ptr<Collider> _collider);
-		bool collide(std::shared_ptr<BoxCollider> _collider);
+		bool collide(std::shared_ptr<BoxCollider> _collider); ///< Uses AABB collision to check if the 2 colliders are colliding
 
-		bool rayCollide(glm::vec3 _o, glm::vec3 _d);
+		bool rayCollide(glm::vec3 _o, glm::vec3 _d);  ///< Uses Ray-Box Intersection to check if the ray collides with the Bounding Box
 
-		//might do later is time allows
+		//might do later if time allows
 		void display();
 		void draw();
 

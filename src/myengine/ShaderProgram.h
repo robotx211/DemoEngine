@@ -13,19 +13,20 @@
 namespace myEngine
 {
 
+	/**
+	*	Stores the ID and Source of a shader
+	*/
 	struct Shader
 	{
 		GLuint m_id;
 		GLchar *m_source;
 	};
 
-	struct Sampler
-	{
-		GLuint m_id;
-		std::shared_ptr<Texture> m_source;
-	};
-
-	//stores shaders
+	/**
+	*	Loads and stores a vertex shader and a fragment shader
+	*	Responsible for linking them
+	* Sets the Model, View and Projection matrices
+	*/
 	class ShaderProgram
 	{
 

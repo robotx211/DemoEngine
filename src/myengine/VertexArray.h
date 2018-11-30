@@ -13,6 +13,9 @@
 namespace myEngine
 {
 
+	/**
+	*	Stores VertexBuffers and uploads them to a Vertex Array Object
+	*/
 	class VertexArray
 	{
 

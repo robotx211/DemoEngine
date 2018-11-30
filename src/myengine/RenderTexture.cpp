@@ -39,7 +39,7 @@ namespace myEngine
 		}
 		glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferId); //stays bound, as it needs texture and render buffer to be attached
 
-																												//create texture
+		//create texture
 		glGenTextures(1, &m_textureId);
 		if (!m_frameBufferId)
 		{

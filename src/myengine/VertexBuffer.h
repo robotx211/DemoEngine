@@ -10,6 +10,10 @@
 namespace myEngine
 {
 
+	/**
+	*	Stores per vertex data (Position, TexCoord, Normal etc.), can either be store vec2s, vec3s or vec4s
+	*	Responsible for uploading the data into a VertexBufferObject
+	*/
 	class VertexBuffer
 	{
 
@@ -22,9 +26,9 @@ namespace myEngine
 	public:
 		VertexBuffer();
 
-		void addVertex(glm::vec2 _value);
-		void addVertex(glm::vec3 _value);
-		void addVertex(glm::vec4 _value);
+		void addVertex(glm::vec2 _value); ///< Once a vec3 or vec4 has been added, will throw an exception
+		void addVertex(glm::vec3 _value); ///< Once a vec2 or vec4 has been added, will throw an exception
+		void addVertex(glm::vec4 _value); ///< Once a vec2 or vec3 has been added, will throw an exception
 
 		int getDataSize() { return m_data.size(); }
 		GLuint getId() { if (m_dirty == true) { upload(); } return m_id; }

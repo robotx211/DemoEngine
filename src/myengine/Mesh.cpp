@@ -53,14 +53,16 @@ namespace myEngine
 	void Mesh::loadModel(std::string _modelAddress)
 	{
 
-		//read each line
-		//split each line into a vector of strings by white space
-		//if line is useful, store it
-		  //if "v", store as vertex position
-		  //if "vt", store as texture coordinate
-		  //if "vn", store as normal
-		  //if "f" store as face
-			//format: "f 1/1/1 2/2/1 3/3/1" - first number is the position index, second is the tex coord index, third is the normal index
+		/**
+		* read each line
+		* split each line into a vector of strings by white space
+		* if line is useful, store it
+		* if "v", store as vertex position
+		* if "vt", store as texture coordinate
+		* if "vn", store as normal
+		* if "f" store as face
+		* format: "f 1/1/1 2/2/1 3/3/1" - first number is the position index, second is the tex coord index, third is the normal index
+		*/
 
 		std::ifstream objfile(_modelAddress);
 		std::string currLine;

@@ -60,6 +60,7 @@ namespace myEngine
 			m_yDelta = m_yPos - yBefore;
 		}
 
+		//resets the mouse position if needed
 		if (m_centreLocked == true)
 		{
 			m_xPos = m_core.lock()->getWindowObject()->getWidth() / 2;

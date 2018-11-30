@@ -14,7 +14,7 @@ namespace myEngine {
 			m_width, m_height,
 			SDL_WINDOW_OPENGL);
 
-		std::cout << "Window Awake" << std::endl;
+		//std::cout << "Window Awake" << std::endl;
 	}
 
     Window::~Window()

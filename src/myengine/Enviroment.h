@@ -7,6 +7,10 @@
 namespace myEngine
 {
 
+	/**
+	*	Enviroment Class
+	*	Uses SDL_GetPerformanceCounter to calculate delta time
+	*/
 	class Enviroment
 	{
 
@@ -21,7 +25,7 @@ namespace myEngine
 
 		int m_dTStoredCap = 30;
 
-		std::deque<double> m_dTStored;
+		std::deque<double> m_dTStored; ///< Deque of previous delta times, used to calculate an average FPS
 		double m_FPS;
 
 	public:
@@ -33,7 +37,7 @@ namespace myEngine
 
 		void update();
 		void calcdT();
-		void calcFPS();
+		void calcFPS(); ///< Calculates average FPS based on previous delta times
 
 		//returns delta time in milliseconds
 		double getDeltaTime() { return m_deltaTime; }

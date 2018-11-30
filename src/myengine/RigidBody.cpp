@@ -47,7 +47,7 @@ namespace myEngine
 
 		if (m_colliding == true)
 		{
-			std::cout << "Colliding: " << m_colliding << std::endl;
+			//std::cout << "Colliding: " << m_colliding << std::endl;
 		}
 	}
 

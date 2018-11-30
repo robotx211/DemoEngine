@@ -8,6 +8,9 @@
 namespace myEngine
 {
 
+	/**
+	*	Loads, uploads and stores a texture
+	*/
 	class Texture
 	{
 

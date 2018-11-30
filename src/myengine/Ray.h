@@ -11,6 +11,9 @@
 namespace myEngine
 {
 
+	/**
+	*	Performs ray collider checks against all colliders in the scene, stores pointers to the colliders
+	*/
 	class Ray
 	{
 
