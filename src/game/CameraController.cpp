@@ -72,7 +72,7 @@ void CameraController::update()
 	m_yaw = glm::mod(m_yaw, 360.0f);
 
 	getTransform()->worldAxisRotateEulerDegrees(0.0f, yaw, 0.0f);
-	//getTransform()->localAxisRotateEulerDegrees(pitch, 0.0f, 0.0f); //removing this makes it look left and right only
+	getTransform()->localAxisRotateEulerDegrees(pitch, 0.0f, 0.0f); //removing this makes it look left and right only
 
 	float forwardMovement = 0.0f;
 	float strafeMovement = 0.0f;
@@ -97,33 +97,27 @@ void CameraController::update()
 
 	glm::vec3 moveVec = (  glm::normalize(getTransform()->getForward()) * forwardMovement * m_movementSpeed) + ( glm::normalize(getTransform()->getLeft()) * strafeMovement * m_movementSpeed);
 
-	getTransform()->translate(moveVec * glm::vec3(1, 0, 1));
+	getTransform()->translate(moveVec);
 
-	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE))
-	{
-		//system("cls");
+	//if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE))
+	//{
+	//	m_ray.setOrigin(getTransform()->getLocalPosition());
+	//	m_ray.setDirection(getTransform()->getForward());
+	//
+	//	if (m_ray.rayCast() == true)
+	//	{
+	//		std::vector < std::shared_ptr<myEngine::Collider>> collisions = m_ray.getCollisions();
 
-		//std::cout << "Origin: " << glm::to_string(getTransform()->getLocalPosition()) << "\n Forward: " << glm::to_string(getTransform()->getForward()) << std::endl;
-
-		m_ray.setOrigin(getTransform()->getLocalPosition());
-		m_ray.setDirection(getTransform()->getForward());
-	
-		if (m_ray.rayCast() == true)
-		{
-			//std::cout << "RayCast Hit" << std::endl;
-
-			std::vector < std::shared_ptr<myEngine::Collider>> collisions = m_ray.getCollisions();
-
-			for (size_t i = 0; i < collisions.size(); i++)
-			{
-				if (collisions.at(i)->getEntity()->getName() == "enemy")
-				{
-					collisions.at(i)->getEntity()->markForDeletion();
-					m_enemiesKilled++;
-				}
-			}
-		}
-	}
+	//		for (size_t i = 0; i < collisions.size(); i++)
+	//		{
+	//			if (collisions.at(i)->getEntity()->getName() == "enemy")
+	//			{
+	//				collisions.at(i)->getEntity()->markForDeletion();
+	//				m_enemiesKilled++;
+	//			}
+	//		}
+	//	}
+	//}
 
 }
 void CameraController::lateUpdate()
@@ -141,7 +135,7 @@ void CameraController::lateUpdate()
 		{
 			if (rb->getCollisions().at(i)->getEntity()->getName() == "enemy")
 			{
-				m_gameController.lock()->reset();
+				//m_gameController.lock()->reset();
 			}
 		}
 	}

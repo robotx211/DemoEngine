@@ -31,7 +31,7 @@ int main()
 
 	std::shared_ptr<myEngine::Transform> maincamera_transform = maincamera->addComponent<myEngine::Transform>();
 
-	maincamera_transform->translate(0.0f, 0.0f, 0.0f);
+	maincamera_transform->translate(0.0f, 0.0f, 10.0f);
 
 	std::shared_ptr<myEngine::Camera> maincamera_camera = maincamera->addComponent<myEngine::Camera>();
 
@@ -48,45 +48,65 @@ int main()
 
 	//---------------------------------------create game controller---------------------------------------
 
-	std::shared_ptr<myEngine::Entity> gamecontroller = core->addEntity();
+	//std::shared_ptr<myEngine::Entity> gamecontroller = core->addEntity();
 
-	std::shared_ptr<GameController> gamecontroller_controller = gamecontroller->addComponent<GameController>();
+	//std::shared_ptr<GameController> gamecontroller_controller = gamecontroller->addComponent<GameController>();
 
-	gamecontroller_controller->setPlayer(maincamera_controller);
-	maincamera_controller->setGameController(gamecontroller_controller);
+	//gamecontroller_controller->setPlayer(maincamera_controller);
+	//maincamera_controller->setGameController(gamecontroller_controller);
 
-	//---------------------------------------create enemy resources---------------------------------------
+	//---------------------------------------create cube resources---------------------------------------
 
-	
-	//std::shared_ptr<myEngine::Mesh> cubeMesh = std::make_shared<myEngine::Mesh>();
-	//cubeMesh->loadModel("../resources/cube.obj");
 	std::vector <std::shared_ptr<myEngine::Mesh>> cubeMesh;
 	myEngine::Mesh::loadModel("../resources/cube.obj", &cubeMesh);
+
+	glm::vec4 cubeMeshSize = myEngine::Mesh::getVertexPositionRangeFromMeshes(&cubeMesh);
 
 	std::shared_ptr<myEngine::Texture> cubeTex = std::make_shared<myEngine::Texture>();
 	cubeTex->loadTexture("../resources/bricks.png");
 
-	std::shared_ptr<myEngine::Sound> soundClip = std::make_shared<myEngine::Sound>();
-	soundClip->loadSoundClip("../resources/dixie_horn.ogg");
+	//---------------------------------------spawn cube---------------------------------------
 
-	//---------------------------------------assign enemy resources to game controller---------------------------------------
+	std::shared_ptr<myEngine::Entity> newcube = core->addEntity();
+	newcube->setName("enemy");
 
-	gamecontroller_controller->setEnemyMesh(cubeMesh.at(0));
-	gamecontroller_controller->setEnemyTex(cubeTex);
-	gamecontroller_controller->setEnemySound(soundClip);
+	std::shared_ptr<myEngine::Transform> newcube_transform = newcube->addComponent<myEngine::Transform>();
+	newcube_transform->scale(1.0f, 1.0f, 1.0f);
+	newcube_transform->translate(0.5f, 0.0f, 0.0f);
 
-	gamecontroller_controller->addSpawnPosition(glm::vec3(0.0f, 0.0f, 30.0f));
-	gamecontroller_controller->addSpawnPosition(glm::vec3(0.0f, 0.0f, -30.0f));
-	gamecontroller_controller->addSpawnPosition(glm::vec3(30.0f, 0.0f, 0.0f));
-	gamecontroller_controller->addSpawnPosition(glm::vec3(-30.0f, 0.0f, 0.0f));
+	std::shared_ptr<myEngine::MeshRenderer> newcube_renderer = newcube->addComponent<myEngine::MeshRenderer>();
+	newcube_renderer->setMesh(&cubeMesh);
+	newcube_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
+	newcube_renderer->setTexture(cubeTex);
 
-	gamecontroller_controller->addSpawnPosition(glm::vec3(30.0f, 0.0f, 30.0f));
-	gamecontroller_controller->addSpawnPosition(glm::vec3(30.0f, 0.0f, -30.0f));
-	gamecontroller_controller->addSpawnPosition(glm::vec3(-30.0f, 0.0f, 30.0f));
-	gamecontroller_controller->addSpawnPosition(glm::vec3(-30.0f, 0.0f, -30.0f));
+	//---------------------------------------create curuthers resources---------------------------------------
+	
+	std::vector <std::shared_ptr<myEngine::Mesh>> catMesh;
+	myEngine::Mesh::loadModel("../resources/curuthers.obj", &catMesh);
 
-	gamecontroller_controller->setSpawnDelay(1.0f);
-	gamecontroller_controller->setMaxEnemyCount(10);
+	glm::vec4 catMeshSize = myEngine::Mesh::getVertexPositionRangeFromMeshes(&catMesh);
+
+	myEngine::Mesh::resetMeshCentre(&catMesh);
+
+	std::shared_ptr<myEngine::Texture> catTex = std::make_shared<myEngine::Texture>();
+	catTex->loadTexture("../resources/curuthers_diffuse.png");
+
+	//---------------------------------------spawn curuthers---------------------------------------
+
+	std::shared_ptr<myEngine::Entity> newcat = core->addEntity();
+	newcat->setName("cat");
+
+	std::shared_ptr<myEngine::Transform> newcat_transform = newcat->addComponent<myEngine::Transform>();
+
+	glm::vec3 requiredSize = glm::vec3(1.0f);
+
+	newcat_transform->scale( glm::vec3(requiredSize.y / catMeshSize.y) );
+	newcat_transform->translate(-0.5f, 0.0f, 0.0f);
+
+	std::shared_ptr<myEngine::MeshRenderer> newcat_renderer = newcat->addComponent<myEngine::MeshRenderer>();
+	newcat_renderer->setMesh(&catMesh);
+	newcat_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
+	newcat_renderer->setTexture(catTex);
 
 	//---------------------------------------create world---------------------------------------
 
@@ -98,86 +118,17 @@ int main()
 	std::shared_ptr<myEngine::Texture> floorTex = std::make_shared<myEngine::Texture>();
 	floorTex->loadTexture("../resources/floor.png");
 
-	for (int x = -3; x <= 3; x++)
-	{
-		for (int z = -3; z <= 3; z++)
-		{
-			std::shared_ptr<myEngine::Entity> floor = core->addEntity();
+	std::shared_ptr<myEngine::Entity> floor = core->addEntity();
 
-			std::shared_ptr<myEngine::Transform> floor_transform = floor->addComponent<myEngine::Transform>();
-			floor_transform->translate(10.0f * x, 1.0f, 10.0f * z);
-			floor_transform->scale(10.0f, 10.0f, 0.0f);
-			floor_transform->localAxisRotateEulerDegrees(90, 0.0f, 0.0f);
+	std::shared_ptr<myEngine::Transform> floor_transform = floor->addComponent<myEngine::Transform>();
+	floor_transform->translate(0.0f, 1.0f, 0.0f);
+	floor_transform->scale(10.0f, 10.0f, 0.0f);
+	floor_transform->localAxisRotateEulerDegrees(90, 0.0f, 0.0f);
 
-			std::shared_ptr<myEngine::MeshRenderer> floor_renderer = floor->addComponent<myEngine::MeshRenderer>();
-			floor_renderer->setMesh(squareMesh.at(0));
-			floor_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-			floor_renderer->setTexture(floorTex);
-		}
-	}
-
-	std::shared_ptr<myEngine::Texture> wallTex = std::make_shared<myEngine::Texture>();
-	wallTex->loadTexture("../resources/wall.png");
-
-	for (int z = -3; z <= 3; z++)
-	{
-		std::shared_ptr<myEngine::Entity> wall = core->addEntity();
-
-		std::shared_ptr<myEngine::Transform> wall_transform = wall->addComponent<myEngine::Transform>();
-		wall_transform->translate(35.0f, -1.0f, 10.0f * z);
-		wall_transform->scale(10.0f, 10.0f, 0.0f);
-		wall_transform->localAxisRotateEulerDegrees(0.0f, -90.0f, 0.0f);
-
-		std::shared_ptr<myEngine::MeshRenderer> wall_renderer = wall->addComponent<myEngine::MeshRenderer>();
-		wall_renderer->setMesh(squareMesh.at(0));
-		wall_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-		wall_renderer->setTexture(wallTex);
-
-		std::shared_ptr<myEngine::Entity> wall2 = core->addEntity();
-
-		std::shared_ptr<myEngine::Transform> wall2_transform = wall2->addComponent<myEngine::Transform>();
-		wall2_transform->translate(-35.0f, -1.0f, 10.0f * z);
-		wall2_transform->scale(10.0f, 10.0f, 0.0f);
-		wall2_transform->localAxisRotateEulerDegrees(0.0f, 90.0f, 0.0f);
-
-		std::shared_ptr<myEngine::MeshRenderer> wall2_renderer = wall2->addComponent<myEngine::MeshRenderer>();
-		wall2_renderer->setMesh(squareMesh.at(0));
-		wall2_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-		wall2_renderer->setTexture(wallTex);
-	}
-
-	for (int x = -3; x <= 3; x++)
-	{
-		std::shared_ptr<myEngine::Entity> wall = core->addEntity();
-
-		std::shared_ptr<myEngine::Transform> wall_transform = wall->addComponent<myEngine::Transform>();
-		wall_transform->translate(10.0f * x, -1.0f, 35.0f);
-		wall_transform->scale(10.0f, 10.0f, 0.0f);
-		wall_transform->localAxisRotateEulerDegrees(0.0f, 0.0f, 0.0f);
-
-		std::shared_ptr<myEngine::MeshRenderer> wall_renderer = wall->addComponent<myEngine::MeshRenderer>();
-		wall_renderer->setMesh(squareMesh.at(0));
-		wall_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-		wall_renderer->setTexture(wallTex);
-
-		std::shared_ptr<myEngine::Entity> wall2 = core->addEntity();
-
-		std::shared_ptr<myEngine::Transform> wall2_transform = wall2->addComponent<myEngine::Transform>();
-		wall2_transform->translate(10.0f * x, -1.0f, -35.0f);
-		wall2_transform->scale(10.0f, 10.0f, 0.0f);
-		wall2_transform->localAxisRotateEulerDegrees(0.0f, -180.0f, 0.0f);
-
-		std::shared_ptr<myEngine::MeshRenderer> wall2_renderer = wall2->addComponent<myEngine::MeshRenderer>();
-		wall2_renderer->setMesh(squareMesh.at(0));
-		wall2_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-		wall2_renderer->setTexture(wallTex);
-	}
-
-
-
-
-
-	//std::shared_ptr<myEngine::BoxCollider> newenemy_collider = newenemy->addComponent<myEngine::BoxCollider>();
+	std::shared_ptr<myEngine::MeshRenderer> floor_renderer = floor->addComponent<myEngine::MeshRenderer>();
+	floor_renderer->setMesh(squareMesh.at(0));
+	floor_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
+	floor_renderer->setTexture(floorTex);
 
 	//---------------------------------------create GUI---------------------------------------
 

@@ -80,6 +80,17 @@ namespace myEngine
 		int getVertexcount();
 		std::shared_ptr<VertexArray> getModelVAO() { return m_VAO; }
 
+		glm::vec4 getVertexPositionMax() { return m_posVBO->getMax(); }
+		glm::vec4 getVertexPositionMin() { return m_posVBO->getMin(); }
+		glm::vec4 getVertexPositionRange() { return m_posVBO->getRange(); }
+
+		static glm::vec4 getVertexPositionMaxFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList);
+		static glm::vec4 getVertexPositionMinFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList);
+		static glm::vec4 getVertexPositionRangeFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList);
+
+		void offsetVertexPositions(glm::vec4 _offset) { m_posVBO->offset(_offset); }
+		static void resetMeshCentre(std::vector<std::shared_ptr<Mesh>> *_meshList);
+
 		void upload();
 
 	};

@@ -29,7 +29,7 @@ namespace myEngine
 	{
 
 	private:
-		std::shared_ptr<Mesh> m_mesh;
+
 		std::vector<std::shared_ptr<Mesh>> m_meshes;
 
 		std::shared_ptr<Texture> m_texture;

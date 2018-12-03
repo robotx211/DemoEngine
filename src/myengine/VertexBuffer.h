@@ -37,6 +37,13 @@ namespace myEngine
 
 		void upload();
 
+		//mostly used just for vertex position buffer
+		glm::vec4 getMax();
+		glm::vec4 getMin();
+		glm::vec4 getRange() { return getMax() - getMin(); };
+
+		void offset(glm::vec4 _offset);
+
 	};
 
 }

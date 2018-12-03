@@ -273,7 +273,7 @@ namespace myEngine
 		std::vector<tinyobj::material_t> materials;
 
 		std::string err;
-		bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, _modelAddress.c_str());
+		bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, _modelAddress.c_str(), "../resources", true);
 
 		if (!err.empty()) 
 		{
@@ -309,15 +309,17 @@ namespace myEngine
 					tinyobj::real_t vy = attrib.vertices[3 * idx.vertex_index + 1];
 					tinyobj::real_t vz = attrib.vertices[3 * idx.vertex_index + 2];
 
+					thisMesh->m_posVBO->addVertex(glm::vec3(vx, vy, vz));
+
 					tinyobj::real_t tx = attrib.texcoords[2 * idx.texcoord_index + 0];
 					tinyobj::real_t ty = attrib.texcoords[2 * idx.texcoord_index + 1];
+
+					thisMesh->m_texCoordsVBO->addVertex(glm::vec2(tx, ty));
 
 					tinyobj::real_t nx = attrib.normals[3 * idx.normal_index + 0];
 					tinyobj::real_t ny = attrib.normals[3 * idx.normal_index + 1];
 					tinyobj::real_t nz = attrib.normals[3 * idx.normal_index + 2];
 
-					thisMesh->m_posVBO->addVertex(glm::vec3(vx, vy, vz));
-					thisMesh->m_texCoordsVBO->addVertex(glm::vec2(tx, ty));
 					thisMesh->m_normsVBO->addVertex(glm::vec3(nx, ny, nz));
 				}
 				index_offset += fv;
@@ -359,6 +361,94 @@ namespace myEngine
 		int vertexCount = m_posVBO->getDataSize() / m_posVBO->getComponents();
 
 		return vertexCount;
+	}
+
+	glm::vec4 Mesh::getVertexPositionMaxFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList)
+	{
+		glm::vec4 max = glm::vec4(-INFINITY);
+
+		glm::vec4 thisMax = glm::vec4(0);
+
+
+		for (int i = 0; i < _meshList->size(); i++)
+		{
+			thisMax = _meshList->at(i)->getVertexPositionMax();
+
+			if (thisMax.x > max.x)
+			{
+				max.x = thisMax.x;
+			}
+
+			if (thisMax.y > max.y)
+			{
+				max.y = thisMax.y;
+			}
+
+			if (thisMax.z > max.z)
+			{
+				max.z = thisMax.z;
+			}
+
+			if (thisMax.w > max.w)
+			{
+				max.w = thisMax.w;
+			}
+		}
+
+		return max;
+	}
+	glm::vec4 Mesh::getVertexPositionMinFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList)
+	{
+		glm::vec4 min = glm::vec4(INFINITY);
+
+		glm::vec4 thisMin = glm::vec4(0);
+
+
+		for (int i = 0; i < _meshList->size(); i++)
+		{
+			thisMin = _meshList->at(i)->getVertexPositionMin();
+
+			if (thisMin.x < min.x)
+			{
+				min.x = thisMin.x;
+			}
+
+			if (thisMin.y < min.y)
+			{
+				min.y = thisMin.y;
+			}
+
+			if (thisMin.z < min.z)
+			{
+				min.z = thisMin.z;
+			}
+
+			if (thisMin.w < min.w)
+			{
+				min.w = thisMin.w;
+			}
+		}
+
+		return min;
+	}
+	glm::vec4 Mesh::getVertexPositionRangeFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList)
+	{
+		glm::vec4 rtnVec = getVertexPositionMaxFromMeshes(_meshList) - getVertexPositionMinFromMeshes(_meshList);
+		return rtnVec;
+	}
+
+	void Mesh::resetMeshCentre(std::vector<std::shared_ptr<Mesh>> *_meshList)
+	{
+		glm::vec4 currentCentre = getVertexPositionMaxFromMeshes(_meshList) - (getVertexPositionRangeFromMeshes(_meshList) / 2.0f);
+
+		glm::vec4 offset = currentCentre * -1.0f;
+
+		for (size_t i = 0; i < _meshList->size(); i++)
+		{
+			_meshList->at(i)->offsetVertexPositions(offset);
+
+			_meshList->at(i)->upload();
+		}
 	}
 
 

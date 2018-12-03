@@ -22,6 +22,8 @@ namespace myEngine
 		int height = 0;
 		int channels = 0;
 
+		stbi_set_flip_vertically_on_load(true);
+
 		unsigned char *data = stbi_load(_path.c_str(), &width, &height, &channels, 4);
 		//path, width, height, num of channels, desired num of channels
 		//does desired channels add an empty alpha if one is not included?

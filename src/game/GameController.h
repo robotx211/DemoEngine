@@ -26,7 +26,7 @@ private:
 	std::vector<glm::vec3> m_spawnPositions;
 
 	//enemy spawning data
-	std::shared_ptr<myEngine::Mesh> m_enemyMesh;
+	std::vector<std::shared_ptr<myEngine::Mesh>> m_enemyMesh;
 	std::shared_ptr<myEngine::Texture> m_enemyTex;
 	std::shared_ptr<myEngine::Sound> m_enemySound;
 
@@ -53,7 +53,7 @@ public:
 	void setSpawnPositions(std::vector<glm::vec3> _spawnPositions) { m_spawnPositions = _spawnPositions; }
 	void clearSpawnPositions() { m_spawnPositions.clear(); }
 
-	void setEnemyMesh(std::shared_ptr<myEngine::Mesh> _mesh) { m_enemyMesh = _mesh; }
+	void setEnemyMesh(std::vector<std::shared_ptr<myEngine::Mesh>> _mesh) { m_enemyMesh = _mesh; }
 	void setEnemyTex(std::shared_ptr<myEngine::Texture> _tex) { m_enemyTex = _tex; }
 	void setEnemySound(std::shared_ptr<myEngine::Sound> _sound) { m_enemySound = _sound; }
 
