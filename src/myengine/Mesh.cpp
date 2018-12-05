@@ -436,20 +436,25 @@ namespace myEngine
 		glm::vec4 rtnVec = getVertexPositionMaxFromMeshes(_meshList) - getVertexPositionMinFromMeshes(_meshList);
 		return rtnVec;
 	}
-
-	void Mesh::resetMeshCentre(std::vector<std::shared_ptr<Mesh>> *_meshList)
+	glm::vec4 Mesh::getCentreFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList)
 	{
-		glm::vec4 currentCentre = getVertexPositionMaxFromMeshes(_meshList) - (getVertexPositionRangeFromMeshes(_meshList) / 2.0f);
-
-		glm::vec4 offset = currentCentre * -1.0f;
-
-		for (size_t i = 0; i < _meshList->size(); i++)
-		{
-			_meshList->at(i)->offsetVertexPositions(offset);
-
-			_meshList->at(i)->upload();
-		}
+		glm::vec4 rtnVec = getVertexPositionMaxFromMeshes(_meshList) - (getVertexPositionRangeFromMeshes(_meshList) / 2.0f);
+		return rtnVec;
 	}
+
+	//void Mesh::resetMeshCentre(std::vector<std::shared_ptr<Mesh>> *_meshList)
+	//{
+	//	glm::vec4 currentCentre = getVertexPositionMaxFromMeshes(_meshList) - (getVertexPositionRangeFromMeshes(_meshList) / 2.0f);
+
+	//	glm::vec4 offset = currentCentre * -1.0f;
+
+	//	for (size_t i = 0; i < _meshList->size(); i++)
+	//	{
+	//		_meshList->at(i)->offsetVertexPositions(offset);
+
+	//		_meshList->at(i)->upload();
+	//	}
+	//}
 
 
 }

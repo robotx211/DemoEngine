@@ -122,23 +122,23 @@ void CameraController::update()
 }
 void CameraController::lateUpdate()
 {
-	std::shared_ptr<myEngine::RigidBody> rb = getEntity()->getComponent <myEngine::RigidBody>();
+	//std::shared_ptr<myEngine::RigidBody> rb = getEntity()->getComponent <myEngine::RigidBody>();
 
-	if (rb == NULL)
-	{
-		return;
-	}
+	//if (rb == NULL)
+	//{
+	//	return;
+	//}
 
-	if (rb->isColliding() == true)
-	{
-		for (size_t i = 0; i < rb->getCollisions().size(); i++)
-		{
-			if (rb->getCollisions().at(i)->getEntity()->getName() == "enemy")
-			{
-				//m_gameController.lock()->reset();
-			}
-		}
-	}
+	//if (rb->isColliding() == true)
+	//{
+	//	for (size_t i = 0; i < rb->getCollisions().size(); i++)
+	//	{
+	//		if (rb->getCollisions().at(i)->getEntity()->getName() == "enemy")
+	//		{
+	//			//m_gameController.lock()->reset();
+	//		}
+	//	}
+	//}
 }
 
 

@@ -121,6 +121,9 @@ namespace myEngine {
 
 		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
 		std::vector<std::shared_ptr<Camera>> *camList = new std::vector<std::shared_ptr<Camera>>();
 		getComponents<Camera>(camList);
@@ -149,6 +152,40 @@ namespace myEngine {
 				glViewport(0, 0, m_windowObject->getWidth(), m_windowObject->getHeight());
 			}
 		}
+
+		glDisable(GL_BLEND);
+
+		//if (m_screenTex != nullptr)
+		//{
+		//	if (m_screenRect == nullptr)
+		//	{
+		//		m_screenRect = std::make_shared<Mesh>();
+		//		m_screenRect->loadRect();
+		//	}
+		//	if (m_screenShader == nullptr)
+		//	{
+		//		m_screenShader = std::make_shared<ShaderProgram>("../resources/textured.vert", "../resources/textured.frag");
+		//	}
+
+		//	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//	glViewport(0, 0, m_windowObject->getWidth(), m_windowObject->getHeight());
+
+		//	glm::vec3 translateVec = glm::vec3(m_screenTex->getSize(), 1.0f) * glm::vec3((float)1 / (float)(getWindowObject()->getWidth()) * 100.0f, (float)1 / (float)(getWindowObject()->getHeight()) * 100.0f, 0.0f);
+		//	glm::mat4 modelMat = glm::scale(glm::mat4(1.0f), translateVec);
+
+		//	glUseProgram(m_screenShader->getId());
+
+		//	glBindVertexArray(m_screenRect->getModelVAO()->getId());
+
+		//	m_screenTex->bindTexture();
+
+		//	glDrawArrays(GL_TRIANGLES, 0, m_screenRect->getVertexcount());
+
+		//	glBindTexture(GL_TEXTURE_2D, 0);
+		//	glBindVertexArray(0);
+		//	glUseProgram(0);
+
+		//}
 
 		GUI();
 

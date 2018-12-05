@@ -87,9 +87,10 @@ namespace myEngine
 		static glm::vec4 getVertexPositionMaxFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList);
 		static glm::vec4 getVertexPositionMinFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList);
 		static glm::vec4 getVertexPositionRangeFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList);
+		static glm::vec4 getCentreFromMeshes(std::vector<std::shared_ptr<Mesh>> *_meshList);
 
-		void offsetVertexPositions(glm::vec4 _offset) { m_posVBO->offset(_offset); }
-		static void resetMeshCentre(std::vector<std::shared_ptr<Mesh>> *_meshList);
+		//void offsetVertexPositions(glm::vec4 _offset) { m_posVBO->offset(_offset); }
+		//static void resetMeshCentre(std::vector<std::shared_ptr<Mesh>> *_meshList);
 
 		void upload();
 

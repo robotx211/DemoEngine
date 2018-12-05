@@ -8,12 +8,15 @@
 #include <SDL2/SDL.h>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
+#include <glm/ext.hpp>
 
 #include "Window.h"
 #include "Enviroment.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Sound.h"
+#include "RenderTexture.h"
+#include "Mesh.h"
 
 namespace myEngine {
 
@@ -40,6 +43,10 @@ namespace myEngine {
 
 		std::shared_ptr<Keyboard> m_keyboardInput;
 		std::shared_ptr<Mouse> m_mouseInput;
+
+		std::shared_ptr<Texture> m_screenTex;
+		std::shared_ptr<Mesh> m_screenRect;
+		std::shared_ptr<ShaderProgram> m_screenShader; //will be replaced with a post process
 
 		bool running;
 
@@ -88,6 +95,8 @@ namespace myEngine {
 
 		std::shared_ptr<Keyboard> getKeyboard() { return m_keyboardInput; }
 		std::shared_ptr<Mouse> getMouse() { return m_mouseInput; }
+
+		void setScreenTex(std::shared_ptr<Texture> _texture) { m_screenTex = _texture; }
 
 
 	};

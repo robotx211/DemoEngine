@@ -14,7 +14,7 @@ int main()
 
 
 	std::shared_ptr<myEngine::Core> core = myEngine::Core::init();
-	core->createNewWindowObject("main window", 1280, 720);
+	std::shared_ptr<myEngine::Window> window = core->createNewWindowObject("main window", 1280, 720);
 
 	//---------------------------------------TinyOBJ Loader testing---------------------------------------
 
@@ -24,36 +24,81 @@ int main()
 
 	//return 0;
 
-	//---------------------------------------create main camera / player---------------------------------------
+	//---------------------------------------create draw camera---------------------------------------
+
+	std::shared_ptr<myEngine::Entity> drawcamera = core->addEntity();
+	drawcamera->setName("draw cam");
+
+	std::shared_ptr<myEngine::Transform> drawcamera_transform = drawcamera->addComponent<myEngine::Transform>();
+
+	drawcamera_transform->translate(0.0f, 0.0f, 10.0f);
+
+	std::shared_ptr<myEngine::Camera> drawcamera_camera = drawcamera->addComponent<myEngine::Camera>();
+
+	drawcamera_camera->setDegFOV(45.0f);
+	drawcamera_camera->setAspectRatio(core->getWindowObject()->getAspectRatio());
+
+	std::shared_ptr<myEngine::RenderTexture> screen_rendertexture = std::make_shared<myEngine::RenderTexture>();
+
+	screen_rendertexture->setSize(window->getWidth(), window->getHeight());
+	screen_rendertexture->init();
+
+	drawcamera_camera->setRenderTexture(screen_rendertexture);
+
+	core->setScreenTex(screen_rendertexture);
+
+	std::shared_ptr<CameraController> drawcamera_controller = drawcamera->addComponent<CameraController>();
+	drawcamera_controller->setCameraSpeed(0.01f);
+	drawcamera_controller->setMovementSpeed(0.1f);
+
+	//---------------------------------------create render camera / player---------------------------------------
 
 	std::shared_ptr<myEngine::Entity> maincamera = core->addEntity();
 	maincamera->setName("player");
 
 	std::shared_ptr<myEngine::Transform> maincamera_transform = maincamera->addComponent<myEngine::Transform>();
 
-	maincamera_transform->translate(0.0f, 0.0f, 10.0f);
+	maincamera_transform->translate(20.0f, 0.0f, 10.0f);
 
 	std::shared_ptr<myEngine::Camera> maincamera_camera = maincamera->addComponent<myEngine::Camera>();
 
 	maincamera_camera->setDegFOV(45.0f);
 	maincamera_camera->setAspectRatio(core->getWindowObject()->getAspectRatio());
 
-	std::shared_ptr<CameraController> maincamera_controller = maincamera->addComponent<CameraController>();
-	maincamera_controller->setCameraSpeed(0.01f);
-	maincamera_controller->setMovementSpeed(0.1f);
+	//std::shared_ptr<CameraController> maincamera_controller = maincamera->addComponent<CameraController>();
+	//maincamera_controller->setCameraSpeed(0.01f);
+	//maincamera_controller->setMovementSpeed(0.1f);
 
-	maincamera->addComponent<myEngine::BoxCollider>();
+	//---------------------------------------create curuthers resources---------------------------------------
 
-	maincamera->addComponent<myEngine::RigidBody>();
+	std::vector <std::shared_ptr<myEngine::Mesh>> catMesh;
+	myEngine::Mesh::loadModel("../resources/curuthers.obj", &catMesh);
 
-	//---------------------------------------create game controller---------------------------------------
+	glm::vec4 catMeshSize = myEngine::Mesh::getVertexPositionRangeFromMeshes(&catMesh);
 
-	//std::shared_ptr<myEngine::Entity> gamecontroller = core->addEntity();
+	glm::vec4 catMeshCentre = myEngine::Mesh::getCentreFromMeshes(&catMesh);
 
-	//std::shared_ptr<GameController> gamecontroller_controller = gamecontroller->addComponent<GameController>();
+	std::shared_ptr<myEngine::Texture> catTex = std::make_shared<myEngine::Texture>();
+	catTex->loadTexture("../resources/curuthers_diffuse.png");
 
-	//gamecontroller_controller->setPlayer(maincamera_controller);
-	//maincamera_controller->setGameController(gamecontroller_controller);
+	//---------------------------------------spawn curuthers---------------------------------------
+
+	std::shared_ptr<myEngine::Entity> newcat = core->addEntity();
+	newcat->setName("cat");
+
+	std::shared_ptr<myEngine::Transform> newcat_transform = newcat->addComponent<myEngine::Transform>();
+
+	glm::vec3 requiredSize = glm::vec3(1.0f);
+
+	newcat_transform->scale(glm::vec3(requiredSize.y / catMeshSize.y));
+
+	newcat_transform->translate( glm::vec3(catMeshCentre) * glm::vec3(requiredSize.y / catMeshSize.y) * glm::vec3(0.0f, 1.0f, 0.0f) );
+	newcat_transform->translate(-0.5f, 0.0f, 0.0f);
+
+	std::shared_ptr<myEngine::MeshRenderer> newcat_renderer = newcat->addComponent<myEngine::MeshRenderer>();
+	newcat_renderer->setMesh(&catMesh);
+	newcat_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
+	newcat_renderer->setTexture(catTex);
 
 	//---------------------------------------create cube resources---------------------------------------
 
@@ -63,7 +108,7 @@ int main()
 	glm::vec4 cubeMeshSize = myEngine::Mesh::getVertexPositionRangeFromMeshes(&cubeMesh);
 
 	std::shared_ptr<myEngine::Texture> cubeTex = std::make_shared<myEngine::Texture>();
-	cubeTex->loadTexture("../resources/bricks.png");
+	cubeTex->loadTexture("../resources/transparent_bricks.png");
 
 	//---------------------------------------spawn cube---------------------------------------
 
@@ -79,34 +124,7 @@ int main()
 	newcube_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 	newcube_renderer->setTexture(cubeTex);
 
-	//---------------------------------------create curuthers resources---------------------------------------
-	
-	std::vector <std::shared_ptr<myEngine::Mesh>> catMesh;
-	myEngine::Mesh::loadModel("../resources/curuthers.obj", &catMesh);
 
-	glm::vec4 catMeshSize = myEngine::Mesh::getVertexPositionRangeFromMeshes(&catMesh);
-
-	myEngine::Mesh::resetMeshCentre(&catMesh);
-
-	std::shared_ptr<myEngine::Texture> catTex = std::make_shared<myEngine::Texture>();
-	catTex->loadTexture("../resources/curuthers_diffuse.png");
-
-	//---------------------------------------spawn curuthers---------------------------------------
-
-	std::shared_ptr<myEngine::Entity> newcat = core->addEntity();
-	newcat->setName("cat");
-
-	std::shared_ptr<myEngine::Transform> newcat_transform = newcat->addComponent<myEngine::Transform>();
-
-	glm::vec3 requiredSize = glm::vec3(1.0f);
-
-	newcat_transform->scale( glm::vec3(requiredSize.y / catMeshSize.y) );
-	newcat_transform->translate(-0.5f, 0.0f, 0.0f);
-
-	std::shared_ptr<myEngine::MeshRenderer> newcat_renderer = newcat->addComponent<myEngine::MeshRenderer>();
-	newcat_renderer->setMesh(&catMesh);
-	newcat_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-	newcat_renderer->setTexture(catTex);
 
 	//---------------------------------------create world---------------------------------------
 
@@ -123,12 +141,26 @@ int main()
 	std::shared_ptr<myEngine::Transform> floor_transform = floor->addComponent<myEngine::Transform>();
 	floor_transform->translate(0.0f, 1.0f, 0.0f);
 	floor_transform->scale(10.0f, 10.0f, 0.0f);
-	floor_transform->localAxisRotateEulerDegrees(90, 0.0f, 0.0f);
+	floor_transform->localAxisRotateEulerDegrees(90.0f, 0.0f, 0.0f);
 
 	std::shared_ptr<myEngine::MeshRenderer> floor_renderer = floor->addComponent<myEngine::MeshRenderer>();
 	floor_renderer->setMesh(squareMesh.at(0));
 	floor_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 	floor_renderer->setTexture(floorTex);
+
+	//create screen
+
+	std::shared_ptr<myEngine::Entity> screen = core->addEntity();
+
+	std::shared_ptr<myEngine::Transform> screen_transform = screen->addComponent<myEngine::Transform>();
+	screen_transform->translate(20.0f, 0.0f, 0.0f);
+	screen_transform->scale( glm::vec3(window->getWidth() / 100.0f, window->getHeight() / 100.0f, 0.0f) );
+	screen_transform->localAxisRotateEulerDegrees(180.0f, 0.0f, 0.0f);
+
+	std::shared_ptr<myEngine::MeshRenderer> screen_renderer = screen->addComponent<myEngine::MeshRenderer>();
+	screen_renderer->setMesh(squareMesh.at(0));
+	screen_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
+	screen_renderer->setTexture(screen_rendertexture);
 
 	//---------------------------------------create GUI---------------------------------------
 
