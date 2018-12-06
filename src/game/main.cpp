@@ -9,6 +9,8 @@
 #include <game/CameraController.h>
 #include <game/EnemyController.h>
 
+#include <game/PostProcess_Blur.h>
+
 int main()
 {
 
@@ -51,23 +53,11 @@ int main()
 	drawcamera_controller->setCameraSpeed(0.01f);
 	drawcamera_controller->setMovementSpeed(0.1f);
 
-	//---------------------------------------create render camera / player---------------------------------------
+	//---------------------------------------set post process---------------------------------------
 
-	std::shared_ptr<myEngine::Entity> maincamera = core->addEntity();
-	maincamera->setName("player");
+	std::shared_ptr<PostProcess_Blur> blurPostProcess = std::make_shared< PostProcess_Blur>();
 
-	std::shared_ptr<myEngine::Transform> maincamera_transform = maincamera->addComponent<myEngine::Transform>();
-
-	maincamera_transform->translate(20.0f, 0.0f, 10.0f);
-
-	std::shared_ptr<myEngine::Camera> maincamera_camera = maincamera->addComponent<myEngine::Camera>();
-
-	maincamera_camera->setDegFOV(45.0f);
-	maincamera_camera->setAspectRatio(core->getWindowObject()->getAspectRatio());
-
-	//std::shared_ptr<CameraController> maincamera_controller = maincamera->addComponent<CameraController>();
-	//maincamera_controller->setCameraSpeed(0.01f);
-	//maincamera_controller->setMovementSpeed(0.1f);
+	core->setPostProcess(blurPostProcess);
 
 	//---------------------------------------create curuthers resources---------------------------------------
 
@@ -148,31 +138,7 @@ int main()
 	floor_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 	floor_renderer->setTexture(floorTex);
 
-	//create screen
-
-	std::shared_ptr<myEngine::Entity> screen = core->addEntity();
-
-	std::shared_ptr<myEngine::Transform> screen_transform = screen->addComponent<myEngine::Transform>();
-	screen_transform->translate(20.0f, 0.0f, 0.0f);
-	screen_transform->scale( glm::vec3(window->getWidth() / 100.0f, window->getHeight() / 100.0f, 0.0f) );
-	screen_transform->localAxisRotateEulerDegrees(180.0f, 0.0f, 0.0f);
-
-	std::shared_ptr<myEngine::MeshRenderer> screen_renderer = screen->addComponent<myEngine::MeshRenderer>();
-	screen_renderer->setMesh(squareMesh.at(0));
-	screen_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-	screen_renderer->setTexture(screen_rendertexture);
-
-	//---------------------------------------create GUI---------------------------------------
-
-	std::shared_ptr<myEngine::Texture> GUITex = std::make_shared<myEngine::Texture>();
-	GUITex->loadTexture("../resources/crosshair.png");
-
-	std::shared_ptr<myEngine::Entity> GUIcrosshair = core->addEntity();
-
-	std::shared_ptr<myEngine::GUIRect> GUIcrosshair_GUIRect = GUIcrosshair->addComponent<myEngine::GUIRect>();
-	GUIcrosshair_GUIRect->setRect((float)core->getWindowObject()->getWidth() / 2, (float)core->getWindowObject()->getHeight() / 2, 1.0, 1.0);
-	GUIcrosshair_GUIRect->setTexture(GUITex);
-	GUIcrosshair_GUIRect->setShaders("../resources/GUI.vert", "../resources/textured.frag");
+	//---------------------------------------begin---------------------------------------
 
 	core->begin();
 

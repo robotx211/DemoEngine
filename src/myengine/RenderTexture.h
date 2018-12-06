@@ -32,6 +32,7 @@ namespace myEngine
 		GLuint getId() { return m_textureId; }
 
 		void bindFrameBuffer();
+
 	};
 
 }

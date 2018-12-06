@@ -87,6 +87,8 @@ add_executable(game
 	src/game/CameraController.cpp
 	src/game/EnemyController.cpp
 	src/game/GameController.cpp
+
+	src/game/PostProcess_Blur.cpp
 )
 
 target_link_libraries(game 

@@ -118,6 +118,7 @@ namespace myEngine {
 
 	void Core::display()
 	{
+		glEnable(GL_DEPTH_TEST);
 
 		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -155,39 +156,47 @@ namespace myEngine {
 
 		glDisable(GL_BLEND);
 
-		//if (m_screenTex != nullptr)
-		//{
-		//	if (m_screenRect == nullptr)
-		//	{
-		//		m_screenRect = std::make_shared<Mesh>();
-		//		m_screenRect->loadRect();
-		//	}
-		//	if (m_screenShader == nullptr)
-		//	{
-		//		m_screenShader = std::make_shared<ShaderProgram>("../resources/textured.vert", "../resources/textured.frag");
-		//	}
+		//apply post proccess
 
-		//	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		//	glViewport(0, 0, m_windowObject->getWidth(), m_windowObject->getHeight());
+		if (m_screenTex != nullptr)
+		{
+			m_postProcess->apply(m_screenTex);
 
-		//	glm::vec3 translateVec = glm::vec3(m_screenTex->getSize(), 1.0f) * glm::vec3((float)1 / (float)(getWindowObject()->getWidth()) * 100.0f, (float)1 / (float)(getWindowObject()->getHeight()) * 100.0f, 0.0f);
-		//	glm::mat4 modelMat = glm::scale(glm::mat4(1.0f), translateVec);
+			glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//	glUseProgram(m_screenShader->getId());
+			if (m_screenRect == nullptr)
+			{
+				m_screenRect = std::make_shared<Mesh>();
+				m_screenRect->loadRect();
+			}
+			if (m_screenShader == nullptr)
+			{
+				m_screenShader = std::make_shared<ShaderProgram>("../resources/GUI.vert", "../resources/textured.frag");
+			}
 
-		//	glBindVertexArray(m_screenRect->getModelVAO()->getId());
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glViewport(0, 0, m_windowObject->getWidth(), m_windowObject->getHeight());
 
-		//	m_screenTex->bindTexture();
+			glm::mat4 modelMat = glm::mat4(1.0f);
 
-		//	glDrawArrays(GL_TRIANGLES, 0, m_screenRect->getVertexcount());
+			m_screenShader->setModelMatrix(modelMat);
 
-		//	glBindTexture(GL_TEXTURE_2D, 0);
-		//	glBindVertexArray(0);
-		//	glUseProgram(0);
+			glUseProgram(m_screenShader->getId());
 
-		//}
+			glBindVertexArray(m_screenRect->getModelVAO()->getId());
 
-		GUI();
+			m_screenTex->bindTexture();
+
+			glDrawArrays(GL_TRIANGLES, 0, m_screenRect->getVertexcount());
+
+			glBindTexture(GL_TEXTURE_2D, 0);
+			glBindVertexArray(0);
+			glUseProgram(0);
+
+		}
+
+		//GUI();
 
 		SDL_GL_SwapWindow(m_windowObject->getWindow());
 	}

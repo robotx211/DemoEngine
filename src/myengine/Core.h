@@ -17,6 +17,7 @@
 #include "Sound.h"
 #include "RenderTexture.h"
 #include "Mesh.h"
+#include "PostProcess.h"
 
 namespace myEngine {
 
@@ -44,9 +45,11 @@ namespace myEngine {
 		std::shared_ptr<Keyboard> m_keyboardInput;
 		std::shared_ptr<Mouse> m_mouseInput;
 
-		std::shared_ptr<Texture> m_screenTex;
+		std::shared_ptr<RenderTexture> m_screenTex;
 		std::shared_ptr<Mesh> m_screenRect;
 		std::shared_ptr<ShaderProgram> m_screenShader; //will be replaced with a post process
+
+		std::shared_ptr<PostProcess> m_postProcess;
 
 		bool running;
 
@@ -96,9 +99,9 @@ namespace myEngine {
 		std::shared_ptr<Keyboard> getKeyboard() { return m_keyboardInput; }
 		std::shared_ptr<Mouse> getMouse() { return m_mouseInput; }
 
-		void setScreenTex(std::shared_ptr<Texture> _texture) { m_screenTex = _texture; }
+		void setScreenTex(std::shared_ptr<RenderTexture> _texture) { m_screenTex = _texture; }
 
-
+		void setPostProcess(std::shared_ptr<PostProcess> _postProcess) { m_postProcess = _postProcess; }
 	};
 
 }

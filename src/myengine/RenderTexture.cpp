@@ -22,7 +22,11 @@ namespace myEngine
 
 	RenderTexture::~RenderTexture()
 	{
+		glDeleteFramebuffers(1, &m_frameBufferId);
 
+		glDeleteTextures(1, &m_textureId);
+
+		glDeleteRenderbuffers(1, &m_renderBufferId);
 	}
 
 	void RenderTexture::init()

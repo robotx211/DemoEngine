@@ -26,6 +26,8 @@
 #include "RenderTexture.h"
 #include "MeshRenderer.h"
 
+#include "PostProcess.h"
+
 //Sound
 #include "Sound.h"
 

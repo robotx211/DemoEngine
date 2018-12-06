@@ -27,13 +27,13 @@ namespace myEngine
 
 		//(0,0) at centre
 
-		m_posVBO->addVertex(glm::vec3(-0.5f, -0.5f, 0.0f)); //bot left
-		m_posVBO->addVertex(glm::vec3(0.5f, 0.5f, 0.0f)); //top right
-		m_posVBO->addVertex(glm::vec3(-0.5f, 0.5f, 0.0f)); //top left
+		m_posVBO->addVertex(glm::vec3(-1.0f, -1.0f, 0.0f)); //bot left
+		m_posVBO->addVertex(glm::vec3(1.0f, 1.0f, 0.0f)); //top right
+		m_posVBO->addVertex(glm::vec3(-1.0f, 1.0f, 0.0f)); //top left
 
-		m_posVBO->addVertex(glm::vec3(-0.5f, -0.5f, 0.0f)); //bot left
-		m_posVBO->addVertex(glm::vec3(0.5f, -0.5f, 0.0f)); //bot right
-		m_posVBO->addVertex(glm::vec3(0.5f, 0.5f, 0.0f)); // top right
+		m_posVBO->addVertex(glm::vec3(-1.0f, -1.0f, 0.0f)); //bot left
+		m_posVBO->addVertex(glm::vec3(1.0f, -1.0f, 0.0f)); //bot right
+		m_posVBO->addVertex(glm::vec3(1.0f, 1.0f, 0.0f)); // top right
 
 		//flips image, idk why
 		m_texCoordsVBO = std::make_shared<VertexBuffer>();
