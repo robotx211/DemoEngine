@@ -55,7 +55,7 @@ int main()
 
 	//---------------------------------------set post process---------------------------------------
 
-	std::shared_ptr<PostProcess_Blur> blurPostProcess = std::make_shared< PostProcess_Blur>();
+	std::shared_ptr<PostProcess_Blur> blurPostProcess = std::make_shared< PostProcess_Blur>(window->getWidth(), window->getHeight());
 
 	core->setPostProcess(blurPostProcess);
 

@@ -58,7 +58,11 @@ namespace myEngine
 		void setViewMatrix(glm::mat4 _mat);
 		void setProjectionMatrix(glm::mat4 _mat);
 
-
+		void setUniform(std::string _uniform, glm::vec4 _value);
+		void setUniform(std::string _uniform, float _value);
+		void setUniform(std::string _uniform, int _value);
+		void setUniform(std::string _uniform, glm::mat4 _value);
+		void setUniform(std::string _uniform, std::shared_ptr<Texture> _texture);
 	};
 
 }

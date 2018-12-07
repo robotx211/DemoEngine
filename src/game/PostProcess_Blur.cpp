@@ -4,14 +4,25 @@
 
 PostProcess_Blur::PostProcess_Blur()
 {
-	createRenderTextures(2);
+	//should never be called
+	throw std::exception();
+}
+PostProcess_Blur::PostProcess_Blur(int _width, int _height)
+{
+	setRenderTextureSize(_width, _height);
 
+	m_nullShader = std::make_shared<myEngine::ShaderProgram>("../resources/nullpass.vert", "../resources/nullpass.frag");
+	m_lightShader = std::make_shared<myEngine::ShaderProgram>("../resources/lightkeypass.vert", "../resources/lightkeypass.frag");
 	m_blurShader = std::make_shared<myEngine::ShaderProgram>("../resources/blur.vert", "../resources/blur.frag");
+	m_mergeShader = std::make_shared<myEngine::ShaderProgram>("../resources/mergepass.vert", "../resources/mergepass.frag");
 
-	m_currentRenderTexIndex = 0;
-	m_currentRenderTex = m_workingRenderTextures.at(m_currentRenderTexIndex);
+	m_tmp1 = std::make_shared<myEngine::RenderTexture>();
+	m_tmp1->setSize(m_renderTextureSize);
+	m_tmp1->init();
 
-	PostProcess();
+	m_tmp2 = std::make_shared<myEngine::RenderTexture>();
+	m_tmp2->setSize(m_renderTextureSize);
+	m_tmp2->init();
 }
 PostProcess_Blur::~PostProcess_Blur()
 {
@@ -20,10 +31,32 @@ PostProcess_Blur::~PostProcess_Blur()
 
 void PostProcess_Blur::apply(std::shared_ptr<myEngine::RenderTexture> _targetTex)
 {
+	//draw light from target to tmp1
+	draw(_targetTex, m_tmp1, m_lightShader);
 
-	glDisable(GL_DEPTH_TEST);
+	//draw blur from tmp1 to tmp2
+	draw(m_tmp1, m_tmp2, m_blurShader);
+	//draw blur from tmp2 to tmp1
+	draw(m_tmp2, m_tmp1, m_blurShader);
+	//draw blur from tmp1 to tmp2
+	draw(m_tmp1, m_tmp2, m_blurShader);
+	//draw blur from tmp2 to tmp1
+	draw(m_tmp2, m_tmp1, m_blurShader);
+	//draw blur from tmp1 to tmp2
+	draw(m_tmp1, m_tmp2, m_blurShader);
+	//draw blur from tmp2 to tmp1
+	draw(m_tmp2, m_tmp1, m_blurShader);
+	//draw blur from tmp1 to tmp2
+	draw(m_tmp1, m_tmp2, m_blurShader);
+	//draw blur from tmp2 to tmp1
+	draw(m_tmp2, m_tmp1, m_blurShader);
 
-	draw(_targetTex, m_currentRenderTex, m_blurShader);
+	//draw merge from tmp1 and target to tmp 2
+	draw(_targetTex, m_tmp1, m_tmp2, m_mergeShader); //Scene -> TexB, Light -> TexA
+	//draw(m_tmp1, _targetTex, m_tmp2, m_mergeShader); //Scene -> TexA, Light -> TexB
 
-	draw(m_currentRenderTex, _targetTex, m_blurShader);
+	//draw(_targetTex, m_tmp2, m_nullShader);
+
+	//draw null from tmp2 to target 
+	draw(m_tmp2, _targetTex, m_nullShader);
 }
