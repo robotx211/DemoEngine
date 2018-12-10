@@ -28,7 +28,7 @@ namespace myEngine
 		return newRT;
 	}
 
-	void PostProcess::draw(	std::shared_ptr<RenderTexture> _subject, std::shared_ptr<RenderTexture> _target, std::shared_ptr<ShaderProgram> _shader)
+	void PostProcess::draw(	std::shared_ptr<Texture> _subject, std::shared_ptr<RenderTexture> _target, std::shared_ptr<ShaderProgram> _shader)
 	{
 		if (m_screenMesh == nullptr)
 		{
@@ -42,18 +42,11 @@ namespace myEngine
 
 		//glBindFramebuffer(GL_FRAMEBUFFER, _target->getId());
 
-		//glm::mat4 modelMat = glm::mat4(1.0f);
-
-		//_shader->setModelMatrix(modelMat);
-
 		glUseProgram(_shader->getId());
 
 		glBindVertexArray(m_screenMesh->getModelVAO()->getId());
 
-		//bind subject texture
-		//_subject->bindTexture();
-
-		//_shader->setUniform("in_Texture", 0);
+		_shader->setUniform("in_Texture", 0);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, _subject->getId());
@@ -67,7 +60,7 @@ namespace myEngine
 		glUseProgram(0);
 	}
 
-	void PostProcess::draw(std::shared_ptr<RenderTexture> _subject, std::shared_ptr<RenderTexture> _subject2, std::shared_ptr<RenderTexture> _target, std::shared_ptr<ShaderProgram> _shader)
+	void PostProcess::draw(std::shared_ptr<Texture> _subject, std::shared_ptr<Texture> _subject2, std::shared_ptr<RenderTexture> _target, std::shared_ptr<ShaderProgram> _shader)
 	{
 		if (m_screenMesh == nullptr)
 		{
@@ -79,22 +72,12 @@ namespace myEngine
 		//bind target frame buffer
 		_target->bindFrameBuffer();
 
-		//glBindFramebuffer(GL_FRAMEBUFFER, _target->getId());
-
-		//glm::mat4 modelMat = glm::mat4(1.0f);
-
-		//_shader->setModelMatrix(modelMat);
-
 		glUseProgram(_shader->getId());
 
 		glBindVertexArray(m_screenMesh->getModelVAO()->getId());
 
-		//bind subject texture
-		//_subject->bindTexture();
-		//_subject2->bindTexture();
-
-		//_shader->setUniform("in_TextureA", 0);
-		//_shader->setUniform("in_TextureB", 1);
+		_shader->setUniform("in_TextureA", 0);
+		_shader->setUniform("in_TextureB", 1);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, _subject->getId());

@@ -13,6 +13,8 @@
 #include <game/PostProcess_Blur.h>
 #include <game/PostProcess_Bloom.h>
 
+#include <game/PostProcess_B&W.h>
+
 int main()
 {
 
@@ -47,27 +49,23 @@ int main()
 	screen_rendertexture->setSize(window->getWidth(), window->getHeight());
 	screen_rendertexture->init();
 
-	std::cout << "RenderTex0: Screen" << std::endl;
+	std::cout << "RenderTex, id: 1, Name: Screen" << std::endl;
 
 	drawcamera_camera->setRenderTexture(screen_rendertexture);
 
 	core->setScreenTex(screen_rendertexture);
 
 	std::shared_ptr<CameraController> drawcamera_controller = drawcamera->addComponent<CameraController>();
-	drawcamera_controller->setCameraSpeed(0.1f);
-	drawcamera_controller->setMovementSpeed(0.01f);
+	drawcamera_controller->setCameraSpeed(1.0f);
+	drawcamera_controller->setMovementSpeed(0.1f);
 
 	//---------------------------------------set post process---------------------------------------
 
-	//std::shared_ptr<PostProcess_LightKey> lightKeyPostProcess = std::make_shared< PostProcess_LightKey>(window->getWidth(), window->getHeight());
-	//std::shared_ptr<PostProcess_Blur> blurPostProcess = std::make_shared< PostProcess_Blur>(window->getWidth(), window->getHeight());
+	std::shared_ptr<PostProcess_BandW> blackAndWhitePostProcess = std::make_shared< PostProcess_BandW>(window->getWidth(), window->getHeight());
 	std::shared_ptr<PostProcess_Bloom> bloomPostProcess = std::make_shared< PostProcess_Bloom>(window->getWidth(), window->getHeight());
 
-	//core->setPostProcess(blurPostProcess);
-
-	//core->addPostProcess(lightKeyPostProcess);
-	//core->addPostProcess(blurPostProcess);
 	core->addPostProcess(bloomPostProcess);
+	core->addPostProcess(blackAndWhitePostProcess);
 
 	//---------------------------------------create curuthers resources---------------------------------------
 

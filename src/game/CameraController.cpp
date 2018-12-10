@@ -112,15 +112,15 @@ void CameraController::update()
 		m_spaceDown = false;
 	}
 
-	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_M) && m_nextDown == false)
-	{
-		m_nextDown = true;
-		getCore()->useNextPostProcess();
-	}
-	else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_M) != true && m_nextDown == true)
-	{
-		m_nextDown = false;
-	}
+	//if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_M) && m_nextDown == false)
+	//{
+	//	m_nextDown = true;
+	//	getCore()->useNextPostProcess();
+	//}
+	//else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_M) != true && m_nextDown == true)
+	//{
+	//	m_nextDown = false;
+	//}
 
 }
 void CameraController::lateUpdate()

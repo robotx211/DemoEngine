@@ -39,12 +39,12 @@ namespace myEngine
 
 		std::shared_ptr<RenderTexture> createRenderTexture();
 
-		void draw(std::shared_ptr<RenderTexture> _subject, 
+		void draw(std::shared_ptr<Texture> _subject,
 							std::shared_ptr<RenderTexture> _target, 
 							std::shared_ptr<ShaderProgram> _shader); //subject is what is being drawn, target is what it's beong drawn to
 
-		void draw(std::shared_ptr<RenderTexture> _subject,
-							std::shared_ptr<RenderTexture> _subject2,
+		void draw(std::shared_ptr<Texture> _subject,
+							std::shared_ptr<Texture> _subject2,
 							std::shared_ptr<RenderTexture> _target,
 							std::shared_ptr<ShaderProgram> _shader);
 

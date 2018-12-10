@@ -8,6 +8,9 @@
 #include <fstream>
 #include <string>
 
+#include <memory>
+#include <vector>
+
 #include "Texture.h"
 
 namespace myEngine
@@ -62,7 +65,6 @@ namespace myEngine
 		void setUniform(std::string _uniform, float _value);
 		void setUniform(std::string _uniform, int _value);
 		void setUniform(std::string _uniform, glm::mat4 _value);
-		void setUniform(std::string _uniform, std::shared_ptr<Texture> _texture);
 	};
 
 }

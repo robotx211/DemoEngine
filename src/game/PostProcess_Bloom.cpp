@@ -19,27 +19,27 @@ PostProcess_Bloom::PostProcess_Bloom(int _width, int _height)
 	m_cleanCopy = std::make_shared<myEngine::RenderTexture>();
 	m_cleanCopy->setSize(m_renderTextureSize);
 	m_cleanCopy->init();
-	std::cout << "RenderTex1: CleanCopy" << std::endl;
+	std::cout << "RenderTex, id: 2, Name: CleanCopy" << std::endl;
 
 	m_lightKey = std::make_shared<myEngine::RenderTexture>();
 	m_lightKey->setSize(m_renderTextureSize);
 	m_lightKey->init();
-	std::cout << "RenderTex2: LightKey" << std::endl;
+	std::cout << "RenderTex, id: 3, Name: LightKey" << std::endl;
 
 	m_blur1 = std::make_shared<myEngine::RenderTexture>();
 	m_blur1->setSize(m_renderTextureSize);
 	m_blur1->init();
-	std::cout << "RenderTex3: Blur1" << std::endl;
+	std::cout << "RenderTex, id: 4, Name: Blur1" << std::endl;
 
 	m_blur2 = std::make_shared<myEngine::RenderTexture>();
 	m_blur2->setSize(m_renderTextureSize);
 	m_blur2->init();
-	std::cout << "RenderTex4: Blur2" << std::endl;
+	std::cout << "RenderTex, id: 5, Name: Blur2" << std::endl;
 
 	m_merge = std::make_shared<myEngine::RenderTexture>();
 	m_merge->setSize(m_renderTextureSize);
 	m_merge->init();
-	std::cout << "RenderTex5: Merge" << std::endl;
+	std::cout << "RenderTex, id: 6, Name: Merge" << std::endl;
 }
 PostProcess_Bloom::~PostProcess_Bloom()
 {

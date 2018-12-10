@@ -91,6 +91,8 @@ add_executable(game
 	src/game/PostProcess_Blur.cpp
 	src/game/PostProcess_Bloom.cpp
 	src/game/PostProcess_LightKey.cpp
+
+	src/game/PostProcess_B&W.cpp
 )
 
 target_link_libraries(game 

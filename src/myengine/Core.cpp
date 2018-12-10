@@ -157,15 +157,16 @@ namespace myEngine {
 			}
 		}
 
-		glDisable(GL_BLEND);
-
 		//apply post proccess
 
 		if (m_screenTex != nullptr)
 		{
 			if (m_usePostProcess) 
 			{
-				m_postProcesses.at(m_postProcessIndex)->apply(m_screenTex);
+				for (size_t i = 0; i < m_postProcesses.size(); i++)
+				{
+					m_postProcesses.at(i)->apply(m_screenTex);
+				}
 			}
 
 			glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
@@ -180,6 +181,8 @@ namespace myEngine {
 			{
 				m_screenShader = std::make_shared<ShaderProgram>("../resources/GUI.vert", "../resources/textured.frag");
 			}
+
+			m_screenShader->setUniform("in_Texture", 0);
 
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glViewport(0, 0, m_windowObject->getWidth(), m_windowObject->getHeight());
@@ -201,6 +204,8 @@ namespace myEngine {
 			glUseProgram(0);
 
 		}
+
+		glDisable(GL_BLEND);
 
 		//GUI();
 

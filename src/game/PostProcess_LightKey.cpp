@@ -13,16 +13,10 @@ PostProcess_LightKey::PostProcess_LightKey(int _width, int _height)
 
 	m_nullShader = std::make_shared<myEngine::ShaderProgram>("../resources/nullpass.vert", "../resources/nullpass.frag");
 	m_lightShader = std::make_shared<myEngine::ShaderProgram>("../resources/lightkeypass.vert", "../resources/lightkeypass.frag");
-	m_blurShader = std::make_shared<myEngine::ShaderProgram>("../resources/blur.vert", "../resources/blur.frag");
-	m_mergeShader = std::make_shared<myEngine::ShaderProgram>("../resources/mergepass.vert", "../resources/mergepass.frag");
 
 	m_tmp1 = std::make_shared<myEngine::RenderTexture>();
 	m_tmp1->setSize(m_renderTextureSize);
 	m_tmp1->init();
-
-	m_tmp2 = std::make_shared<myEngine::RenderTexture>();
-	m_tmp2->setSize(m_renderTextureSize);
-	m_tmp2->init();
 }
 PostProcess_LightKey::~PostProcess_LightKey()
 {

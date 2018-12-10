@@ -11,7 +11,6 @@ private:
 	std::shared_ptr<myEngine::ShaderProgram> m_nullShader;
 	std::shared_ptr<myEngine::ShaderProgram> m_lightShader;
 	std::shared_ptr<myEngine::ShaderProgram> m_blurShader;
-	std::shared_ptr<myEngine::ShaderProgram> m_mergeShader;
 
 	std::shared_ptr<myEngine::RenderTexture> m_tmp1;
 	std::shared_ptr<myEngine::RenderTexture> m_tmp2;

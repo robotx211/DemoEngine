@@ -14,7 +14,6 @@ PostProcess_Blur::PostProcess_Blur(int _width, int _height)
 	m_nullShader = std::make_shared<myEngine::ShaderProgram>("../resources/nullpass.vert", "../resources/nullpass.frag");
 	m_lightShader = std::make_shared<myEngine::ShaderProgram>("../resources/lightkeypass.vert", "../resources/lightkeypass.frag");
 	m_blurShader = std::make_shared<myEngine::ShaderProgram>("../resources/blur.vert", "../resources/blur.frag");
-	m_mergeShader = std::make_shared<myEngine::ShaderProgram>("../resources/mergepass.vert", "../resources/mergepass.frag");
 
 	m_tmp1 = std::make_shared<myEngine::RenderTexture>();
 	m_tmp1->setSize(m_renderTextureSize);
