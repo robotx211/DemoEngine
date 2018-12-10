@@ -1,13 +1,13 @@
-#include "PostProcess_Blur.h"
+#include "PostProcess_LightKey.h"
 
 #include <glm/glm.hpp>
 
-PostProcess_Blur::PostProcess_Blur()
+PostProcess_LightKey::PostProcess_LightKey()
 {
 	//should never be called
 	throw std::exception();
 }
-PostProcess_Blur::PostProcess_Blur(int _width, int _height)
+PostProcess_LightKey::PostProcess_LightKey(int _width, int _height)
 {
 	setRenderTextureSize(_width, _height);
 
@@ -24,34 +24,16 @@ PostProcess_Blur::PostProcess_Blur(int _width, int _height)
 	m_tmp2->setSize(m_renderTextureSize);
 	m_tmp2->init();
 }
-PostProcess_Blur::~PostProcess_Blur()
+PostProcess_LightKey::~PostProcess_LightKey()
 {
 
 }
 
-void PostProcess_Blur::apply(std::shared_ptr<myEngine::RenderTexture> _targetTex)
+void PostProcess_LightKey::apply(std::shared_ptr<myEngine::RenderTexture> _targetTex)
 {
 	//draw light from target to tmp1
 	draw(_targetTex, m_tmp1, m_lightShader);
 
-	//draw blur from tmp1 to tmp2
-	draw(m_tmp1, m_tmp2, m_blurShader);
-	//draw blur from tmp2 to tmp1
-	draw(m_tmp2, m_tmp1, m_blurShader);
-	//draw blur from tmp1 to tmp2
-	draw(m_tmp1, m_tmp2, m_blurShader);
-	//draw blur from tmp2 to tmp1
-	draw(m_tmp2, m_tmp1, m_blurShader);
-	//draw blur from tmp1 to tmp2
-	draw(m_tmp1, m_tmp2, m_blurShader);
-	//draw blur from tmp2 to tmp1
-	draw(m_tmp2, m_tmp1, m_blurShader);
-	//draw blur from tmp1 to tmp2
-	draw(m_tmp1, m_tmp2, m_blurShader);
-	//draw blur from tmp2 to tmp1
-	draw(m_tmp2, m_tmp1, m_blurShader);
-
 	draw(m_tmp1, _targetTex, m_nullShader);
 	return;
-
 }

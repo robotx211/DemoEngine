@@ -66,6 +66,9 @@ namespace myEngine {
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
 
+		m_usePostProcess = false;
+		m_postProcessIndex = 0;
+
 		while (running == true)
 		{
 
@@ -160,7 +163,10 @@ namespace myEngine {
 
 		if (m_screenTex != nullptr)
 		{
-			m_postProcess->apply(m_screenTex);
+			if (m_usePostProcess) 
+			{
+				m_postProcesses.at(m_postProcessIndex)->apply(m_screenTex);
+			}
 
 			glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

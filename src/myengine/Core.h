@@ -50,6 +50,9 @@ namespace myEngine {
 		std::shared_ptr<ShaderProgram> m_screenShader; //will be replaced with a post process
 
 		std::shared_ptr<PostProcess> m_postProcess;
+		std::vector<std::shared_ptr<PostProcess>> m_postProcesses;
+		int m_postProcessIndex;
+		bool m_usePostProcess;
 
 		bool running;
 
@@ -102,6 +105,13 @@ namespace myEngine {
 		void setScreenTex(std::shared_ptr<RenderTexture> _texture) { m_screenTex = _texture; }
 
 		void setPostProcess(std::shared_ptr<PostProcess> _postProcess) { m_postProcess = _postProcess; }
+		void togglePostProcess() { m_usePostProcess = !m_usePostProcess; }
+		void addPostProcess(std::shared_ptr<PostProcess> _postProcess) { m_postProcesses.push_back(_postProcess); }
+		void useNextPostProcess() 
+		{ 
+			m_postProcessIndex++; 
+			m_postProcessIndex = m_postProcessIndex % (int)m_postProcesses.size();
+		}
 	};
 
 }

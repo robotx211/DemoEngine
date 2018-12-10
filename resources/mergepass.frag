@@ -7,5 +7,8 @@ void main()
 {
   vec4 texA = texture2D(in_TextureA, ex_TexCoord);
   vec4 texB = texture2D(in_TextureB, ex_TexCoord);
-  gl_FragColor = texA + texB; // A * 0 + B * 1
+
+  texA += texB;
+
+  gl_FragColor = texA;
 }

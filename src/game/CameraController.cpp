@@ -21,6 +21,9 @@ CameraController::CameraController()
 	m_pitchMin = -90.0f;
 	m_pitchMax = 90.0f;
 
+	m_spaceDown = false;
+	m_nextDown = false;
+
 }
 CameraController::~CameraController()
 {
@@ -41,20 +44,20 @@ void CameraController::update()
 
 	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_UP))
 	{
-		pitch += 1.0f;
+		pitch += 1.0f * m_cameraSpeed;
 	}
 	else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_DOWN))
 	{
-		pitch -= 1.0f;
+		pitch -= 1.0f * m_cameraSpeed;
 	}
 
 	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_LEFT))
 	{
-		yaw -= 1.0f;
+		yaw -= 1.0f * m_cameraSpeed;
 	}
 	else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_RIGHT))
 	{
-		yaw += 1.0f;
+		yaw += 1.0f * m_cameraSpeed;
 	}
 
 	if (m_pitch + pitch > m_pitchMax)
@@ -99,25 +102,25 @@ void CameraController::update()
 
 	getTransform()->translate(moveVec);
 
-	//if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE))
-	//{
-	//	m_ray.setOrigin(getTransform()->getLocalPosition());
-	//	m_ray.setDirection(getTransform()->getForward());
-	//
-	//	if (m_ray.rayCast() == true)
-	//	{
-	//		std::vector < std::shared_ptr<myEngine::Collider>> collisions = m_ray.getCollisions();
+	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE) && m_spaceDown == false)
+	{
+		m_spaceDown = true;
+		getCore()->togglePostProcess();
+	}
+	else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE) != true && m_spaceDown == true)
+	{
+		m_spaceDown = false;
+	}
 
-	//		for (size_t i = 0; i < collisions.size(); i++)
-	//		{
-	//			if (collisions.at(i)->getEntity()->getName() == "enemy")
-	//			{
-	//				collisions.at(i)->getEntity()->markForDeletion();
-	//				m_enemiesKilled++;
-	//			}
-	//		}
-	//	}
-	//}
+	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_M) && m_nextDown == false)
+	{
+		m_nextDown = true;
+		getCore()->useNextPostProcess();
+	}
+	else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_M) != true && m_nextDown == true)
+	{
+		m_nextDown = false;
+	}
 
 }
 void CameraController::lateUpdate()

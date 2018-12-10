@@ -6,11 +6,11 @@ void main()
 {
   vec4 tex = texture2D(in_Texture, ex_TexCoord);
 
-  if(tex.x > 0.3 || tex.y > 0.3 || tex.z > 0.3)
+  if(tex.x > 0.6 || tex.y > 0.6 || tex.z > 0.6)
   {
+    tex = vec4(tex.x, tex.y, tex.z, 1);
     //tex = tex * vec4(1.2, 1.2, 1.2, 1);
     //tex = max(tex, vec4(1, 1, 1, 1));
-    tex = vec4(0.5, 0.5, 0.5, 1);
   }
   else
   {
