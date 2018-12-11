@@ -14,6 +14,7 @@
 #include <game/PostProcess_Bloom.h>
 
 #include <game/PostProcess_B&W.h>
+#include <game/PostProcess_Vignette.h>
 
 int main()
 {
@@ -61,11 +62,13 @@ int main()
 
 	//---------------------------------------set post process---------------------------------------
 
+	std::shared_ptr<PostProcess_Vignette> vignettePostProcess = std::make_shared< PostProcess_Vignette>(window->getWidth(), window->getHeight());
 	std::shared_ptr<PostProcess_BandW> blackAndWhitePostProcess = std::make_shared< PostProcess_BandW>(window->getWidth(), window->getHeight());
 	std::shared_ptr<PostProcess_Bloom> bloomPostProcess = std::make_shared< PostProcess_Bloom>(window->getWidth(), window->getHeight());
 
 	core->addPostProcess(bloomPostProcess);
 	core->addPostProcess(blackAndWhitePostProcess);
+	core->addPostProcess(vignettePostProcess);
 
 	//---------------------------------------create curuthers resources---------------------------------------
 

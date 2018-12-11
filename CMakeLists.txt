@@ -93,6 +93,8 @@ add_executable(game
 	src/game/PostProcess_LightKey.cpp
 
 	src/game/PostProcess_B&W.cpp
+
+	src/game/PostProcess_Vignette.cpp
 )
 
 target_link_libraries(game 
