@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Component.h"
 #include "Camera.h"
+#include "Light.h"
 
 namespace myEngine {
 
@@ -132,6 +133,9 @@ namespace myEngine {
 		std::vector<std::shared_ptr<Camera>> *camList = new std::vector<std::shared_ptr<Camera>>();
 		getComponents<Camera>(camList);
 
+		std::vector<std::shared_ptr<Light>> *lightList = new std::vector<std::shared_ptr<Light>>();
+		getComponents<Light>(&m_lightsList);
+
 		if (camList->size() == 0)
 		{
 			throw std::exception();
@@ -188,7 +192,8 @@ namespace myEngine {
 			glViewport(0, 0, m_windowObject->getWidth(), m_windowObject->getHeight());
 
 			glm::mat4 modelMat = glm::mat4(1.0f);
-
+			
+			glUseProgram(m_screenShader->getId());
 			m_screenShader->setModelMatrix(modelMat);
 
 			glUseProgram(m_screenShader->getId());
@@ -266,6 +271,13 @@ namespace myEngine {
 	std::shared_ptr<Camera> Core::getCurrentCamera()
 	{
 		return m_currentCamera;
+	}
+
+	std::vector<std::shared_ptr<Light>> Core::getCurrentLights()
+	{
+
+		return m_lightsList;
+
 	}
 
 }

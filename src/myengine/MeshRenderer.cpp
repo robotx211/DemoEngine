@@ -3,22 +3,29 @@
 #include "MeshRenderer.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Light.h"
 
 namespace myEngine
 {
 
 	void MeshRenderer::draw()
 	{
+		//tell OpenGL which shader program to use
+		glUseProgram(m_shaderProg->getId());
+
 		m_shaderProg->setModelMatrix(getTransform()->getTransformMat());
 		m_shaderProg->setViewMatrix(getCore()->getCurrentCamera()->getViewMatrix());
 		m_shaderProg->setProjectionMatrix(glm::perspective(getCore()->getCurrentCamera()->getRadFOV(),
 			getCore()->getCurrentCamera()->getAspectRatio(), 0.1f, 100.0f));
 
-		//tell OpenGL which shader program to use
-		glUseProgram(m_shaderProg->getId());
+
+		getCore()->getCurrentLights().at(0)->setShaderData(m_shaderProg);
 
 		//bind the texure
-		m_texture->bindTexture();
+		if (m_texture != nullptr)
+		{
+			m_texture->bindTexture();
+		}
 
 		for (size_t i = 0; i < m_meshes.size(); i++)
 		{
@@ -88,6 +95,6 @@ namespace myEngine
 		m_shaderProg = std::make_shared<ShaderProgram>(_vertShadAddress, _fragShadAddress);
 	}
 
-	
+
 
 }

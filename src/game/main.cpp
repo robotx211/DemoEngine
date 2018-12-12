@@ -24,14 +24,6 @@ int main()
 	std::shared_ptr<myEngine::Core> core = myEngine::Core::init();
 	std::shared_ptr<myEngine::Window> window = core->createNewWindowObject("main window", 1280, 720);
 
-	//---------------------------------------TinyOBJ Loader testing---------------------------------------
-
-	//std::vector<std::shared_ptr<myEngine::Mesh>> meshes;
-
-	//myEngine::Mesh::loadModel("../resources/cube.obj", &meshes);
-
-	//return 0;
-
 	//---------------------------------------create draw camera---------------------------------------
 
 	std::shared_ptr<myEngine::Entity> drawcamera = core->addEntity();
@@ -69,8 +61,8 @@ int main()
 
 	core->addPostProcess(bloomPostProcess);
 	core->addPostProcess(blackAndWhitePostProcess);
-	core->addPostProcess(noisePostProcess);
 	core->addPostProcess(vignettePostProcess);
+	core->addPostProcess(noisePostProcess);
 
 	//---------------------------------------create curuthers resources---------------------------------------
 
@@ -86,22 +78,24 @@ int main()
 
 	//---------------------------------------spawn curuthers---------------------------------------
 
-	std::shared_ptr<myEngine::Entity> newcat = core->addEntity();
-	newcat->setName("cat");
+	//std::shared_ptr<myEngine::Entity> newcat = core->addEntity();
+	//newcat->setName("cat");
 
-	std::shared_ptr<myEngine::Transform> newcat_transform = newcat->addComponent<myEngine::Transform>();
+	//std::shared_ptr<myEngine::Transform> newcat_transform = newcat->addComponent<myEngine::Transform>();
 
-	glm::vec3 requiredSize = glm::vec3(1.0f);
+	//glm::vec3 requiredSize = glm::vec3(1.0f);
 
-	newcat_transform->scale(glm::vec3(requiredSize.y / catMeshSize.y));
+	//newcat_transform->scale(glm::vec3(requiredSize.y / catMeshSize.y));
 
-	newcat_transform->translate( glm::vec3(catMeshCentre) * glm::vec3(requiredSize.y / catMeshSize.y) * glm::vec3(0.0f, 1.0f, 0.0f) );
-	newcat_transform->translate(-0.5f, 0.0f, 0.0f);
+	//newcat_transform->translate( glm::vec3(catMeshCentre) * glm::vec3(requiredSize.y / catMeshSize.y) * glm::vec3(0.0f, 1.0f, 0.0f) );
+	//newcat_transform->translate(-0.5f, 0.0f, 0.0f);
 
-	std::shared_ptr<myEngine::MeshRenderer> newcat_renderer = newcat->addComponent<myEngine::MeshRenderer>();
-	newcat_renderer->setMesh(&catMesh);
-	newcat_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-	newcat_renderer->setTexture(catTex);
+	//std::shared_ptr<myEngine::MeshRenderer> newcat_renderer = newcat->addComponent<myEngine::MeshRenderer>();
+	//newcat_renderer->setMesh(&catMesh);
+	//newcat_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
+	//newcat_renderer->setTexture(catTex);
+
+	//newcat->addComponent<Move>();
 
 	//---------------------------------------create cube resources---------------------------------------
 
@@ -115,24 +109,31 @@ int main()
 
 	//---------------------------------------spawn cube---------------------------------------
 
-	std::shared_ptr<myEngine::Entity> newcube = core->addEntity();
-	newcube->setName("enemy");
+	std::shared_ptr<myEngine::Entity> cube = core->addEntity();
+	cube->setName("cube");
 
-	std::shared_ptr<myEngine::Transform> newcube_transform = newcube->addComponent<myEngine::Transform>();
-	newcube_transform->scale(1.0f, 1.0f, 1.0f);
-	newcube_transform->translate(0.5f, 0.0f, 0.0f);
+	std::shared_ptr<myEngine::Transform> cube_transform = cube->addComponent<myEngine::Transform>();
+	cube_transform->scale(1.0f, 1.0f, 1.0f);
+	cube_transform->translate(0.0f, 0.0f, 0.0f);
 
-	std::shared_ptr<myEngine::MeshRenderer> newcube_renderer = newcube->addComponent<myEngine::MeshRenderer>();
-	newcube_renderer->setMesh(&cubeMesh);
-	newcube_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-	newcube_renderer->setTexture(cubeTex);
+	std::shared_ptr<myEngine::MeshRenderer> cube_renderer = cube->addComponent<myEngine::MeshRenderer>();
+	cube_renderer->setMesh(&cubeMesh);
+	cube_renderer->setShaders("../resources/textured_lit.vert", "../resources/textured_lit.frag");
+	cube_renderer->setTexture(cubeTex);
 
+	//newcube->addComponent<Move>();
 
+	//---------------------------------------spawn point light source---------------------------------------
+
+	std::shared_ptr<myEngine::Entity> ambientlight = core->addEntity();
+	ambientlight->setName("ambient light");
+
+	std::shared_ptr<myEngine::Light> ambientlight_light = ambientlight->addComponent<myEngine::Light>();
+	ambientlight_light->setColour(glm::vec3(1.0f, 1.0f, 1.0f));
+	ambientlight_light->setStrength(1.0f);
 
 	//---------------------------------------create world---------------------------------------
 
-	//std::shared_ptr<myEngine::Mesh> squareMesh = std::make_shared<myEngine::Mesh>();
-	//squareMesh->loadModel("../resources/square.obj");
 	std::vector <std::shared_ptr<myEngine::Mesh>> squareMesh;
 	myEngine::Mesh::loadModel("../resources/square.obj", &squareMesh);
 
@@ -150,6 +151,8 @@ int main()
 	floor_renderer->setMesh(squareMesh.at(0));
 	floor_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
 	floor_renderer->setTexture(floorTex);
+
+	//floor->addComponent<Move>();
 
 	//---------------------------------------begin---------------------------------------
 

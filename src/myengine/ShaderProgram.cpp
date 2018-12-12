@@ -103,7 +103,7 @@ namespace myEngine
 		//ensure VAO "position" attrib stream gets set as the first position during link
 		glBindAttribLocation(m_id, 0, "in_Position");
 		glBindAttribLocation(m_id, 1, "in_TexCoord");
-		//glBindAttribLocation(m_id, 2, "in_Normal");
+		glBindAttribLocation(m_id, 2, "in_Normal");
 
 		//perform the link
 		glLinkProgram(m_id);
@@ -134,9 +134,9 @@ namespace myEngine
 			throw std::exception();
 		}
 
-		glUseProgram(m_id);
+		//glUseProgram(m_id);
 		glUniformMatrix4fv(modelMatId, 1, GL_FALSE, glm::value_ptr(_mat));
-		glUseProgram(0);
+		//glUseProgram(0);
 	}
 	void ShaderProgram::setViewMatrix(glm::mat4 _mat)
 	{
@@ -147,9 +147,9 @@ namespace myEngine
 			throw std::exception();
 		}
 
-		glUseProgram(m_id);
+		//glUseProgram(m_id);
 		glUniformMatrix4fv(viewMatId, 1, GL_FALSE, glm::value_ptr(_mat));
-		glUseProgram(0);
+		//glUseProgram(0);
 	}
 	void ShaderProgram::setProjectionMatrix(glm::mat4 _mat)
 	{
@@ -160,21 +160,33 @@ namespace myEngine
 			throw std::exception();
 		}
 
-		glUseProgram(m_id);
+		//glUseProgram(m_id);
 		glUniformMatrix4fv(projMatId, 1, GL_FALSE, glm::value_ptr(_mat));
-		glUseProgram(0);
+		//glUseProgram(0);
 	}
 
 	//----------------------------------generic uniform setting-------------------------------
+
+	void ShaderProgram::setUniform(std::string _uniform, glm::vec3 _value)
+	{
+		GLint uniformId = glGetUniformLocation(m_id, _uniform.c_str());
+
+		//if (uniformId == -1)
+		//{
+		//	throw std::exception();
+		//}
+
+		glUniform3f(uniformId, _value.x, _value.y, _value.z);
+	}
 
 	void ShaderProgram::setUniform(std::string _uniform, glm::vec4 _value)
 	{
 		GLint uniformId = glGetUniformLocation(m_id, _uniform.c_str());
 
-		if (uniformId == -1)
-		{
-			throw std::exception();
-		}
+		//if (uniformId == -1)
+		//{
+		//	throw std::exception();
+		//}
 
 		glUniform4f(uniformId, _value.x, _value.y, _value.z, _value.w);
 	}
@@ -183,10 +195,10 @@ namespace myEngine
 	{
 		GLint uniformId = glGetUniformLocation(m_id, _uniform.c_str());
 
-		if (uniformId == -1)
-		{
-			throw std::exception();
-		}
+		//if (uniformId == -1)
+		//{
+		//	throw std::exception();
+		//}
 
 		glUniform1f(uniformId, _value);
 	}
@@ -195,10 +207,10 @@ namespace myEngine
 	{
 		GLint uniformId = glGetUniformLocation(m_id, _uniform.c_str());
 
-		if (uniformId == -1)
-		{
-			//throw std::exception();
-		}
+		//if (uniformId == -1)
+		//{
+		//	throw std::exception();
+		//}
 
 		glUniform1i(uniformId, _value);
 	}
@@ -207,10 +219,10 @@ namespace myEngine
 	{
 		GLint uniformId = glGetUniformLocation(m_id, _uniform.c_str());
 
-		if (uniformId == -1)
-		{
-			throw std::exception();
-		}
+		//if (uniformId == -1)
+		//{
+		//	throw std::exception();
+		//}
 
 		glUniformMatrix4fv(uniformId, 1, GL_FALSE, glm::value_ptr(_value));
 	}

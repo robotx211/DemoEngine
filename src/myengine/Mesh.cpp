@@ -35,7 +35,6 @@ namespace myEngine
 		m_posVBO->addVertex(glm::vec3(1.0f, -1.0f, 0.0f)); //bot right
 		m_posVBO->addVertex(glm::vec3(1.0f, 1.0f, 0.0f)); // top right
 
-		//flips image, idk why
 		m_texCoordsVBO = std::make_shared<VertexBuffer>();
 
 		m_texCoordsVBO->addVertex(glm::vec2(0.0f, 0.0f));
@@ -46,10 +45,21 @@ namespace myEngine
 		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 0.0f));
 		m_texCoordsVBO->addVertex(glm::vec2(1.0f, 1.0f));
 
+		m_normsVBO = std::make_shared<VertexBuffer>();
+
+		m_normsVBO->addVertex(glm::vec3(0.0f, 0.0f, -1.0f));
+		m_normsVBO->addVertex(glm::vec3(0.0f, 0.0f, -1.0f));
+		m_normsVBO->addVertex(glm::vec3(0.0f, 0.0f, -1.0f));
+
+		m_normsVBO->addVertex(glm::vec3(0.0f, 0.0f, -1.0f));
+		m_normsVBO->addVertex(glm::vec3(0.0f, 0.0f, -1.0f));
+		m_normsVBO->addVertex(glm::vec3(0.0f, 0.0f, -1.0f));
+
 		m_VAO = std::make_shared<VertexArray>();
 
 		m_VAO->addBuffer(enums::ShaderAttribute::in_Position, m_posVBO);
 		m_VAO->addBuffer(enums::ShaderAttribute::in_TexCoord, m_texCoordsVBO);
+		m_VAO->addBuffer(enums::ShaderAttribute::in_Normal, m_texCoordsVBO);
 
 		upload();
 
@@ -340,18 +350,9 @@ namespace myEngine
 
 	void Mesh::upload()
 	{
-		if (m_posCheck == true)
-		{
-			m_posVBO->upload();
-		}
-		if (m_texCheck == true)
-		{
-			m_texCoordsVBO->upload();
-		}
-		if (m_normCheck == true)
-		{
-			m_normsVBO->upload();
-		}
+		m_posVBO->upload();
+		m_texCoordsVBO->upload();
+		m_normsVBO->upload();
 
 		m_VAO->upload();
 	}

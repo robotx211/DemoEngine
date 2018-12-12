@@ -61,6 +61,7 @@ namespace myEngine
 		void setViewMatrix(glm::mat4 _mat);
 		void setProjectionMatrix(glm::mat4 _mat);
 
+		void setUniform(std::string _uniform, glm::vec3 _value);
 		void setUniform(std::string _uniform, glm::vec4 _value);
 		void setUniform(std::string _uniform, float _value);
 		void setUniform(std::string _uniform, int _value);

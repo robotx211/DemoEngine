@@ -28,6 +28,8 @@
 
 #include "PostProcess.h"
 
+#include "Light.h"
+
 //Sound
 #include "Sound.h"
 

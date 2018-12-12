@@ -23,6 +23,7 @@ namespace myEngine {
 
 	class Camera;
 	class Entity;
+	class Light;
 
 	/**
 	* Gameengine Core
@@ -53,6 +54,8 @@ namespace myEngine {
 		std::vector<std::shared_ptr<PostProcess>> m_postProcesses;
 		int m_postProcessIndex;
 		bool m_usePostProcess;
+
+		std::vector<std::shared_ptr<Light>> m_lightsList;
 
 		bool running;
 
@@ -112,6 +115,8 @@ namespace myEngine {
 			m_postProcessIndex++; 
 			m_postProcessIndex = m_postProcessIndex % (int)m_postProcesses.size();
 		}
+
+		std::vector<std::shared_ptr<Light>> getCurrentLights();
 	};
 
 }

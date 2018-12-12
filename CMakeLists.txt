@@ -66,6 +66,7 @@ add_library(myengine
 	src/myengine/Ray.cpp
 	src/myengine/GUI.cpp
 	src/myengine/PostProcess.cpp
+	src/myengine/Light.cpp
 
 	src/myengine/GL_Triangle.cpp
 )

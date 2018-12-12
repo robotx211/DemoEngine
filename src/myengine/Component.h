@@ -1,5 +1,5 @@
-#ifndef MYENGINE_COMPONENT_H
-#define MYENGINE_COMPONENT_H
+#ifndef COMPONENT_H
+#define COMPONENT_H
 
 #include <memory>
 #include <vector>
