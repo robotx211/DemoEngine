@@ -95,6 +95,8 @@ add_executable(game
 	src/game/PostProcess_B&W.cpp
 
 	src/game/PostProcess_Vignette.cpp
+
+	src/game/PostProcess_Noise.cpp
 )
 
 target_link_libraries(game 

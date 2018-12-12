@@ -15,6 +15,7 @@
 
 #include <game/PostProcess_B&W.h>
 #include <game/PostProcess_Vignette.h>
+#include <game/PostProcess_Noise.h>
 
 int main()
 {
@@ -50,8 +51,6 @@ int main()
 	screen_rendertexture->setSize(window->getWidth(), window->getHeight());
 	screen_rendertexture->init();
 
-	std::cout << "RenderTex, id: 1, Name: Screen" << std::endl;
-
 	drawcamera_camera->setRenderTexture(screen_rendertexture);
 
 	core->setScreenTex(screen_rendertexture);
@@ -65,9 +64,12 @@ int main()
 	std::shared_ptr<PostProcess_Vignette> vignettePostProcess = std::make_shared< PostProcess_Vignette>(window->getWidth(), window->getHeight());
 	std::shared_ptr<PostProcess_BandW> blackAndWhitePostProcess = std::make_shared< PostProcess_BandW>(window->getWidth(), window->getHeight());
 	std::shared_ptr<PostProcess_Bloom> bloomPostProcess = std::make_shared< PostProcess_Bloom>(window->getWidth(), window->getHeight());
+	std::shared_ptr<PostProcess_Noise> noisePostProcess = std::make_shared< PostProcess_Noise>(window->getWidth(), window->getHeight());
+
 
 	core->addPostProcess(bloomPostProcess);
 	core->addPostProcess(blackAndWhitePostProcess);
+	core->addPostProcess(noisePostProcess);
 	core->addPostProcess(vignettePostProcess);
 
 	//---------------------------------------create curuthers resources---------------------------------------
