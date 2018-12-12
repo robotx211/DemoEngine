@@ -1,4 +1,5 @@
 #include "Light.h"
+#include "Transform.h"
 
 namespace myEngine
 {
@@ -7,10 +8,10 @@ namespace myEngine
 	{
 
 
-		_shader->setUniform("in_AmbientLightCol", m_colour);
-		_shader->setUniform("in_AmbientLightStrength", m_strength);
+		_shader->setUniform("in_LightCol", m_colour);
+		_shader->setUniform("in_AmbientLightStrength", m_ambientStrength);
 
-		//glUseProgram(0);
+		_shader->setUniform("in_LightPos", getTransform()->getLocalPosition());
 
 	}
 

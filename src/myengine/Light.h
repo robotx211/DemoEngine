@@ -11,7 +11,7 @@
 
 namespace myEngine
 {
-	//base class for light will represent ambient light
+	//base class for light will represent a point light
 	class Light : public Component
 	{
 
@@ -19,15 +19,15 @@ namespace myEngine
 	protected:
 
 		glm::vec3 m_colour;
-		float m_strength; //ambient light strength
+		float m_ambientStrength; //ambient light strength
 
 	public:
 
 		virtual void setColour(glm::vec3 _colour) { m_colour = _colour; }
 		virtual glm::vec3 getColour() { return m_colour; }
 
-		void setStrength(float _strength) { m_strength = _strength; }
-		float getStrength() { return m_strength; }
+		void setAmbientStrength(float _strength) { m_ambientStrength = _strength; }
+		float getAmbientStrength() { return m_ambientStrength; }
 
 		void setShaderData(std::shared_ptr<ShaderProgram> _shader);
 

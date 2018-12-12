@@ -125,12 +125,20 @@ int main()
 
 	//---------------------------------------spawn point light source---------------------------------------
 
-	std::shared_ptr<myEngine::Entity> ambientlight = core->addEntity();
-	ambientlight->setName("ambient light");
+	std::shared_ptr<myEngine::Entity> pointlight = core->addEntity();
+	pointlight->setName("ambient light");
 
-	std::shared_ptr<myEngine::Light> ambientlight_light = ambientlight->addComponent<myEngine::Light>();
-	ambientlight_light->setColour(glm::vec3(1.0f, 1.0f, 1.0f));
-	ambientlight_light->setStrength(1.0f);
+	std::shared_ptr<myEngine::Transform> pointlight_transform = pointlight->addComponent<myEngine::Transform>();
+	pointlight_transform->scale(0.2f, 0.2f, 0.2f);
+	pointlight_transform->translate(-1.0f, -1.0f, -1.0f);
+
+	std::shared_ptr<myEngine::MeshRenderer> pointlight_renderer = pointlight->addComponent<myEngine::MeshRenderer>();
+	pointlight_renderer->setMesh(&cubeMesh);
+	pointlight_renderer->setShaders("../resources/light.vert", "../resources/light.frag");
+
+	std::shared_ptr<myEngine::Light> pointlight_light = pointlight->addComponent<myEngine::Light>();
+	pointlight_light->setColour(glm::vec3(1.0f, 1.0f, 1.0f));
+	pointlight_light->setAmbientStrength(0.1f);
 
 	//---------------------------------------create world---------------------------------------
 

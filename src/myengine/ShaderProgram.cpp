@@ -54,7 +54,11 @@ namespace myEngine
 		glGetShaderiv(m_vertShad->m_id, GL_COMPILE_STATUS, &success);
 		if (!success)
 		{
-			//vert shader did not compile
+			std::cout << "Vertex Shader Compilation Error" << std::endl;
+			std::vector<char> errorlog(255);
+			glGetShaderInfoLog(m_id, 255, NULL, errorlog.data());
+			std::string errorString(errorlog.begin(), errorlog.end());
+			std::cout << errorString << std::endl;
 			throw std::exception();
 		}
 
@@ -83,6 +87,11 @@ namespace myEngine
 		glGetShaderiv(m_fragShad->m_id, GL_COMPILE_STATUS, &success);
 		if (!success)
 		{
+			std::cout << "Fragment Shader Compilation Error" << std::endl;
+			std::vector<char> errorlog(255);
+			glGetShaderInfoLog(m_id, 255, NULL, errorlog.data());
+			std::string errorString(errorlog.begin(), errorlog.end());
+			std::cout << errorString << std::endl;
 			throw std::exception();
 		}
 
@@ -112,6 +121,11 @@ namespace myEngine
 		glGetProgramiv(m_id, GL_LINK_STATUS, &success);
 		if (!success)
 		{
+			std::cout << "Shader Link Error" << std::endl;
+			std::vector<char> errorlog(255);
+			glGetShaderInfoLog(m_id, 255, NULL, errorlog.data());
+			std::string errorString(errorlog.begin(), errorlog.end());
+			std::cout << errorString << std::endl;
 			throw std::exception();
 		}
 
