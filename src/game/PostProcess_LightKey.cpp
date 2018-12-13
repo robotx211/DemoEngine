@@ -25,9 +25,10 @@ PostProcess_LightKey::~PostProcess_LightKey()
 
 void PostProcess_LightKey::apply(std::shared_ptr<myEngine::RenderTexture> _targetTex)
 {
-	//draw light from target to tmp1
+	//draws the light fragments from the screen to tmp1 (produces the light key)
 	draw(_targetTex, m_tmp1, m_lightShader);
 
+	//draws the light key to the target render texture
 	draw(m_tmp1, _targetTex, m_nullShader);
 	return;
 }

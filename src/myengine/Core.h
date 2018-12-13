@@ -56,6 +56,8 @@ namespace myEngine {
 		bool m_usePostProcess;
 
 		std::vector<std::shared_ptr<Light>> m_lightsList;
+		bool m_useLighting;
+		int m_lightingIndex;
 
 		bool running;
 
@@ -113,10 +115,11 @@ namespace myEngine {
 		void useNextPostProcess() 
 		{ 
 			m_postProcessIndex++; 
-			m_postProcessIndex = m_postProcessIndex % (int)m_postProcesses.size();
+			m_postProcessIndex = m_postProcessIndex % ((int)m_postProcesses.size() + 1);
 		}
 
 		std::vector<std::shared_ptr<Light>> getCurrentLights();
+
 	};
 
 }

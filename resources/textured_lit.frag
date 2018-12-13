@@ -33,7 +33,7 @@ void main()
   vec3 reflectDir = reflect(-lightDir, normal);
   
   float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-  vec3 specular = in_SpecularStrength * spec * in_LightCol * 1;
+  vec3 specular = in_SpecularStrength * spec * in_LightCol;
 
   //final colour calculation
   vec4 result = tex * vec4( ambient + diffuse + specular, 1);

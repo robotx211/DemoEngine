@@ -25,6 +25,9 @@ namespace myEngine {
 
 		newCore->running = false;
 
+		newCore->m_postProcessIndex = 0;
+		newCore->m_lightingIndex = 0;
+
 		return newCore;
 	}
 
@@ -161,16 +164,29 @@ namespace myEngine {
 			}
 		}
 
-		//apply post proccess
+		//Post Process Application
 
 		if (m_screenTex != nullptr)
 		{
+
+			//Applys the chosen post process(es)
 			if (m_usePostProcess) 
 			{
-				for (size_t i = 0; i < m_postProcesses.size(); i++)
+				if (m_postProcessIndex == m_postProcesses.size())
 				{
-					m_postProcesses.at(i)->apply(m_screenTex);
+					//Applys the necessary post processes to produce the final image
+					for (size_t i = 2; i < m_postProcesses.size(); i++)
+					{
+						m_postProcesses.at(i)->apply(m_screenTex);
+					}
 				}
+				else
+				{
+					//Applys a single, selected post process
+					m_postProcesses.at(m_postProcessIndex)->apply(m_screenTex);
+				}
+
+
 			}
 
 			glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
@@ -183,20 +199,15 @@ namespace myEngine {
 			}
 			if (m_screenShader == nullptr)
 			{
-				m_screenShader = std::make_shared<ShaderProgram>("../resources/GUI.vert", "../resources/textured.frag");
+				m_screenShader = std::make_shared<ShaderProgram>("../resources/nullpass.vert", "../resources/nullpass.frag");
 			}
+
+			glUseProgram(m_screenShader->getId());
 
 			m_screenShader->setUniform("in_Texture", 0);
 
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glViewport(0, 0, m_windowObject->getWidth(), m_windowObject->getHeight());
-
-			glm::mat4 modelMat = glm::mat4(1.0f);
-			
-			glUseProgram(m_screenShader->getId());
-			m_screenShader->setModelMatrix(modelMat);
-
-			glUseProgram(m_screenShader->getId());
 
 			glBindVertexArray(m_screenRect->getModelVAO()->getId());
 

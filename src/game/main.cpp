@@ -22,7 +22,7 @@ int main()
 
 
 	std::shared_ptr<myEngine::Core> core = myEngine::Core::init();
-	std::shared_ptr<myEngine::Window> window = core->createNewWindowObject("main window", 1280, 720);
+	std::shared_ptr<myEngine::Window> window = core->createNewWindowObject("main window", 1910, 1080);
 
 	//---------------------------------------create draw camera---------------------------------------
 
@@ -53,11 +53,17 @@ int main()
 
 	//---------------------------------------set post process---------------------------------------
 
+	std::shared_ptr<PostProcess_LightKey> lightKeyPostProcess = std::make_shared< PostProcess_LightKey>(window->getWidth(), window->getHeight());
+	std::shared_ptr<PostProcess_Blur> blurPostProcess = std::make_shared< PostProcess_Blur>(window->getWidth(), window->getHeight());
+
+	std::shared_ptr<PostProcess_Bloom> bloomPostProcess = std::make_shared< PostProcess_Bloom>(window->getWidth(), window->getHeight());
 	std::shared_ptr<PostProcess_Vignette> vignettePostProcess = std::make_shared< PostProcess_Vignette>(window->getWidth(), window->getHeight());
 	std::shared_ptr<PostProcess_BandW> blackAndWhitePostProcess = std::make_shared< PostProcess_BandW>(window->getWidth(), window->getHeight());
-	std::shared_ptr<PostProcess_Bloom> bloomPostProcess = std::make_shared< PostProcess_Bloom>(window->getWidth(), window->getHeight());
 	std::shared_ptr<PostProcess_Noise> noisePostProcess = std::make_shared< PostProcess_Noise>(window->getWidth(), window->getHeight());
 
+
+	core->addPostProcess(lightKeyPostProcess);
+	core->addPostProcess(blurPostProcess);
 
 	core->addPostProcess(bloomPostProcess);
 	core->addPostProcess(blackAndWhitePostProcess);
@@ -130,7 +136,7 @@ int main()
 
 	std::shared_ptr<myEngine::Transform> pointlight_transform = pointlight->addComponent<myEngine::Transform>();
 	pointlight_transform->scale(0.2f, 0.2f, 0.2f);
-	pointlight_transform->translate(-1.0f, -2.0f, 1.0f);
+	pointlight_transform->translate(-1.0f, 2.0f, 1.0f);
 
 	std::shared_ptr<myEngine::MeshRenderer> pointlight_renderer = pointlight->addComponent<myEngine::MeshRenderer>();
 	pointlight_renderer->setMesh(&cubeMesh);

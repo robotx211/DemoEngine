@@ -19,7 +19,7 @@ namespace myEngine
 			getCore()->getCurrentCamera()->getAspectRatio(), 0.1f, 100.0f));
 
 
-		getCore()->getCurrentLights().at(0)->setShaderData(m_shaderProg);
+		getCore()->getCurrentLights().at(0)->setShaderData(m_shaderProg, getCore());
 
 		//bind the texure
 		if (m_texture != nullptr)

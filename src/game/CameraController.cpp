@@ -22,7 +22,7 @@ CameraController::CameraController()
 	m_pitchMax = 90.0f;
 
 	m_spaceDown = false;
-	m_nextDown = false;
+	m_nextPostProcess = false;
 
 }
 CameraController::~CameraController()
@@ -102,6 +102,7 @@ void CameraController::update()
 
 	getTransform()->translate(moveVec);
 
+
 	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_SPACE) && m_spaceDown == false)
 	{
 		m_spaceDown = true;
@@ -112,36 +113,23 @@ void CameraController::update()
 		m_spaceDown = false;
 	}
 
-	//if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_M) && m_nextDown == false)
-	//{
-	//	m_nextDown = true;
-	//	getCore()->useNextPostProcess();
-	//}
-	//else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_M) != true && m_nextDown == true)
-	//{
-	//	m_nextDown = false;
-	//}
+
+	if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_P) && m_nextPostProcess == false)
+	{
+		m_nextPostProcess = true;
+		getCore()->useNextPostProcess();
+	}
+	else if (getCore()->getKeyboard()->getKey(SDL_SCANCODE_P) != true && m_nextPostProcess == true)
+	{
+		m_nextPostProcess = false;
+	}
+
+	std::cout << "Cam Pos: (" << getTransform()->getLocalPosition().x << "," << getTransform()->getLocalPosition().y << "," << getTransform()->getLocalPosition().z << ")" << std::endl;
 
 }
 void CameraController::lateUpdate()
 {
-	//std::shared_ptr<myEngine::RigidBody> rb = getEntity()->getComponent <myEngine::RigidBody>();
 
-	//if (rb == NULL)
-	//{
-	//	return;
-	//}
-
-	//if (rb->isColliding() == true)
-	//{
-	//	for (size_t i = 0; i < rb->getCollisions().size(); i++)
-	//	{
-	//		if (rb->getCollisions().at(i)->getEntity()->getName() == "enemy")
-	//		{
-	//			//m_gameController.lock()->reset();
-	//		}
-	//	}
-	//}
 }
 
 

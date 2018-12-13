@@ -25,7 +25,7 @@ PostProcess_BandW::~PostProcess_BandW()
 
 void PostProcess_BandW::apply(std::shared_ptr<myEngine::RenderTexture> _targetTex)
 {
-	//draw light from target to tmp1
+	//draws the target texture to tmp1, averaging out the colour into a greyscale image
 	draw(_targetTex, m_tmp1, m_BandWShader);
 
 	draw(m_tmp1, _targetTex, m_nullShader);

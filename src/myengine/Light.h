@@ -8,19 +8,22 @@
 
 #include "Component.h"
 #include "ShaderProgram.h"
+#include "Core.h"
 
 namespace myEngine
 {
-	//base class for light will represent a point light
+	/**
+	* Base light class, acts as a point light (requires a transform component to work)
+	*/
 	class Light : public Component
 	{
 
 	private:
 	protected:
 
-		glm::vec3 m_colour;
-		float m_ambientStrength; //ambient light strength
-		float m_specularStrength;
+		glm::vec3 m_colour; ///Colour of the light
+		float m_ambientStrength; ///Strength of the ambient light (how much light is ambient)
+		float m_specularStrength; ///Intensity of the specular light
 
 	public:
 
@@ -33,7 +36,10 @@ namespace myEngine
 		void setSpecularStrength(float _strength) { m_specularStrength = _strength; }
 		float getSpecularStrength() { return m_specularStrength; }
 
-		void setShaderData(std::shared_ptr<ShaderProgram> _shader);
+		/**
+		* Sets the uniforms needed to calculate ambient, diffuse and specular lighting
+		*/
+		void setShaderData(std::shared_ptr<ShaderProgram> _shader, std::shared_ptr<Core> _core);
 
 	};
 

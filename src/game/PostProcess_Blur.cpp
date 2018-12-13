@@ -30,26 +30,20 @@ PostProcess_Blur::~PostProcess_Blur()
 
 void PostProcess_Blur::apply(std::shared_ptr<myEngine::RenderTexture> _targetTex)
 {
-	//draw light from target to tmp1
+	//draws the light fragments from the screen to tmp1 (produces the light key)
 	draw(_targetTex, m_tmp1, m_lightShader);
 
-	//draw blur from tmp1 to tmp2
+	//blurs the light key between tmp1 and tmp2, 8 times in total
 	draw(m_tmp1, m_tmp2, m_blurShader);
-	//draw blur from tmp2 to tmp1
 	draw(m_tmp2, m_tmp1, m_blurShader);
-	//draw blur from tmp1 to tmp2
 	draw(m_tmp1, m_tmp2, m_blurShader);
-	//draw blur from tmp2 to tmp1
 	draw(m_tmp2, m_tmp1, m_blurShader);
-	//draw blur from tmp1 to tmp2
 	draw(m_tmp1, m_tmp2, m_blurShader);
-	//draw blur from tmp2 to tmp1
 	draw(m_tmp2, m_tmp1, m_blurShader);
-	//draw blur from tmp1 to tmp2
 	draw(m_tmp1, m_tmp2, m_blurShader);
-	//draw blur from tmp2 to tmp1
 	draw(m_tmp2, m_tmp1, m_blurShader);
 
+	//draws the blurred light key to the target render texture
 	draw(m_tmp1, _targetTex, m_nullShader);
 	return;
 

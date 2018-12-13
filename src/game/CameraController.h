@@ -27,7 +27,7 @@ private:
 	std::weak_ptr<GameController> m_gameController;
 
 	bool m_spaceDown;
-	bool m_nextDown;
+	bool m_nextPostProcess;
 
 public:
 

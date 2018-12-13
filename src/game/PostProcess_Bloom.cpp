@@ -45,31 +45,24 @@ void PostProcess_Bloom::apply(std::shared_ptr<myEngine::RenderTexture> _targetTe
 {
 	draw(_targetTex, m_cleanCopy, m_nullShader);
 
-	//draw light from target to tmp1
+	//draws the light fragments from the screen to m_lightKey (produces the light key)
 	draw(_targetTex, m_lightKey, m_lightShader);
 
-	//draw blur from tmp1 to tmp2
+	//blurs the light key between tmp1 and tmp2, 8 times in total
 	draw(m_lightKey, m_blur1, m_blurShader);
-	//draw blur from tmp2 to tmp1
 	draw(m_blur1, m_blur2, m_blurShader);
-	//draw blur from tmp1 to tmp2
 	draw(m_blur2, m_blur1, m_blurShader);
-	//draw blur from tmp2 to tmp1
 	draw(m_blur1, m_blur2, m_blurShader);
-	//draw blur from tmp1 to tmp2
 	draw(m_blur2, m_blur1, m_blurShader);
-	//draw blur from tmp2 to tmp1
 	draw(m_blur1, m_blur2, m_blurShader);
-	//draw blur from tmp1 to tmp2
 	draw(m_blur2, m_blur1, m_blurShader);
-	//draw blur from tmp2 to tmp1
 	draw(m_blur1, m_blur2, m_blurShader);
 
-	//draw merge from tmp1 and target to tmp 2
-	draw(m_cleanCopy, m_blur2, m_merge, m_mergeShader); //Scene -> TexB, Light -> TexA, draws bright scene, no blur
-	//draw(m_tmp1, _targetTex, m_tmp2, m_mergeShader); //Scene -> TexA, Light -> TexB, draws white blue
+	//merges the copy of the screen texture with the blurred light key to apply bloom
+	draw(m_cleanCopy, m_blur2, m_merge, m_mergeShader);
 
-	//draw null from tmp2 to target 
+	//draws the bloomed scene to the target render texture
 	draw(m_merge, _targetTex, m_nullShader);
+
 	return;
 }

@@ -17,17 +17,6 @@ namespace myEngine
 
 	}
 
-	std::shared_ptr<RenderTexture> PostProcess::createRenderTexture()
-	{
-
-		std::shared_ptr<RenderTexture> newRT = std::make_shared<RenderTexture>();
-		
-		newRT->setSize(m_renderTextureSize);
-		newRT->init();
-
-		return newRT;
-	}
-
 	void PostProcess::draw(	std::shared_ptr<Texture> _subject, std::shared_ptr<RenderTexture> _target, std::shared_ptr<ShaderProgram> _shader)
 	{
 		if (m_screenMesh == nullptr)

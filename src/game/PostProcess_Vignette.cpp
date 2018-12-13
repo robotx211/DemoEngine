@@ -27,7 +27,8 @@ PostProcess_Vignette::~PostProcess_Vignette()
 
 void PostProcess_Vignette::apply(std::shared_ptr<myEngine::RenderTexture> _targetTex)
 {
-	//draw light from target to tmp1
+	
+	//multiplies the screen fragment colour by the vingette fragment colour
 	draw(_targetTex, m_vignetteTex, m_tmp1, m_vignetteShader);
 
 	draw(m_tmp1, _targetTex, m_nullShader);

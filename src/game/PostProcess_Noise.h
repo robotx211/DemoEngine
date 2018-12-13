@@ -11,7 +11,6 @@ private:
 	std::shared_ptr<myEngine::ShaderProgram> m_nullShader;
 	std::shared_ptr<myEngine::ShaderProgram> m_noiseshader;
 
-	std::shared_ptr<myEngine::Texture> m_noiseTex;
 	std::shared_ptr<myEngine::RenderTexture> m_tmp1;
 
 	PostProcess_Noise();
