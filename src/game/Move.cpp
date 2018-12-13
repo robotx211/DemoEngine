@@ -11,6 +11,6 @@ void Move::update()
 
 	float angle = 90.0f;
 
-	getTransform()->localAxisRotateEulerDegrees(angle * getCore()->getEnviroment()->getDeltaTime() / 1000.0f, 0.0f, 0.0f);
+	getTransform()->localAxisRotateEulerDegrees(0.0f, angle * getCore()->getEnviroment()->getDeltaTime() / 3000.0f, 0.0f);
 
 }

@@ -20,6 +20,7 @@ namespace myEngine
 
 		glm::vec3 m_colour;
 		float m_ambientStrength; //ambient light strength
+		float m_specularStrength;
 
 	public:
 
@@ -28,6 +29,9 @@ namespace myEngine
 
 		void setAmbientStrength(float _strength) { m_ambientStrength = _strength; }
 		float getAmbientStrength() { return m_ambientStrength; }
+
+		void setSpecularStrength(float _strength) { m_specularStrength = _strength; }
+		float getSpecularStrength() { return m_specularStrength; }
 
 		void setShaderData(std::shared_ptr<ShaderProgram> _shader);
 

@@ -1,5 +1,6 @@
 #include "Light.h"
 #include "Transform.h"
+#include "Camera.h"
 
 namespace myEngine
 {
@@ -12,6 +13,9 @@ namespace myEngine
 		_shader->setUniform("in_AmbientLightStrength", m_ambientStrength);
 
 		_shader->setUniform("in_LightPos", getTransform()->getLocalPosition());
+
+		_shader->setUniform("in_ViewPos", getCore()->getCurrentCamera()->getTransform()->getLocalPosition());
+		_shader->setUniform("in_SpecularStrength", m_specularStrength);
 
 	}
 

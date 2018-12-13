@@ -78,22 +78,22 @@ int main()
 
 	//---------------------------------------spawn curuthers---------------------------------------
 
-	//std::shared_ptr<myEngine::Entity> newcat = core->addEntity();
-	//newcat->setName("cat");
+	std::shared_ptr<myEngine::Entity> newcat = core->addEntity();
+	newcat->setName("cat");
 
-	//std::shared_ptr<myEngine::Transform> newcat_transform = newcat->addComponent<myEngine::Transform>();
+	std::shared_ptr<myEngine::Transform> newcat_transform = newcat->addComponent<myEngine::Transform>();
 
-	//glm::vec3 requiredSize = glm::vec3(1.0f);
+	glm::vec3 requiredSize = glm::vec3(1.0f);
 
-	//newcat_transform->scale(glm::vec3(requiredSize.y / catMeshSize.y));
+	newcat_transform->scale(glm::vec3(requiredSize.y / catMeshSize.y));
 
-	//newcat_transform->translate( glm::vec3(catMeshCentre) * glm::vec3(requiredSize.y / catMeshSize.y) * glm::vec3(0.0f, 1.0f, 0.0f) );
-	//newcat_transform->translate(-0.5f, 0.0f, 0.0f);
+	newcat_transform->translate( glm::vec3(catMeshCentre) * glm::vec3(requiredSize.y / catMeshSize.y) * glm::vec3(0.0f, 1.0f, 0.0f) );
+	newcat_transform->translate(-0.7f, 0.0f, 0.0f);
 
-	//std::shared_ptr<myEngine::MeshRenderer> newcat_renderer = newcat->addComponent<myEngine::MeshRenderer>();
-	//newcat_renderer->setMesh(&catMesh);
-	//newcat_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
-	//newcat_renderer->setTexture(catTex);
+	std::shared_ptr<myEngine::MeshRenderer> newcat_renderer = newcat->addComponent<myEngine::MeshRenderer>();
+	newcat_renderer->setMesh(&catMesh);
+	newcat_renderer->setShaders("../resources/textured_lit.vert", "../resources/textured_lit.frag");
+	newcat_renderer->setTexture(catTex);
 
 	//newcat->addComponent<Move>();
 
@@ -114,14 +114,14 @@ int main()
 
 	std::shared_ptr<myEngine::Transform> cube_transform = cube->addComponent<myEngine::Transform>();
 	cube_transform->scale(1.0f, 1.0f, 1.0f);
-	cube_transform->translate(0.0f, 0.0f, 0.0f);
+	cube_transform->translate(0.7f, 0.0f, 0.0f);
 
 	std::shared_ptr<myEngine::MeshRenderer> cube_renderer = cube->addComponent<myEngine::MeshRenderer>();
 	cube_renderer->setMesh(&cubeMesh);
 	cube_renderer->setShaders("../resources/textured_lit.vert", "../resources/textured_lit.frag");
 	cube_renderer->setTexture(cubeTex);
 
-	//newcube->addComponent<Move>();
+	cube->addComponent<Move>();
 
 	//---------------------------------------spawn point light source---------------------------------------
 
@@ -130,7 +130,7 @@ int main()
 
 	std::shared_ptr<myEngine::Transform> pointlight_transform = pointlight->addComponent<myEngine::Transform>();
 	pointlight_transform->scale(0.2f, 0.2f, 0.2f);
-	pointlight_transform->translate(-1.0f, -1.0f, -1.0f);
+	pointlight_transform->translate(-1.0f, -2.0f, 1.0f);
 
 	std::shared_ptr<myEngine::MeshRenderer> pointlight_renderer = pointlight->addComponent<myEngine::MeshRenderer>();
 	pointlight_renderer->setMesh(&cubeMesh);
@@ -139,6 +139,7 @@ int main()
 	std::shared_ptr<myEngine::Light> pointlight_light = pointlight->addComponent<myEngine::Light>();
 	pointlight_light->setColour(glm::vec3(1.0f, 1.0f, 1.0f));
 	pointlight_light->setAmbientStrength(0.1f);
+	pointlight_light->setSpecularStrength(1.0f);
 
 	//---------------------------------------create world---------------------------------------
 
@@ -157,7 +158,7 @@ int main()
 
 	std::shared_ptr<myEngine::MeshRenderer> floor_renderer = floor->addComponent<myEngine::MeshRenderer>();
 	floor_renderer->setMesh(squareMesh.at(0));
-	floor_renderer->setShaders("../resources/textured.vert", "../resources/textured.frag");
+	floor_renderer->setShaders("../resources/textured_lit.vert", "../resources/textured_lit.frag");
 	floor_renderer->setTexture(floorTex);
 
 	//floor->addComponent<Move>();
